@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.java_tools.dao.UserDao">
+
+    <!--    插入数据-->
+    <insert id="insertMsg" parameterType="com.example.java_tools.entity.User">
+	    INSERT INTO tb_user (username,password,tb_name)
+	    VALUES (#{username},#{password},#{tbName})
+    </insert>
+
+    <!--    创建一张新表-->
+    <update id="createNewTable" parameterType="java.lang.String">
+        CREATE TABLE ${_parameter} (
+          id bigint(20) NOT NULL AUTO_INCREMENT,
+          file_name varchar(32) NOT NULL,
+          file_url varchar(255) DEFAULT NULL,
+          PRIMARY KEY (id))
+    </update>
+
+    <!--  用于验证账号密码正确  -->
+    <select id="queryUserByUsername" parameterType="java.lang.String" resultType="com.example.java_tools.entity.User">
+        SELECT id,username,password
+        FROM tb_user
+        WHERE username=#{username}
+    </select>
+
+
+    <select id="queryMsgById" parameterType="int" resultType="com.example.java_tools.entity.User">
+        SELECT id,username,password,tb_name
+        FROM tb_user
+        WHERE id=#{id}
+    </select>
+
+    <update id="updateMsgById" parameterType="com.example.java_tools.entity.User">
+        UPDATE tb_user
+        <set>
+            <if test="password!=null">password=#{password},</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+
+
+
+</mapper>
