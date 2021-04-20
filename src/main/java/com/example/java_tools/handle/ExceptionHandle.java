@@ -27,18 +27,14 @@ public class ExceptionHandle {
             return new BackMessage(customException.getCode(),customException.getMessage());
         }else if(e instanceof HttpRequestMethodNotSupportedException){
             logger.warn("捕捉浏览器错误请求异常");
-            return new BackMessage(BackEnum.HTTPERROR);
+            return new BackMessage(BackEnum.REQUEST_METHOD_ERROR);
         }else if(e instanceof MissingServletRequestParameterException){
             logger.warn("捕捉错误参数请求异常");
-            return new BackMessage(BackEnum.PARAMERROR);
+            return new BackMessage(BackEnum.PWD_ERROR);
         }
         else {
             logger.error("系统异常{}",e);
-            return new BackMessage(BackEnum.UNKNOW_ERROR);
+            return new BackMessage(BackEnum.UNKNOWN_ERROR);
         }
-
-
     }
-
-
 }

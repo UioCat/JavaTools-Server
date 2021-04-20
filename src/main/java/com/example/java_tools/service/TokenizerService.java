@@ -1,5 +1,6 @@
 package com.example.java_tools.service;
 
+import com.example.java_tools.utils.IData;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,17 +14,6 @@ import java.util.List;
 @Service
 public class TokenizerService {
 
-    // 包含的变量类型
-    private String[] scope = {
-            "Integer", "int",
-            "Double", "double",
-            "Float", "float",
-            "Boolean", "boolean",
-            "String",
-            "BigDecimal",
-            "Long", "long",
-            "Date"
-    };
 
     /**
      * 解析Java代码，将Java代码解析出字段的类型以及字段名
@@ -80,7 +70,7 @@ public class TokenizerService {
      * @return 字段为变量类型返回true，否则返回false
      */
     private boolean verifyWord(String word) {
-        for(String type : scope) {
+        for(String type : IData.scope) {
             if(word.equals(type)) {
                 return true;
             }

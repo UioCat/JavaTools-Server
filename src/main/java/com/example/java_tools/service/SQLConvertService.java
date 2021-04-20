@@ -47,11 +47,13 @@ public class SQLConvertService {
      * @return
      */
     public BackMessage updateTableService(ParameterMessage parameterMessage) {
+
         /*
         需求改的参数
          */
         List<String> parameterType = new ArrayList<>();
         List<String> parameterName = new ArrayList<>();
+
         /*
         用于判断的参数
          */
