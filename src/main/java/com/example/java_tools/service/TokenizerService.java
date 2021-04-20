@@ -3,7 +3,6 @@ package com.example.java_tools.service;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,12 +14,21 @@ import java.util.List;
 public class TokenizerService {
 
     // 包含的变量类型
-    private String[] scope = {"Integer", "int", "Double", "double", "Float", "float", "Boolean", "boolean", "String", "BigDecimal", "Long", "long", "Date"};
+    private String[] scope = {
+            "Integer", "int",
+            "Double", "double",
+            "Float", "float",
+            "Boolean", "boolean",
+            "String",
+            "BigDecimal",
+            "Long", "long",
+            "Date"
+    };
 
     /**
      * 解析Java代码，将Java代码解析出字段的类型以及字段名
      * @param code Java代码（可以不全）
-     * @return 字段类型+字段名
+     * @return 字段类型 + 字段名
      */
     public List<String> extractFieldFromJavaCode(String code) {
         List<String> result = null;
@@ -31,7 +39,7 @@ public class TokenizerService {
     /**
      * 解析每一句话，提取出字段类型以及字段名
      * @param words 拆分单词
-     * @return
+     * @return 字段类型 + 字段名 （ex：String name）
      */
     private List<String> parseJavaCode(String[] words) {
 

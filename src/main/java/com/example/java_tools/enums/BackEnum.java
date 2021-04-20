@@ -9,7 +9,7 @@ public enum BackEnum {
     /**
      * 服务器异常
      */
-    UNKNOW_ERROR(500,"未知错误"),
+    UNKNOWN_ERROR(500,"未知错误"),
 
     /**
      * 请求数据成功，无异常情况

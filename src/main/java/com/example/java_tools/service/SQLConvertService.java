@@ -22,17 +22,6 @@ public class SQLConvertService {
     SQLProduceService sqlProduceService;
 
     /**
-     * 根据输入的字符，识别出 参数类型类型+参数名
-     * @param data 文本
-     * @return list内为参数类型 参数名
-     */
-    public BackMessage wordIdentifyService(String data) {
-
-        Object [] result = parse.parseParameter(data).toArray();
-        return new BackMessage<>(BackEnum.REQUEST_SUCCESS,result);
-    }
-
-    /**
      * 根据参数写出创表命令
      * @param parameterMessage parameter，tbName
      * @return 创表命令

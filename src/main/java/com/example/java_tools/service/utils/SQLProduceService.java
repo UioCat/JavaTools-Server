@@ -16,6 +16,7 @@ public class SQLProduceService {
 
     @Autowired
     ParseStrUtils utils;
+    // todo 模版
 
     /**
      * 输入参数类型list，参数名list，返回sql创建命令
@@ -30,7 +31,7 @@ public class SQLProduceService {
         StringBuilder stringBuilder = new StringBuilder();
         //判断数据是否错误
         if(parameterName.size() != parameterType.size()){
-            throw new CustomException(BackEnum.ERROR);
+            throw new CustomException(BackEnum.DATA_ERROR);
         }
 
         stringBuilder.append("CREATE TABLE ");
@@ -68,7 +69,7 @@ public class SQLProduceService {
         StringBuilder stringBuilder = new StringBuilder();
         //判断数据是否错误
         if(parameterName.size() != parameterType.size() || keyParameterName.size() != keyParameterType.size()){
-            throw new CustomException(BackEnum.ERROR);
+            throw new CustomException(BackEnum.PARAM_ERROR);
         }
 
 
@@ -128,7 +129,7 @@ public class SQLProduceService {
         StringBuilder stringBuilder = new StringBuilder();
         //判断数据是否错误
         if(parameterName.size() != parameterType.size()){
-            throw new CustomException(BackEnum.ERROR);
+            throw new CustomException(BackEnum.DATA_ERROR);
         }
 
         stringBuilder.append("INSERT INTO ");
@@ -178,7 +179,7 @@ public class SQLProduceService {
         StringBuilder stringBuilder = new StringBuilder();
 
         if(keyParameterType.size() != keyParameterName.size()){
-            throw new CustomException(BackEnum.ERROR);
+            throw new CustomException(BackEnum.DATA_ERROR);
         }
 
         //DELETE FROM tb_config where port='802' AND equipment2='#2-设备';
@@ -224,7 +225,7 @@ public class SQLProduceService {
         StringBuilder stringBuilder = new StringBuilder();
 
         if(keyParameterType.size() != keyParameterName.size()){
-            throw new CustomException(BackEnum.ERROR);
+            throw new CustomException(BackEnum.DATA_ERROR);
         }
 
         stringBuilder.append("SELECT ");
