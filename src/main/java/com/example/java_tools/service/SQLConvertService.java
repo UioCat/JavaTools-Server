@@ -4,6 +4,7 @@ package com.example.java_tools.service;
 import com.example.java_tools.enums.BackEnum;
 import com.example.java_tools.service.utils.ParseStrUtils;
 import com.example.java_tools.service.utils.SQLProduceService;
+import com.example.java_tools.service.utils.VelocityTemplateForSQL;
 import com.example.java_tools.utils.BackMessage;
 import com.example.java_tools.utils.json_msg.ParameterMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,11 @@ public class SQLConvertService {
     @Autowired
     SQLProduceService sqlProduceService;
 
+    @Autowired
+    VelocityTemplateForSQL velocityTemplateForSQL;
+
     /**
+     *
      * 根据参数写出创表命令
      * @param parameterMessage parameter，tbName
      * @return 创表命令
@@ -36,11 +41,12 @@ public class SQLConvertService {
             parameterName.add(parse.upperToLower(parameter.split(" ")[1]));
         }
 
-        String SQLCommand = sqlProduceService.composeSqlCommand(parameterType,parameterName,parameterMessage.getTbName());
+        String SQLCommand = velocityTemplateForSQL.createSQLTemplate(parameterType,parameterName,parameterMessage.getTbName());
+
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS,SQLCommand);
     }
 
-
+    // todo 替换增删改查语句， 使用模版
     /**
      * 更新数据库表命令
      * @param parameterMessage parameter,keyParameter,tbName

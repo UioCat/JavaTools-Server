@@ -26,6 +26,15 @@ public class BackMessage<T> {
         this.message = message;
     }
 
+    @Override
+    public String toString() {
+        return "BackMessage{" +
+                "code=" + code +
+                ", message='" + message + '\'' +
+                ", info=" + info +
+                '}';
+    }
+
     public Integer getCode() {
         return code;
     }

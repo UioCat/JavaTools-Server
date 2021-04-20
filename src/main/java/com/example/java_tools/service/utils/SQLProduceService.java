@@ -49,7 +49,6 @@ public class SQLProduceService {
                 stringBuilder.append(");");
             }
         }
-
         return stringBuilder.toString();
     }
 
