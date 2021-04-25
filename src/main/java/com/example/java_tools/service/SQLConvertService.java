@@ -89,15 +89,13 @@ public class SQLConvertService {
      */
     public BackMessage insertMsgService(ParameterMessage parameterMessage){
 
-        List<String> parameterType = new ArrayList<>();
         List<String> parameterName = new ArrayList<>();
 
         for(String parameter : parameterMessage.getParameter()){
-            parameterType.add(parameter.split(" ")[0]);
-            parameterName.add(parameter.split(" ")[1]);
+            parameterName.add(parse.upperToLower(parameter.split(" ")[1]));
         }
 
-        String insertSQL = sqlProduceService.composeSQLInsert(parameterType,parameterName,parameterMessage.getTbName());
+        String insertSQL = velocityTemplateForSQL.insertSQLTemplate(parameterName, parameterMessage.getTbName());
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS,insertSQL);
     }
 

@@ -22,9 +22,15 @@ public interface IData {
     };
 
     /**
-     * 用于生成MySQL 插入语句的模版
+     * 用于生成MySQL 生成表命令模版文件路径
      */
-    String templateForInsertSQL = "";
+    String templateForCreateSQLFile = "velocity_template/create_sql.vm";
+
+    /**
+     * 用户生成MySQL 插入语句的模版文件路径
+     */
+    String templateForInsertSQLFile = "velocity_template/insert_sql.vm";
+
 
 
 

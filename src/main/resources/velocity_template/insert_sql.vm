@@ -1,8 +1,4 @@
-CREATE TABLE ${tbName}
-(
-#foreach(${paramNameItem} in ${paramNameList})
-    #set($index=$!{velocityCount} - 1) ${paramNameItem} ${paramTypeList.get($index)}#if(${paramNameList.size()} != $velocityCount),
-#end
-#end
-
-);
+INSERT INTO ${tbName}
+(#foreach(${Item} in ${paramNameList})${Item}#if(${velocityCount} != ${paramNameList.size()}),#end#end)
+values
+(#foreach(${Item} in ${paramNameList})${Item}#if(${velocityCount} != ${paramNameList.size()}),#end#end)
