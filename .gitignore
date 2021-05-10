@@ -29,3 +29,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### 配置文件 ###
+application*
+
+### 测试文件夹 ###
+test/
+
