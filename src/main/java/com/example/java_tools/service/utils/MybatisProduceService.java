@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// todo 使用模版替换生成mybatis字符串
 @Service
 public class MybatisProduceService {
 

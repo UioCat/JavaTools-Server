@@ -68,8 +68,6 @@ public class VelocityTemplateForSQL {
     }
 
 
-
-
     /**
      * 初始化模版
      * @param templateFilePath 模版文件路径

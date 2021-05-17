@@ -46,7 +46,7 @@ public class SQLConvertService {
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS,SQLCommand);
     }
 
-    // todo 替换增删改查语句， 使用模版
+    // todo 使用模版替换 update SQL语句
     /**
      * 更新数据库表命令
      * @param parameterMessage parameter,keyParameter,tbName
@@ -99,6 +99,7 @@ public class SQLConvertService {
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS,insertSQL);
     }
 
+    // todo 使用模版替换 delete SQL语句
     /**
      * 生成删除信息命令
      * @param parameterMessage keyParameter,tbName
@@ -119,6 +120,7 @@ public class SQLConvertService {
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS,deleteSQL);
     }
 
+    // todo 使用模版替换 select SQL语句
     /**
      * 查询信息命令生成
      * @param parameterMessage parameter，keyParameter，tbName

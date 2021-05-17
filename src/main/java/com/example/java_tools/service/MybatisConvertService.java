@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+// todo 抽离接口，面向接口编程
 @Service
 public class MybatisConvertService {
 

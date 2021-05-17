@@ -16,7 +16,6 @@ public class SQLProduceService {
 
     @Autowired
     ParseStrUtils utils;
-    // todo 模版
 
     /**
      * 输入参数类型list，参数名list，返回sql创建命令
