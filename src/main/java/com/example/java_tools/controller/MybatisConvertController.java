@@ -23,8 +23,7 @@ public class MybatisConvertController {
      */
     @RequestMapping("/mybatisBasics")
     public BackMessage mybatisBatisController(@RequestBody ParameterMessage parameterMessage){
-        BackMessage backMessage = mybatisConvertService.MybatisBasicsService(parameterMessage);
-        return backMessage;
+        return mybatisConvertService.MybatisBasicsService(parameterMessage);
     }
 
     /**
@@ -34,8 +33,7 @@ public class MybatisConvertController {
      */
     @RequestMapping("/mybatisInsert")
     public BackMessage mybatisInsertController(@RequestBody ParameterMessage parameterMessage){
-        BackMessage backMessage = mybatisConvertService.MybatisInsertService(parameterMessage);
-        return backMessage;
+        return mybatisConvertService.MybatisInsertService(parameterMessage);
     }
 
     /**
@@ -45,8 +43,7 @@ public class MybatisConvertController {
      */
     @RequestMapping("/mybatisDelete")
     public BackMessage mybatisDeleteController(@RequestBody ParameterMessage parameterMessage){
-        BackMessage backMessage = mybatisConvertService.MybatisDeleteService(parameterMessage);
-        return backMessage;
+        return mybatisConvertService.MybatisDeleteService(parameterMessage);
     }
 
     /**
@@ -56,14 +53,12 @@ public class MybatisConvertController {
      */
     @RequestMapping("/mybatisUpdate")
     public BackMessage mybatisUpdate(@RequestBody ParameterMessage parameterMessage){
-        BackMessage backMessage = mybatisConvertService.MybatisUpdateService(parameterMessage);
-        return backMessage;
+        return mybatisConvertService.MybatisUpdateService(parameterMessage);
     }
 
     @RequestMapping("/mybatisSelect")
     public BackMessage mybatisSelect(@RequestBody ParameterMessage parameterMessage){
-        BackMessage backMessage = mybatisConvertService.MybatisSelectService(parameterMessage);
-        return backMessage;
+        return mybatisConvertService.MybatisSelectService(parameterMessage);
     }
 
 }
