@@ -30,7 +30,7 @@ public class ParseStrUtils {
                 if(i == 0){
                     stringBuilder.append(ch[i]);
                 }else {
-                    stringBuilder.append("_" + ch[i]);
+                    stringBuilder.append("_").append(ch[i]);
                 }
             }else {
                 stringBuilder.append(ch[i]);
@@ -48,7 +48,8 @@ public class ParseStrUtils {
     public String typeConvertForMysql(String type){
 
         switch (type){
-            case "Integer":{
+            case "Integer":
+            case "int": {
                 type = "int(32)";
                 break;
             }
@@ -56,19 +57,46 @@ public class ParseStrUtils {
                 type = "varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL";
                 break;
             }
-            case "Boolean":{
+            case "Boolean": {
+                type = "bit(1) DEFAULT NULL";
+                break;
+            }
+            case "boolean": {
                 type = "bit(1) NOT NULL DEFAULT b'0'";
                 break;
             }
-            case "Double":{
+            case "Double": {
                 type = "double DEFAULT NULL";
                 break;
             }
-            case "Float":{
+            case "double": {
+                type = "double";
+                break;
+            }
+            case "Float": {
                 type = "float DEFAULT NULL";
                 break;
             }
-            // todo 加上int,Date,BigDecimal
+            case "float": {
+                type = "float";
+                break;
+            }
+            case "Long": {
+                type = "bigint DEFAULT NULL";
+                break;
+            }
+            case "long": {
+                type = "bigint";
+                break;
+            }
+            case "BigDecimal": {
+                type = "decimal(10,2) DEFAULT '0.0000'";
+                break;
+            }
+            case "Date": {
+                type = "datetime DEFAULT NULL";
+                break;
+            }
         }
         return type;
     }
