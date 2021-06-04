@@ -31,10 +31,7 @@ build/
 .vscode/
 
 ### 配置文件 ###
-application*
-
-### 测试文件夹 ###
-test/
+application-prod.yml
 
 ### 上传脚本 ###
 up_package.sh
