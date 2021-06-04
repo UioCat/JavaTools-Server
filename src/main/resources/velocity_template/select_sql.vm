@@ -1,0 +1,5 @@
+SELECT #foreach($paramNameItem in ${paramNameList})$paramNameItem#if(${paramNameList.size()}!=$velocityCount),#end
+#end
+ WHERE
+#foreach($keyParamNameItem in ${keyParamNameList})#set($index=${velocityCount} - 1)$keyParamNameItem=#if(${keyParamTypeList.get($index)}=="String")'$keyParamNameItem'#else$keyParamNameItem#end#if(${keyParamNameList.size()} != $velocityCount) AND #end
+#end;
