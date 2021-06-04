@@ -1,4 +1,4 @@
-package com.example.java_tools.service.utils;
+package com.example.java_tools.manager.impl;
 
 
 import com.example.java_tools.enums.BackEnum;
@@ -15,41 +15,41 @@ import java.util.List;
 public class SQLProduceService {
 
     @Autowired
-    ParseStrUtils utils;
+    ParseStrManagerImpl utils;
 
-    /**
-     * 输入参数类型list，参数名list，返回sql创建命令
-     * @param parameterType 参数类型List 已转换成数据库的类型
-     * @param parameterName 参数名List 已转换成数据库变量名格式
-     * @param tbName 建表名称
-     * @return 创表命令
-     */
-    public String composeSqlCommand(List<String> parameterType, List<String> parameterName,
-                                    String tbName){
-
-        StringBuilder stringBuilder = new StringBuilder();
-        //判断数据是否错误
-        if(parameterName.size() != parameterType.size()){
-            throw new CustomException(BackEnum.DATA_ERROR);
-        }
-
-        stringBuilder.append("CREATE TABLE ");
-        stringBuilder.append(tbName);
-        stringBuilder.append("( ");
-
-        for(int i = 0; i < parameterType.size(); i++){
-            stringBuilder.append(parameterName.get(i));
-            stringBuilder.append(" ");
-            stringBuilder.append(parameterType.get(i));
-
-            if(i != parameterType.size() - 1){
-                stringBuilder.append(",");
-            }else {
-                stringBuilder.append(");");
-            }
-        }
-        return stringBuilder.toString();
-    }
+//    /**
+//     * 输入参数类型list，参数名list，返回sql创建命令
+//     * @param parameterType 参数类型List 已转换成数据库的类型
+//     * @param parameterName 参数名List 已转换成数据库变量名格式
+//     * @param tbName 建表名称
+//     * @return 创表命令
+//     */
+//    public String composeSqlCommand(List<String> parameterType, List<String> parameterName,
+//                                    String tbName){
+//
+//        StringBuilder stringBuilder = new StringBuilder();
+//        //判断数据是否错误
+//        if(parameterName.size() != parameterType.size()){
+//            throw new CustomException(BackEnum.DATA_ERROR);
+//        }
+//
+//        stringBuilder.append("CREATE TABLE ");
+//        stringBuilder.append(tbName);
+//        stringBuilder.append("( ");
+//
+//        for(int i = 0; i < parameterType.size(); i++){
+//            stringBuilder.append(parameterName.get(i));
+//            stringBuilder.append(" ");
+//            stringBuilder.append(parameterType.get(i));
+//
+//            if(i != parameterType.size() - 1){
+//                stringBuilder.append(",");
+//            }else {
+//                stringBuilder.append(");");
+//            }
+//        }
+//        return stringBuilder.toString();
+//    }
 
     /**
      * 输入参数类型，参数名list，返回sql更新表
@@ -114,55 +114,55 @@ public class SQLProduceService {
         return stringBuilder.toString();
     }
 
-    /**
-     * 输入参数类型 参数名List ，返回SQL 插入数据命令
-     * @param parameterType 参数类型，没有转换的
-     * @param parameterName 参数名，没有转换的
-     * @param tbName 表名
-     * @return 插入数据命令
-     */
-    public String composeSQLInsert(List<String> parameterType, List<String> parameterName,
-                                   String tbName){
-
-        StringBuilder stringBuilder = new StringBuilder();
-        //判断数据是否错误
-        if(parameterName.size() != parameterType.size()){
-            throw new CustomException(BackEnum.DATA_ERROR);
-        }
-
-        stringBuilder.append("INSERT INTO ");
-        stringBuilder.append(tbName);
-        stringBuilder.append(" (");
-
-        for(int i = 0; i < parameterType.size(); i++){
-
-            stringBuilder.append(utils.upperToLower(parameterName.get(i)));
-            if(parameterType.size() -1 == i || parameterName.size() ==1 ){
-                stringBuilder.append(")");
-            }else {
-                stringBuilder.append(",");
-            }
-        }
-        stringBuilder.append(" values (");
-
-        for(int i = 0; i < parameterType.size(); i++){
-
-            if(parameterType.get(i).equals("String")) {
-                stringBuilder.append("'");
-                stringBuilder.append(parameterName.get(i));
-                stringBuilder.append("'");
-            }else {
-                stringBuilder.append(parameterName.get(i));
-            }
-
-            if(parameterType.size() -1 == i || parameterName.size() ==1 ){
-                stringBuilder.append(");");
-            }else {
-                stringBuilder.append(",");
-            }
-        }
-        return stringBuilder.toString();
-    }
+//    /**
+//     * 输入参数类型 参数名List ，返回SQL 插入数据命令
+//     * @param parameterType 参数类型，没有转换的
+//     * @param parameterName 参数名，没有转换的
+//     * @param tbName 表名
+//     * @return 插入数据命令
+//     */
+//    public String composeSQLInsert(List<String> parameterType, List<String> parameterName,
+//                                   String tbName){
+//
+//        StringBuilder stringBuilder = new StringBuilder();
+//        //判断数据是否错误
+//        if(parameterName.size() != parameterType.size()){
+//            throw new CustomException(BackEnum.DATA_ERROR);
+//        }
+//
+//        stringBuilder.append("INSERT INTO ");
+//        stringBuilder.append(tbName);
+//        stringBuilder.append(" (");
+//
+//        for(int i = 0; i < parameterType.size(); i++){
+//
+//            stringBuilder.append(utils.upperToLower(parameterName.get(i)));
+//            if(parameterType.size() -1 == i || parameterName.size() ==1 ){
+//                stringBuilder.append(")");
+//            }else {
+//                stringBuilder.append(",");
+//            }
+//        }
+//        stringBuilder.append(" values (");
+//
+//        for(int i = 0; i < parameterType.size(); i++){
+//
+//            if(parameterType.get(i).equals("String")) {
+//                stringBuilder.append("'");
+//                stringBuilder.append(parameterName.get(i));
+//                stringBuilder.append("'");
+//            }else {
+//                stringBuilder.append(parameterName.get(i));
+//            }
+//
+//            if(parameterType.size() -1 == i || parameterName.size() ==1 ){
+//                stringBuilder.append(");");
+//            }else {
+//                stringBuilder.append(",");
+//            }
+//        }
+//        return stringBuilder.toString();
+//    }
 
     /**
      * 输入参数类型 参数名List 返回SQL，删除信息命令

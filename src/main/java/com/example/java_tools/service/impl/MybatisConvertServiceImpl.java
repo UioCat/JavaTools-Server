@@ -1,0 +1,85 @@
+package com.example.java_tools.service.impl;
+
+import com.example.java_tools.enums.BackEnum;
+import com.example.java_tools.service.MybatisConvertService;
+import com.example.java_tools.manager.impl.MybatisProduceManagerImpl;
+import com.example.java_tools.utils.BackMessage;
+import com.example.java_tools.utils.json_msg.ParameterMessage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class MybatisConvertServiceImpl implements MybatisConvertService {
+
+    @Autowired
+    MybatisProduceManagerImpl mybatisProduceService;
+
+    @Override
+    public BackMessage MybatisBasicsService(ParameterMessage parameterMessage) {
+        String basicsCommand = mybatisProduceService.mybatisBasics(parameterMessage.getNamespace());
+        return new BackMessage<>(BackEnum.REQUEST_SUCCESS,basicsCommand);
+    }
+
+    @Override
+    public BackMessage MybatisInsertService(ParameterMessage parameterMessage) {
+
+        List<String> parameterName = new ArrayList<>();
+
+        for(String parameter : parameterMessage.getParameter()){
+            parameterName.add(parameter.split(" ")[1]);
+        }
+
+        String insertCommand = mybatisProduceService.mybatisInsert(parameterName,parameterMessage.getTbName());
+        return new BackMessage<>(BackEnum.REQUEST_SUCCESS,insertCommand);
+    }
+
+    @Override
+    public BackMessage MybatisUpdateService(ParameterMessage parameterMessage) {
+
+        List<String> parameterName = new ArrayList<>();
+        List<String> keyParameterName = new ArrayList<>();
+
+        for(String keyParameter : parameterMessage.getKeyParameter()){
+            keyParameterName.add(keyParameter.split(" ")[1]);
+        }
+        for(String parameter : parameterMessage.getParameter()){
+            parameterName.add(parameter.split(" ")[1]);
+        }
+
+        String updateCommand = mybatisProduceService.mybatisUpdate(keyParameterName,parameterName,parameterMessage.getTbName());
+        return new BackMessage(BackEnum.REQUEST_SUCCESS,updateCommand);
+    }
+
+    @Override
+    public BackMessage MybatisDeleteService(ParameterMessage parameterMessage) {
+
+        List<String> keyParameterName = new ArrayList<>();
+
+        for(String keyParameter : parameterMessage.getKeyParameter()){
+            keyParameterName.add(keyParameter.split(" ")[1]);
+        }
+
+        String deleteCommand = mybatisProduceService.mybatisDelete(keyParameterName,parameterMessage.getTbName());
+        return new BackMessage<>(BackEnum.REQUEST_SUCCESS,deleteCommand);
+    }
+
+    @Override
+    public BackMessage MybatisSelectService(ParameterMessage parameterMessage) {
+
+        List<String> parameterName = new ArrayList<>();
+        List<String> keyParameterName = new ArrayList<>();
+
+        for(String keyParameter : parameterMessage.getKeyParameter()){
+            keyParameterName.add(keyParameter.split(" ")[1]);
+        }
+        for(String parameter : parameterMessage.getParameter()){
+            parameterName.add(parameter.split(" ")[1]);
+        }
+        String selectCommand = mybatisProduceService.mybatisSelect(keyParameterName,parameterName,parameterMessage.getTbName());
+
+        return new BackMessage<>(BackEnum.REQUEST_SUCCESS,selectCommand);
+    }
+}

@@ -1,22 +1,19 @@
-package com.example.java_tools.service.utils;
+package com.example.java_tools.manager.impl;
 
+import com.example.java_tools.manager.MybatisProduceManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 // todo 使用模版替换生成mybatis字符串
-@Service
-public class MybatisProduceService {
+@Component
+public class MybatisProduceManagerImpl implements MybatisProduceManager {
 
     @Autowired
-    ParseStrUtils utils;
+    ParseStrManagerImpl utils;
 
-    /**
-     * 生成mybatis基础的框架数据
-     * @param namespace com.xx.xx.xx.xxDao
-     * @return
-     */
+    @Override
     public String mybatisBasics(String namespace){
         StringBuffer stringBuffer = new StringBuffer();
 
@@ -34,12 +31,7 @@ public class MybatisProduceService {
         return stringBuffer.toString();
     }
 
-    /**
-     * 生成mybatis插入数据配置
-     * @param parameterName
-     * @param tbName
-     * @return String
-     */
+    @Override
     public String mybatisInsert(List<String> parameterName,String tbName){
 
         StringBuffer stringBuffer = new StringBuffer();
@@ -72,13 +64,7 @@ public class MybatisProduceService {
         return stringBuffer.toString();
     }
 
-    /**
-     * 生成mybatis更新数据配置
-     * @param keyParameterName
-     * @param parameterName
-     * @param tbName
-     * @return String
-     */
+    @Override
     public String mybatisUpdate(List<String> keyParameterName,List<String> parameterName,String tbName){
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -119,12 +105,7 @@ public class MybatisProduceService {
         return stringBuilder.toString();
     }
 
-    /**
-     * 生成mybatis删除数据配置
-     * @param keyParameterName
-     * @param tbName
-     * @return String
-     */
+    @Override
     public String mybatisDelete(List<String> keyParameterName,String tbName){
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -149,6 +130,7 @@ public class MybatisProduceService {
         return stringBuilder.toString();
     }
 
+    @Override
     public String mybatisSelect(List<String> keyParameterName,List<String> parameterName,String tbName){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<select id=\"queryMsg\">\n\t");

@@ -36,3 +36,5 @@ application*
 ### 测试文件夹 ###
 test/
 
+### 上传脚本 ###
+up_package.sh

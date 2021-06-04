@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MybatisConvertController {
 
     @Autowired
-    MybatisConvertService mybatisConvertService;
+    private MybatisConvertService mybatisConvertService;
 
     /**
      * mybatis基础信息创建

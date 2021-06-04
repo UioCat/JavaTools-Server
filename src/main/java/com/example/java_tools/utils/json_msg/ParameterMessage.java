@@ -12,6 +12,16 @@ public class ParameterMessage {
     public ParameterMessage() {
     }
 
+    @Override
+    public String toString() {
+        return "ParameterMessage{" +
+                "parameter=" + Arrays.toString(parameter) +
+                ", keyParameter=" + Arrays.toString(keyParameter) +
+                ", tbName='" + tbName + '\'' +
+                ", namespace='" + namespace + '\'' +
+                '}';
+    }
+
     public String getNamespace() {
         return namespace;
     }

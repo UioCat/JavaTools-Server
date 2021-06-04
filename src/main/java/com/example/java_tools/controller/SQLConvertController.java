@@ -1,9 +1,8 @@
 package com.example.java_tools.controller;
 
-import com.example.java_tools.service.SQLConvertService;
+import com.example.java_tools.service.impl.SQLConvertServiceImpl;
 import com.example.java_tools.utils.BackMessage;
 import com.example.java_tools.utils.json_msg.ParameterMessage;
-import com.example.java_tools.utils.json_msg.StringDataMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class SQLConvertController {
     Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    SQLConvertService sqlService;
+    private SQLConvertServiceImpl sqlService;
 
 
     /**

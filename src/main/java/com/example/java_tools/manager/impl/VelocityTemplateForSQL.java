@@ -1,4 +1,4 @@
-package com.example.java_tools.service.utils;
+package com.example.java_tools.manager.impl;
 
 import com.example.java_tools.utils.IData;
 import org.apache.velocity.Template;
@@ -7,7 +7,6 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.StringWriter;
@@ -22,7 +21,7 @@ import java.util.List;
 public class VelocityTemplateForSQL {
 
     @Autowired
-    ParseStrUtils parseStrUtils;
+    ParseStrManagerImpl parseStrUtils;
 
     /**
      * 使用velocity模版生成创建表的SQL语句

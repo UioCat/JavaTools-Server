@@ -1,7 +1,7 @@
 package com.example.java_tools.controller;
 
 import com.example.java_tools.enums.BackEnum;
-import com.example.java_tools.service.TokenizerService;
+import com.example.java_tools.service.impl.TokenizerServiceImpl;
 import com.example.java_tools.utils.BackMessage;
 import com.example.java_tools.utils.json_msg.StringDataMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.List;
 public class TokenizerController {
 
     @Autowired
-    TokenizerService tokenizerService;
+    private TokenizerServiceImpl tokenizerService;
 
     /**
      * 文本识别接口

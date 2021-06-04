@@ -11,6 +11,7 @@ public interface IData {
      * 验证字符方法所用到的字符串
      */
     String[] scope = {
+            // todo 加上 char ，Character
             "Integer", "int",
             "Double", "double",
             "Float", "float",

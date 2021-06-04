@@ -1,24 +1,20 @@
-package com.example.java_tools.service.utils;
+package com.example.java_tools.manager.impl;
 
+import com.example.java_tools.manager.ParseStrManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.LinkedHashSet;
 
 /**
  * 解析字符串的工具类
  */
 @Service
-public class ParseStrUtils {
+public class ParseStrManagerImpl implements ParseStrManager {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
-    /**
-     * 将含有大写字母的变量名 aB 改成 a_b
-     * @param str 字符aB
-     * @return a_b
-     */
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Override
     public String upperToLower(String str){
 
         char[] ch = str.toCharArray();//A-Z 65-90,a-z 97-122
@@ -40,13 +36,9 @@ public class ParseStrUtils {
     }
 
 
-    /**
-     * type转换为数据库建表需要的字符
-     * @param type （Integer）
-     * @return type int(32)
-     */
+    @Override
     public String typeConvertForMysql(String type){
-
+        // todo 使用枚举进行优化重构
         switch (type){
             case "Integer":
             case "int": {

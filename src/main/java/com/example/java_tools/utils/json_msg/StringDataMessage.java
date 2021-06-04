@@ -7,9 +7,6 @@ public class StringDataMessage {
     public StringDataMessage() {
     }
 
-//
-
-
     public String getData() {
         return data;
     }
