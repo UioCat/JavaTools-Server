@@ -1,4 +1,4 @@
-package com.example.java_tools;
+package com.example.java_tools.service;
 
 import com.example.java_tools.service.SQLConvertService;
 import com.example.java_tools.service.impl.SQLConvertServiceImpl;
@@ -14,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * Description:
  */
 @SpringBootTest
-class SQLTest {
+class SQLConvertServiceTest {
     @Autowired
     SQLConvertServiceImpl sqlConvertService;
     ParameterMessage parameterMessage = new ParameterMessage();
