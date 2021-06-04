@@ -43,7 +43,7 @@ public class VelocityTemplateForSQL {
 
         StringWriter sw = new StringWriter();
 
-        template.merge(ctx,sw);
+        template.merge(ctx, sw);
         return sw.toString();
     }
 
@@ -62,10 +62,70 @@ public class VelocityTemplateForSQL {
         ctx.put("paramNameList", parameterName);
 
         StringWriter sw = new StringWriter();
-        template.merge(ctx,sw);
+        template.merge(ctx, sw);
         return sw.toString();
     }
 
+    /**
+     * 创建更新数据语句
+     * @param parameterName 参数名
+     * @param keyParameterType where判断的参数类型
+     * @param keyParameterName where判断的参数名
+     * @param tbName 表名
+     * @return 更新sql的语句
+     */
+    public String updateSQLTemplate(List<String> parameterType, List<String> parameterName, List<String> keyParameterType, List<String> keyParameterName, String tbName) {
+        // 获取模板文件
+        Template template = getTemplate(IData.templateForUpdateSQLFile);
+        // 设置变量
+        VelocityContext ctx = new VelocityContext();
+        ctx.put("tbName", tbName);
+        ctx.put("paramTypeList", parameterType);
+        ctx.put("paramNameList", parameterName);
+        ctx.put("keyParamTypeList", keyParameterType);
+        ctx.put("keyParamNameList", keyParameterName);
+
+        StringWriter sw = new StringWriter();
+        template.merge(ctx, sw);
+        return sw.toString();
+    }
+
+    /**
+     * 创建查询数据语句
+     * @param parameterName 参数名
+     * @param keyParameterType where判断的参数类型
+     * @param keyParameterName where判断的参数名
+     * @param tbName 表名
+     * @return 查询的sql语句
+     */
+    public String selectSQLTemplate(List<String> parameterName, List<String> keyParameterType, List<String> keyParameterName, String tbName) {
+        // 获取模板文件
+        Template template = getTemplate(IData.templateForSelectSQLFile);
+        // 设置变量
+        VelocityContext ctx = new VelocityContext();
+        ctx.put("tbName", tbName);
+        ctx.put("paramNameList", parameterName);
+        ctx.put("keyParamTypeList", keyParameterType);
+        ctx.put("keyParamNameList", keyParameterName);
+
+        StringWriter sw = new StringWriter();
+        template.merge(ctx, sw);
+        return sw.toString();
+    }
+
+    public String deleteSQLTemplate(List<String> keyParameterType, List<String> keyParameterName, String tbName) {
+        // 获取模板文件
+        Template template = getTemplate(IData.templateForDeleteSQLFile);
+        // 设置变量
+        VelocityContext ctx = new VelocityContext();
+        ctx.put("tbName", tbName);
+        ctx.put("keyParamTypeList", keyParameterType);
+        ctx.put("keyParamNameList", keyParameterName);
+
+        StringWriter sw = new StringWriter();
+        template.merge(ctx,sw);
+        return sw.toString();
+    }
 
     /**
      * 初始化模版
@@ -82,6 +142,5 @@ public class VelocityTemplateForSQL {
         // 返回模板文件
         return ve.getTemplate(templateFilePath);
     }
-
 
 }

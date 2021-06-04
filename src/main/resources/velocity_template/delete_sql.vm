@@ -1,0 +1,2 @@
+DELETE FROM ${tbName} WHERE #foreach($keyParamNameItem in ${keyParamNameList})#set($index = ${keyParamNameList.size()} - 1)$keyParamNameItem=#if(${keyParamTypeList.get($index)}=="String")'$keyParamNameItem'#else$keyParamNameItem#end#if(${keyParamTypeList.size()}!=$velocityCount) AND #end
+#end;

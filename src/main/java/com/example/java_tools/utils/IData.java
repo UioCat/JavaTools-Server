@@ -32,7 +32,18 @@ public interface IData {
      */
     String templateForInsertSQLFile = "velocity_template/insert_sql.vm";
 
+    /**
+     * 用户生成MySQL更新语句的模板文件路径
+     */
+    String templateForUpdateSQLFile = "velocity_template/update_sql.vm";
 
+    /**
+     * 用户生成MySQL查询语句的模板文件路径
+     */
+    String templateForSelectSQLFile = "velocity_template/select_sql.vm";
 
-
+    /**
+     * 用户生成MySQL删除语句的模板文件路径
+     */
+    String templateForDeleteSQLFile = "velocity_template/delete_sql.vm";
 }
