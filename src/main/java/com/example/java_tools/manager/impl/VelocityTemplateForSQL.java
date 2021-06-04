@@ -21,7 +21,7 @@ import java.util.List;
 public class VelocityTemplateForSQL {
 
     @Autowired
-    ParseStrManagerImpl parseStrUtils;
+    private ParseStrManagerImpl parseStrUtils;
 
     /**
      * 使用velocity模版生成创建表的SQL语句

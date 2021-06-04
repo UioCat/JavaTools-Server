@@ -1,6 +1,6 @@
 package com.example.java_tools.controller;
 
-import com.example.java_tools.service.impl.SQLConvertServiceImpl;
+import com.example.java_tools.service.SQLConvertService;
 import com.example.java_tools.utils.BackMessage;
 import com.example.java_tools.utils.json_msg.ParameterMessage;
 import org.slf4j.Logger;
@@ -9,15 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
-@CrossOrigin(origins = {"*"}, allowCredentials = "true")
 @RestController
 public class SQLConvertController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private SQLConvertServiceImpl sqlService;
-
+    private SQLConvertService sqlService;
 
     /**
      * 创表命令
@@ -25,13 +23,9 @@ public class SQLConvertController {
      * @return 创表命令 String
      */
     @PostMapping("/createSQL")
-    public BackMessage createSqlCommandController(@RequestBody ParameterMessage parameterMessage){
-
+    public BackMessage<String> createSqlCommandController(@RequestBody ParameterMessage parameterMessage){
         logger.info("parameterMessage = " + parameterMessage.toString());
-
-        BackMessage backMessage = sqlService.createSqlService(parameterMessage);
-
-        return backMessage;
+        return sqlService.createSqlService(parameterMessage);
     }
 
     /**
@@ -40,13 +34,10 @@ public class SQLConvertController {
      * @return 更新数据库表命令 String
      */
     @PostMapping("/updateTable")
-    public BackMessage updateTableController(@RequestBody ParameterMessage parameterMessage){
+    public BackMessage<String> updateTableController(@RequestBody ParameterMessage parameterMessage){
 
         logger.info("parameterMessage = " + parameterMessage.toString());
-
-        BackMessage backMessage = sqlService.updateTableService(parameterMessage);
-
-        return backMessage;
+        return sqlService.updateTableService(parameterMessage);
     }
 
     /**
@@ -55,13 +46,10 @@ public class SQLConvertController {
      * @return 插入数据命令
      */
     @PostMapping("/insertMsg")
-    public BackMessage insertMsgController(@RequestBody ParameterMessage parameterMessage) {
+    public BackMessage<String> insertMsgController(@RequestBody ParameterMessage parameterMessage) {
 
         logger.info("parameterMessage = " + parameterMessage.toString());
-
-        BackMessage backMessage = sqlService.insertMsgService(parameterMessage);
-
-        return backMessage;
+        return sqlService.insertMsgService(parameterMessage);
     }
 
     /**
@@ -70,11 +58,11 @@ public class SQLConvertController {
      * @return 删除信息命令
      */
     @PostMapping("/deleteMsg")
-    public BackMessage deleteMsgController(@RequestBody ParameterMessage parameterMessage){
+    public BackMessage<String> deleteMsgController(@RequestBody ParameterMessage parameterMessage){
 
         logger.info("parameterMessage = " + parameterMessage.toString());
 
-        BackMessage backMessage = sqlService.deleteMsg(parameterMessage);
+        BackMessage<String> backMessage = sqlService.deleteMsg(parameterMessage);
 
         return backMessage;
     }
@@ -85,11 +73,11 @@ public class SQLConvertController {
      * @return
      */
     @PostMapping("/selectTable")
-    public BackMessage selectTableController(@RequestBody ParameterMessage parameterMessage){
+    public BackMessage<String> selectTableController(@RequestBody ParameterMessage parameterMessage){
 
         logger.info("parameterMessage = " + parameterMessage.toString());
 
-        BackMessage backMessage = sqlService.selectMsg(parameterMessage);
+        BackMessage<String> backMessage = sqlService.selectMsg(parameterMessage);
 
         return backMessage;
     }

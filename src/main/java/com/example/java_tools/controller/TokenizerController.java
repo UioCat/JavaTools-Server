@@ -28,8 +28,8 @@ public class TokenizerController {
      * @return 识别好的List<String>
      */
     @PostMapping(value = "/wordIdentify")
-    public BackMessage tokenizer(@RequestBody StringDataMessage dateMessage) {
+    public BackMessage<List<String>> tokenizer(@RequestBody StringDataMessage dateMessage) {
         List<String> fieldList =  tokenizerService.extractFieldFromJavaCode(dateMessage.getData());
-        return new BackMessage<List>(BackEnum.REQUEST_SUCCESS, fieldList);
+        return new BackMessage<List<String>>(BackEnum.REQUEST_SUCCESS, fieldList);
     }
 }

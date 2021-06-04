@@ -22,7 +22,6 @@ public class TokenizerServiceImpl implements TokenizerService {
         /*
             传入
             {
-
                 "data":"private int id;private String username;private String password;\r\nprivate String tbName;"
             }
             返回
@@ -62,7 +61,7 @@ public class TokenizerServiceImpl implements TokenizerService {
             }
 
             if(flag == 0 && verifyWord(words[i])) {
-                // 找到类型关键词
+                // 找到变量类型关键词
                 field = new StringBuilder();
                 field.append(words[i]);
                 field.append(" ");
@@ -70,10 +69,18 @@ public class TokenizerServiceImpl implements TokenizerService {
             } else if(flag == 1) {
                 field.append(words[i]); // 加入变量名
                 flag++;
-            } else if(flag == 2 && (words[i - 1].contains(";") || words[i].equals("="))) {
+                if(words[i].contains(";") || words[i].equals("=")) {
+                    flag = 0;
+                    result.add(field.toString().replace(";", ""));  //如果包含";"则去除
+                }
+            }
+            /*
+            else if(flag == 2 && (words[i - 1].contains(";") || words[i].equals("="))) {
                 flag = 0;
                 result.add(field.toString().replace(";", ""));  //如果包含";"则去除
             }
+            // 原解决方案，但会忽略掉最后一组数据，顾修改
+             */
         }
 
         return result;
