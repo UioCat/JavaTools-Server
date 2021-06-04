@@ -52,12 +52,12 @@ public class MybatisConvertController {
      * @return
      */
     @RequestMapping("/mybatisUpdate")
-    public BackMessage mybatisUpdate(@RequestBody ParameterMessage parameterMessage){
+    public BackMessage<String> mybatisUpdate(@RequestBody ParameterMessage parameterMessage){
         return mybatisConvertService.MybatisUpdateService(parameterMessage);
     }
 
     @RequestMapping("/mybatisSelect")
-    public BackMessage mybatisSelect(@RequestBody ParameterMessage parameterMessage){
+    public BackMessage<String> mybatisSelect(@RequestBody ParameterMessage parameterMessage){
         return mybatisConvertService.MybatisSelectService(parameterMessage);
     }
 

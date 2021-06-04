@@ -9,13 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MybatisConvertServiceImpl implements MybatisConvertService {
 
     @Autowired
     private MybatisProduceManagerImpl mybatisProduceService;
+
+    // todo 将实现类的for循环改成stream，更优雅
 
     @Override
     public BackMessage<String> MybatisBasicsService(ParameterMessage parameterMessage) {
@@ -28,11 +32,14 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
 
         List<String> parameterName = new ArrayList<>();
 
-        for(String parameter : parameterMessage.getParameter()){
-            parameterName.add(parameter.split(" ")[1]);
-        }
+        parameterName = Arrays.stream(parameterMessage.getParameter()).
+                map(parameter -> parameter.split(" ")[1]).collect(Collectors.toList());
 
-        String insertCommand = mybatisProduceService.mybatisInsert(parameterName,parameterMessage.getTbName());
+//        for(String parameter : parameterMessage.getParameter()){
+//            parameterName.add(parameter.split(" ")[1]);
+//        }
+
+        String insertCommand = mybatisProduceService.mybatisInsert(parameterName, parameterMessage.getTbName());
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS,insertCommand);
     }
 

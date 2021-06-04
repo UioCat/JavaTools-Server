@@ -18,22 +18,6 @@ public class TokenizerServiceImpl implements TokenizerService {
     @Override
     public List<String> extractFieldFromJavaCode(String code) {
         List<String> result = null;
-        // todo 解析存在问题，待修改测试
-        /*
-            传入
-            {
-                "data":"private int id;private String username;private String password;\r\nprivate String tbName;"
-            }
-            返回
-            {
-                "code": 200,
-                "message": "请求成功",
-                "info": [
-                    "int idprivate",
-                    "String password"
-                ]
-            }
-         */
         result = parseJavaCode(code.split(" |\\n|\\r"));
         return result;
     }

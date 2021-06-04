@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class ParameterMessage {
 
+    // todo 将数组修改成List
     private String[] parameter;
     private String[] keyParameter;
     private String tbName;

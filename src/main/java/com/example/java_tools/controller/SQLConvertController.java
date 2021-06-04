@@ -24,6 +24,7 @@ public class SQLConvertController {
      */
     @PostMapping("/createSQL")
     public BackMessage<String> createSqlCommandController(@RequestBody ParameterMessage parameterMessage){
+        
         logger.info("parameterMessage = " + parameterMessage.toString());
         return sqlService.createSqlService(parameterMessage);
     }
@@ -61,9 +62,7 @@ public class SQLConvertController {
     public BackMessage<String> deleteMsgController(@RequestBody ParameterMessage parameterMessage){
 
         logger.info("parameterMessage = " + parameterMessage.toString());
-
         BackMessage<String> backMessage = sqlService.deleteMsg(parameterMessage);
-
         return backMessage;
     }
 
@@ -76,10 +75,7 @@ public class SQLConvertController {
     public BackMessage<String> selectTableController(@RequestBody ParameterMessage parameterMessage){
 
         logger.info("parameterMessage = " + parameterMessage.toString());
-
-        BackMessage<String> backMessage = sqlService.selectMsg(parameterMessage);
-
-        return backMessage;
+        return sqlService.selectMsg(parameterMessage);
     }
 
 }

@@ -15,14 +15,14 @@ public interface MybatisConvertService {
      * @param parameterMessage namespace
      * @return backMsg
      */
-    BackMessage MybatisBasicsService(ParameterMessage parameterMessage);
+    BackMessage<String> MybatisBasicsService(ParameterMessage parameterMessage);
 
     /**
      * 根据参数写出插入数据库的mybatis配置语句
      * @param parameterMessage parameter,tbName
      * @return backMsg
      */
-    BackMessage MybatisInsertService(ParameterMessage parameterMessage);
+    BackMessage<String> MybatisInsertService(ParameterMessage parameterMessage);
 
 
     /**
@@ -30,7 +30,7 @@ public interface MybatisConvertService {
      * @param parameterMessage parameter,keyParameter,tbName
      * @return backMsg
      */
-    BackMessage MybatisUpdateService(ParameterMessage parameterMessage);
+    BackMessage<String> MybatisUpdateService(ParameterMessage parameterMessage);
 
 
     /**
@@ -38,14 +38,14 @@ public interface MybatisConvertService {
      * @param parameterMessage keyParameter,tbName
      * @return bakcMsg
      */
-    BackMessage MybatisDeleteService(ParameterMessage parameterMessage);
+    BackMessage<String> MybatisDeleteService(ParameterMessage parameterMessage);
 
     /**
      * 根据参数写出对应的查询配置
      * @param parameterMessage keyParameter，parameter, tbName
      * @return backMsg
      */
-    BackMessage MybatisSelectService(ParameterMessage parameterMessage);
+    BackMessage<String> MybatisSelectService(ParameterMessage parameterMessage);
 
 
 }

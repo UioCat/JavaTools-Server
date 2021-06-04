@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface MybatisProduceManager {
 
+    // todo 对所有生成的mybatis字符串进行名字重构，需要加上ById..
+
     /**
      * 生成mybatis基础的框架数据
      * @param namespace com.xx.xx.xx.xxDao
