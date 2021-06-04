@@ -22,7 +22,7 @@ public class MybatisConvertController {
      * @return
      */
     @RequestMapping("/mybatisBasics")
-    public BackMessage mybatisBatisController(@RequestBody ParameterMessage parameterMessage){
+    public BackMessage<String> mybatisBatisController(@RequestBody ParameterMessage parameterMessage){
         return mybatisConvertService.MybatisBasicsService(parameterMessage);
     }
 
@@ -32,7 +32,7 @@ public class MybatisConvertController {
      * @return
      */
     @RequestMapping("/mybatisInsert")
-    public BackMessage mybatisInsertController(@RequestBody ParameterMessage parameterMessage){
+    public BackMessage<String> mybatisInsertController(@RequestBody ParameterMessage parameterMessage){
         return mybatisConvertService.MybatisInsertService(parameterMessage);
     }
 
@@ -42,7 +42,7 @@ public class MybatisConvertController {
      * @return
      */
     @RequestMapping("/mybatisDelete")
-    public BackMessage mybatisDeleteController(@RequestBody ParameterMessage parameterMessage){
+    public BackMessage<String> mybatisDeleteController(@RequestBody ParameterMessage parameterMessage){
         return mybatisConvertService.MybatisDeleteService(parameterMessage);
     }
 

@@ -15,16 +15,16 @@ import java.util.List;
 public class MybatisConvertServiceImpl implements MybatisConvertService {
 
     @Autowired
-    MybatisProduceManagerImpl mybatisProduceService;
+    private MybatisProduceManagerImpl mybatisProduceService;
 
     @Override
-    public BackMessage MybatisBasicsService(ParameterMessage parameterMessage) {
+    public BackMessage<String> MybatisBasicsService(ParameterMessage parameterMessage) {
         String basicsCommand = mybatisProduceService.mybatisBasics(parameterMessage.getNamespace());
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS,basicsCommand);
     }
 
     @Override
-    public BackMessage MybatisInsertService(ParameterMessage parameterMessage) {
+    public BackMessage<String> MybatisInsertService(ParameterMessage parameterMessage) {
 
         List<String> parameterName = new ArrayList<>();
 
@@ -37,7 +37,7 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
     }
 
     @Override
-    public BackMessage MybatisUpdateService(ParameterMessage parameterMessage) {
+    public BackMessage<String> MybatisUpdateService(ParameterMessage parameterMessage) {
 
         List<String> parameterName = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
@@ -50,11 +50,11 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
         }
 
         String updateCommand = mybatisProduceService.mybatisUpdate(keyParameterName,parameterName,parameterMessage.getTbName());
-        return new BackMessage(BackEnum.REQUEST_SUCCESS,updateCommand);
+        return new BackMessage<>(BackEnum.REQUEST_SUCCESS,updateCommand);
     }
 
     @Override
-    public BackMessage MybatisDeleteService(ParameterMessage parameterMessage) {
+    public BackMessage<String> MybatisDeleteService(ParameterMessage parameterMessage) {
 
         List<String> keyParameterName = new ArrayList<>();
 
@@ -67,7 +67,7 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
     }
 
     @Override
-    public BackMessage MybatisSelectService(ParameterMessage parameterMessage) {
+    public BackMessage<String> MybatisSelectService(ParameterMessage parameterMessage) {
 
         List<String> parameterName = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();

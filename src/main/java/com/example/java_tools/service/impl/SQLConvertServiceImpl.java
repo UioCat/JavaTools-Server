@@ -5,6 +5,7 @@ import com.example.java_tools.enums.BackEnum;
 import com.example.java_tools.manager.impl.ParseStrManagerImpl;
 import com.example.java_tools.manager.impl.SQLProduceService;
 import com.example.java_tools.manager.impl.VelocityTemplateForSQL;
+import com.example.java_tools.service.SQLConvertService;
 import com.example.java_tools.utils.BackMessage;
 import com.example.java_tools.utils.json_msg.ParameterMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +15,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SQLConvertServiceImpl {
+public class SQLConvertServiceImpl implements SQLConvertService {
 
     @Autowired
-    ParseStrManagerImpl parse;
+    private ParseStrManagerImpl parse;
 
     @Autowired
-    SQLProduceService sqlProduceService;
+    private SQLProduceService sqlProduceService;
 
     @Autowired
-    VelocityTemplateForSQL velocityTemplateForSQL;
+    private VelocityTemplateForSQL velocityTemplateForSQL;
 
-
-    public BackMessage createSqlService(ParameterMessage parameterMessage) {
+    @Override
+    public BackMessage<String> createSqlService(ParameterMessage parameterMessage) {
 
         List<String> parameterType = new ArrayList<>();
         List<String> parameterName = new ArrayList<>();
@@ -41,13 +42,8 @@ public class SQLConvertServiceImpl {
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS,SQLCommand);
     }
 
-    // todo 使用模版替换 update SQL语句
-    /**
-     * 更新数据库表命令
-     * @param parameterMessage parameter,keyParameter,tbName
-     * @return
-     */
-    public BackMessage updateTableService(ParameterMessage parameterMessage) {
+    @Override
+    public BackMessage<String> updateTableService(ParameterMessage parameterMessage) {
 
         /*
         需求改的参数
@@ -77,12 +73,8 @@ public class SQLConvertServiceImpl {
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS,updateSQL);
     }
 
-    /**
-     * 插入数据库命令
-     * @param parameterMessage parameter，tbName
-     * @return 参入数据库命令
-     */
-    public BackMessage insertMsgService(ParameterMessage parameterMessage){
+    @Override
+    public BackMessage<String> insertMsgService(ParameterMessage parameterMessage){
 
         List<String> parameterName = new ArrayList<>();
 
@@ -94,13 +86,8 @@ public class SQLConvertServiceImpl {
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS,insertSQL);
     }
 
-    // todo 使用模版替换 delete SQL语句
-    /**
-     * 生成删除信息命令
-     * @param parameterMessage keyParameter,tbName
-     * @return 删除信息命令
-     */
-    public BackMessage deleteMsg(ParameterMessage parameterMessage){
+    @Override
+    public BackMessage<String> deleteMsg(ParameterMessage parameterMessage){
 
         List<String> keyParameterType = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
@@ -115,13 +102,8 @@ public class SQLConvertServiceImpl {
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS,deleteSQL);
     }
 
-    // todo 使用模版替换 select SQL语句
-    /**
-     * 查询信息命令生成
-     * @param parameterMessage parameter，keyParameter，tbName
-     * @return 查询数据库信息命令
-     */
-    public BackMessage selectMsg(ParameterMessage parameterMessage){
+    @Override
+    public BackMessage<String> selectMsg(ParameterMessage parameterMessage){
 
         List<String> keyParameterType = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
