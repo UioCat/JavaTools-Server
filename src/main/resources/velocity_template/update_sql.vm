@@ -1,0 +1,6 @@
+UPDATE ${tbName} SET
+#foreach($paramNameItem in ${paramNameList})
+    #set($index=$!{velocityCount} - 1)#if(${paramTypeList.get($index)} == "String")$paramNameItem='$paramNameItem'#else$paramNameItem=$paramNameItem#end#if(${paramNameList.size()} != $velocityCount),#end
+#end WHERE
+#foreach($keyParamNameItem in ${keyParamNameList})#set($index=$!{velocityCount} - 1)#if(${keyParamTypeList.get($index)} == "String")$keyParamNameItem='$keyParamNameItem'#else$keyParamNameItem=$keyParamNameItem#end#if(${keyParamNameList.size()} != $velocityCount) AND #end
+#end;
