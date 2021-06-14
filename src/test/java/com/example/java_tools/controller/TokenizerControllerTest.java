@@ -6,4 +6,8 @@ package com.example.java_tools.controller;
  * Description:
  */
 public class TokenizerControllerTest {
+    private final String testStr = "";
+
+
+
 }

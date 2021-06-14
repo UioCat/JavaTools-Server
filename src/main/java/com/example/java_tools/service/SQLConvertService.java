@@ -11,7 +11,6 @@ import com.example.java_tools.utils.json_msg.ParameterMessage;
 public interface SQLConvertService {
 
     /**
-     *
      * 根据参数写出创表命令
      * @param parameterMessage parameter，tbName
      * @return 创表命令
@@ -21,7 +20,7 @@ public interface SQLConvertService {
     // todo 使用模版替换 update SQL语句
     /**
      * 更新数据库表命令
-     * @param parameterMessage parameter,keyParameter,tbName
+     * @param parameterMessage parameter, keyParameter, tbName
      * @return
      */
     BackMessage<String> updateTableService(ParameterMessage parameterMessage);

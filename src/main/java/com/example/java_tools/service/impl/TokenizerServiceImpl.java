@@ -35,6 +35,8 @@ public class TokenizerServiceImpl implements TokenizerService {
         int flag = 0; // flag为0表示寻找类型关键词,flag为1表示寻找字段名，flag为2表示判断是否符合类型 + 变量名的格式
         StringBuilder field = null;
         for(int i = 0; i < words.length; i++) {
+
+            // 层级判断和处理
             if(words[i].equals("{")) {
                 hierarchy++;
             } else if(words[i].equals("}")) {
@@ -54,9 +56,9 @@ public class TokenizerServiceImpl implements TokenizerService {
                 field.append(words[i]); // 加入变量名
                 flag++;
                 if(words[i].contains(";") || words[i].equals("=")) {
-                    flag = 0;
                     result.add(field.toString().replace(";", ""));  //如果包含";"则去除
                 }
+                flag = 0;
             }
             /*
             else if(flag == 2 && (words[i - 1].contains(";") || words[i].equals("="))) {

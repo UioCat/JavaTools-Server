@@ -38,7 +38,7 @@ public class ParseStrManagerImpl implements ParseStrManager {
 
     @Override
     public String typeConvertForMysql(String type){
-        // todo 使用枚举进行优化重构
+        // todo 使用策略模式进行优化重构
         switch (type){
             case "Integer":
             case "int": {
