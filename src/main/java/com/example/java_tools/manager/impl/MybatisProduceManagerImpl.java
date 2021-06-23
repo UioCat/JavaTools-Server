@@ -11,7 +11,7 @@ import java.util.List;
 public class MybatisProduceManagerImpl implements MybatisProduceManager {
 
     @Autowired
-    ParseStrManagerImpl utils;
+    private ParseStrManagerImpl utils;
 
     @Override
     public String mybatisBasics(String namespace){

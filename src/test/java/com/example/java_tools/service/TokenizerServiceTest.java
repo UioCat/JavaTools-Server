@@ -8,7 +8,6 @@ import java.io.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author han xun
@@ -30,6 +29,7 @@ public class TokenizerServiceTest {
     public void extractFieldFromJavaCodeTest() {
         String testString = readTestString();
         List<String> list = tokenizerService.extractFieldFromJavaCode(testString);
+        System.out.println(list.size());
         assertEquals(list.size(), listSize);
     }
 

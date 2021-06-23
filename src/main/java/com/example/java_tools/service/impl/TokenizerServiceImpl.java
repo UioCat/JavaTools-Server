@@ -1,5 +1,6 @@
 package com.example.java_tools.service.impl;
 
+import com.example.java_tools.enums.TypeEnum;
 import com.example.java_tools.service.TokenizerService;
 import com.example.java_tools.utils.IData;
 import org.springframework.stereotype.Service;
@@ -54,8 +55,9 @@ public class TokenizerServiceImpl implements TokenizerService {
                 flag++;
             } else if(flag == 1) {
                 field.append(words[i]); // 加入变量名
-                flag++;
-                if(words[i].contains(";") || words[i].equals("=")) {
+                if(words[i].contains(";")) {
+                    // todo 重新考虑 = 的情况
+                    // 如果没有;则表明不合法或为注释，则忽略
                     result.add(field.toString().replace(";", ""));  //如果包含";"则去除
                 }
                 flag = 0;
@@ -77,8 +79,9 @@ public class TokenizerServiceImpl implements TokenizerService {
      * @return 字段为变量类型返回true，否则返回false
      */
     private boolean verifyWord(String word) {
-        for(String type : IData.scope) {
-            if(word.equals(type)) {
+        TypeEnum[] typeEnums = TypeEnum.values();
+        for(TypeEnum type : typeEnums) {
+            if(word.equals(type.getType())) {
                 return true;
             }
         }
