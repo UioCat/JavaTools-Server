@@ -1,5 +1,7 @@
 package com.uio.java_tools.manager;
 
+import java.util.List;
+
 /**
  * @author uio
  * Date 2021/5/23 下午2:57
@@ -21,4 +23,12 @@ public interface ParseStrManager {
      * @return type int(32)
      */
     String typeConvertForMysql(String type);
+
+    /**
+     * 验证字符是否为变量类型
+     * @return 字段为变量类型返回true，否则返回false
+     */
+    boolean verifyWord(String word);
+
+
 }

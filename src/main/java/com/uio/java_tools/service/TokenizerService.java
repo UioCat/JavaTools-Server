@@ -15,4 +15,18 @@ public interface TokenizerService {
      * @return 字段类型 + 字段名
      */
     List<String> extractFieldFromJavaCode(String code);
+
+    /**
+     * 解析Java代码获得包名
+     * @param code
+     * @return
+     */
+    String getPackageName(String code);
+
+    /**
+     * 解析Java代码获得类名
+     * @param code
+     * @return
+     */
+    String getClassName(String code);
 }

@@ -1,5 +1,6 @@
 package com.uio.java_tools.service;
 
+import com.uio.java_tools.util.Utils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,25 +26,19 @@ public class TokenizerServiceTest {
      */
     private static final int listSize = 9;
 
+    /**
+     * 待测试文本存储路径
+     */
+    private static String filePath = "target/classes/static/testJava.txt";
+
     @Test
     public void extractFieldFromJavaCodeTest() {
-        String testString = readTestString();
+
+        String testString = Utils.readTestString(filePath);
         List<String> list = tokenizerService.extractFieldFromJavaCode(testString);
         System.out.println(list.size());
         assertEquals(list.size(), listSize);
     }
 
-    private String readTestString() {
-        try {
-            File file = new File("target/classes/static/testEntity.txt");
-            InputStream is = new FileInputStream(file);
-            byte[] byteArray = new byte[(int) file.length()];
-            is.read(byteArray);
-            is.close();
-            return new String(byteArray);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+
 }

@@ -23,7 +23,7 @@ import java.util.List;
 public class GeneratorBySQLController {
 
     @Autowired
-    @Qualifier("generatorBySQL")
+    @Qualifier("generatorBySQLServiceImpl")
     private GeneratorService generatorServiceBySQL;
 
     /**

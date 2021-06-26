@@ -6,6 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * 解析字符串的工具类
@@ -14,6 +17,17 @@ import org.springframework.stereotype.Service;
 public class ParseStrManagerImpl implements ParseStrManager {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Override
+    public boolean verifyWord(String word) {
+        TypeEnum[] typeEnums = TypeEnum.values();
+        for(TypeEnum type : typeEnums) {
+            if(word.equals(type.getType())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public String upperToLower(String str){
@@ -46,61 +60,4 @@ public class ParseStrManagerImpl implements ParseStrManager {
         }
         return type;
     }
-
-
-//    @Override
-//    public String typeConvertForMysql(String type){
-//        switch (type){
-//            case "Integer":
-//            case "int": {
-//                type = "int(32)";
-//                break;
-//            }
-//            case "String":{
-//                type = "varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL";
-//                break;
-//            }
-//            case "Boolean": {
-//                type = "bit(1) DEFAULT NULL";
-//                break;
-//            }
-//            case "boolean": {
-//                type = "bit(1) NOT NULL DEFAULT b'0'";
-//                break;
-//            }
-//            case "Double": {
-//                type = "double DEFAULT NULL";
-//                break;
-//            }
-//            case "double": {
-//                type = "double";
-//                break;
-//            }
-//            case "Float": {
-//                type = "float DEFAULT NULL";
-//                break;
-//            }
-//            case "float": {
-//                type = "float";
-//                break;
-//            }
-//            case "Long": {
-//                type = "bigint DEFAULT NULL";
-//                break;
-//            }
-//            case "long": {
-//                type = "bigint";
-//                break;
-//            }
-//            case "BigDecimal": {
-//                type = "decimal(10,2) DEFAULT '0.0000'";
-//                break;
-//            }
-//            case "Date": {
-//                type = "datetime DEFAULT NULL";
-//                break;
-//            }
-//        }
-//        return type;
-//    }
 }

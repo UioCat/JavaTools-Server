@@ -23,7 +23,7 @@ import java.util.List;
 public class GeneratorByJavaController {
 
     @Autowired
-    @Qualifier("generatorByJava")
+    @Qualifier("generatorByJavaServiceImpl")
     private GeneratorService generatorServiceByJava;
 
     /**

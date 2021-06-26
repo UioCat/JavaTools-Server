@@ -1,4 +1,4 @@
-package com.example.java_tools;
+package com.example.java_tools.entity;
 
 import java.util.Date;
 
