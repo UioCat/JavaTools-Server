@@ -1,8 +1,6 @@
-# Uio-Tools工具
+# Uio-Tools工具 接口文档
 
-## 接口文档
-
-- 测试用例：
+- 测试用例Java：
 
   ```
   package com.example.java_tools;
@@ -34,10 +32,247 @@
       }
   }
   ```
+  
+- 测试用例SQL：
+
+```
+CREATE TABLE `tb_news` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `keyword` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `article_uid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `index_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `image_source` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `create_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `class_array` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `main_editor` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `content_text` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `memo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `article_uid` (`article_uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=11845 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+```
+
+
+
+
 
 ### 基础 URL：`https://www.uiofield.top`
 
 ### 根路径：`/tools`
+
+
+
+## 解析SQL创表文件
+
+parseSQL
+
+- 路径，POST
+
+```
+/parseSQL
+```
+
+- 发送
+
+```json
+{
+  "data":""
+}
+```
+
+> data数据见测试用例
+
+- 返回
+
+```json
+{
+  "code":"200",
+  "message":"请求成功",
+  "info":{
+    "fieldList":[
+      "Integer id",
+      "String title",
+      "String keyword",
+      "String articleUid"
+    ],
+    "classname":"News",
+    "tbName":"tb_news"
+  }
+}
+```
+
+
+
+## 根据SQL生成文件
+
+generatorFileBySQL
+
+- 路径，Post
+
+```
+/generatorFileBySQL
+```
+
+- 发送
+
+```json
+{
+  "fieldList":[
+      "Integer id",
+      "String title",
+      "String keyword",
+      "String articleUid"
+    ],
+  "tbName":"tb_news",
+  "projectName":"com.uio.java_tools",
+  "classname":"News",
+  "generatorMybatisParameterList":[
+    {
+  		"type":"INSERT",
+      "parameterList":[
+        "Integer title","String keyword","String articleUid"
+      ],
+      "keyParamterList":null
+  	}
+	]
+}
+```
+
+>  1. fieldList为解析时后端返回的全部数据，与用户的选择数据无关
+>
+>  2. tbName为解析时后端返回的数据
+>
+>  3. className为解析时后端返回的数据，用户可以进行更改
+>
+>  4. projectName为用户输入
+>
+>  5. generatorMybatisParameterList内的parameterList数组为用户选择的数据，该数据插入，查询时的选择数据
+>
+>  6. generatorMybatisParameterList内keyParameterList数据为用户选择的诗句，该数据表示查询、修改的条件
+>
+>  7. generatorMybatisParameterList内type数据在后端为枚举，只包含：
+>
+>     ```
+>     INSERT
+>     DELETE
+>     UPDATE
+>     SELECT
+>     ```
+
+- 返回
+
+```json
+{
+  "code":"200",
+  "message":"请求成功",
+  "info":"https://www.uiofield.top/files/xxxx/xxxx.zip"
+}
+```
+
+> info内为生成文件的下载链接
+
+
+
+## 解析Java文件
+
+parseJava
+
+- 路径，Post
+
+```
+/parseJava
+```
+
+- 发送
+
+```json
+{
+  "data":""
+}
+```
+
+> data数据见测试用例
+
+- 返回
+
+```json
+{
+  "code":"200",
+  "message":"请求成功",
+  "info":{
+    "fieldList":[
+      "Integer id",
+      "String title",
+      "String keyword",
+      "String articleUid"
+    ],
+    "classname":"News",
+    "tbName":"tb_news",
+    "packageName":"com.uio.java_tools"
+  }
+}
+```
+
+
+
+## 根据Java生成文件
+
+(该接口的上传参数和返回参数与根据SQL生成文件一致)
+
+generatorFileByJava
+
+- 请求路径，Post
+
+```
+/generatorFileByJava
+```
+
+- 发送
+
+```json
+{
+  "fieldList":[
+      "Integer id",
+      "String title",
+      "String keyword",
+      "String articleUid"
+    ],
+  "tbName":"tb_news",
+  "projectName":"com.uio.java_tools",
+  "classname":"News",
+  "generatorMybatisParameterList":[
+    {
+  		"type":"INSERT",
+      "parameterList":[
+        "Integer title","String keyword","String articleUid"
+      ],
+      "keyParamterList":null
+  	}
+	]
+}
+```
+
+- 返回
+
+```json
+{
+  "code":"200",
+  "message":"请求成功",
+  "info":"https://www.uiofield.top/files/xxxx/xxxx.zip"
+}
+```
+
+> info内为生成文件的下载链接
+
+
+
+
+
+-------------
+
+## 以下全部弃用
 
 ### 文本解析接口parse
 

@@ -1,0 +1,9 @@
+CREATE TABLE `tb_entity` (
+  `id` bigint DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `counts` int DEFAULT NULL,
+  `sum` double DEFAULT NULL,
+  `number` float DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
