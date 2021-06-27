@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * 创建SQL各种命令
+ * @deprecated
  */
 @Service
 public class SQLProduceService {

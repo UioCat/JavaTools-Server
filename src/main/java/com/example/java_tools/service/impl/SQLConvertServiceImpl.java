@@ -21,9 +21,6 @@ public class SQLConvertServiceImpl implements SQLConvertService {
     private ParseStrManagerImpl parse;
 
     @Autowired
-    private SQLProduceService sqlProduceService;
-
-    @Autowired
     private VelocityTemplateForSQL velocityTemplateForSQL;
 
     /**
@@ -82,7 +79,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      * @return 插入数据库命令
      */
     @Override
-    public BackMessage<String> insertMsgService(ParameterMessage parameterMessage){
+    public BackMessage<String> insertMsgService(ParameterMessage parameterMessage) {
 
         List<String> parameterName = new ArrayList<>();
 
@@ -101,7 +98,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      * @return 删除信息命令
      */
     @Override
-    public BackMessage<String> deleteMsg(ParameterMessage parameterMessage){
+    public BackMessage<String> deleteMsg(ParameterMessage parameterMessage) {
 
         List<String> keyParameterType = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
@@ -123,7 +120,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      * @return 查询数据库信息命令
      */
     @Override
-    public BackMessage<String> selectMsg(ParameterMessage parameterMessage){
+    public BackMessage<String> selectMsg(ParameterMessage parameterMessage) {
 
         List<String> keyParameterType = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
@@ -140,7 +137,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
             parameterName.add(parameter.split(" ")[1]);
         }
 
-        String selectSQL = velocityTemplateForSQL.selectSQLTemplate(parameterName,keyParameterType,keyParameterName,parameterMessage.getTbName());
+        String selectSQL = velocityTemplateForSQL.selectSQLTemplate(parameterName, keyParameterType, keyParameterName, parameterMessage.getTbName());
 
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS, selectSQL);
 
