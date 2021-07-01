@@ -1,8 +1,6 @@
 package com.uio.java_tools.service.impl;
 
 import com.uio.java_tools.dto.JavaParseParameterDTO;
-import com.uio.java_tools.dto.ParameterDTO;
-import com.uio.java_tools.dto.ParseParameterDTO;
 import com.uio.java_tools.manager.ParseStrManager;
 import com.uio.java_tools.service.GeneratorService;
 import com.uio.java_tools.service.TokenizerService;
@@ -29,7 +27,7 @@ public class GeneratorByJavaServiceImpl implements GeneratorService {
     private TokenizerService tokenizerService;
 
     @Override
-    public ParseParameterDTO parse(String code) {
+    public JavaParseParameterDTO parse(String code) {
 
         List<String> filedList = tokenizerService.extractFieldFromJavaCode(code);
         String className = tokenizerService.getClassName(code);
@@ -40,6 +38,7 @@ public class GeneratorByJavaServiceImpl implements GeneratorService {
         javaParseParameterDTO.setFieldList(filedList);
         javaParseParameterDTO.setClassName(className);
 
-        return (ParseParameterDTO)javaParseParameterDTO;
+        return javaParseParameterDTO;
     }
+
 }

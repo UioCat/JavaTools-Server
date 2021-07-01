@@ -35,8 +35,7 @@ public class GeneratorByJavaServiceTest {
     @Test
     public void parseJavaTest() {
         String testString = TestUtils.readTestString(filePath);
-        ParseParameterDTO parse = generatorService.parse(testString);
-        JavaParseParameterDTO javaParseParameterDTO = (JavaParseParameterDTO)parse;
+        JavaParseParameterDTO javaParseParameterDTO = generatorService.parse(testString);
         assertEquals(javaParseParameterDTO.getFieldList().size(), listSize);
         assertEquals(javaParseParameterDTO.getPackageName(), "com.example.java_tools");
         assertEquals(javaParseParameterDTO.getClassName(), "Entity");
