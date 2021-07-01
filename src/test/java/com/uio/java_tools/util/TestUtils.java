@@ -10,7 +10,7 @@ import java.io.InputStream;
  * Date 2021/6/27 01:19
  * Description:
  */
-public class Utils {
+public class TestUtils {
 
     public static String readTestString(String filePath) {
         try {

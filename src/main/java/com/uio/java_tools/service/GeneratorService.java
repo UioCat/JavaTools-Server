@@ -23,16 +23,11 @@ public interface GeneratorService {
      * 生成DAO文件
      */
     default void generatorDAO() {
-
     }
 
     /**
      * 生成XML文件
      */
     default void generatorXML() {
-
     }
-
-
-
 }

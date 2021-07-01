@@ -1,11 +1,10 @@
 package com.uio.java_tools.service;
 
-import com.uio.java_tools.util.Utils;
+import com.uio.java_tools.util.TestUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,7 +33,7 @@ public class TokenizerServiceTest {
     @Test
     public void extractFieldFromJavaCodeTest() {
 
-        String testString = Utils.readTestString(filePath);
+        String testString = TestUtils.readTestString(filePath);
         List<String> list = tokenizerService.extractFieldFromJavaCode(testString);
         System.out.println(list.size());
         assertEquals(list.size(), listSize);

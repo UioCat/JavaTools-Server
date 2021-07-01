@@ -47,20 +47,4 @@ public class GeneratorBySQLController {
     public BackMessage<String> generatorFileBySQL(@RequestBody List<GeneratorParameterReq> generatorParameterReqList) {
         return null;
     }
-
-    /**
-     * 测试文件生成
-     * @return
-     */
-    @PostMapping("/testFile")
-    public void testFile() throws IOException {
-        CreateFileUtil createFileUtil = new CreateFileUtil();
-        String folder = createFileUtil.createFolder("C://java");
-        createFileUtil.createFile(folder,"Student.java","public class Student {\n" +
-                "\n" +
-                "    private String name;\n" +
-                "}\n");
-        return;
-    }
-
 }

@@ -2,15 +2,12 @@ package com.uio.java_tools.service;
 
 import com.uio.java_tools.dto.JavaParseParameterDTO;
 import com.uio.java_tools.dto.ParseParameterDTO;
-import com.uio.java_tools.util.Utils;
+import com.uio.java_tools.util.TestUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -37,7 +34,7 @@ public class GeneratorByJavaServiceTest {
 
     @Test
     public void parseJavaTest() {
-        String testString = Utils.readTestString(filePath);
+        String testString = TestUtils.readTestString(filePath);
         ParseParameterDTO parse = generatorService.parse(testString);
         JavaParseParameterDTO javaParseParameterDTO = (JavaParseParameterDTO)parse;
         assertEquals(javaParseParameterDTO.getFieldList().size(), listSize);

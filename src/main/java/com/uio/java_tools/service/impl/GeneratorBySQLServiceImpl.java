@@ -1,5 +1,6 @@
 package com.uio.java_tools.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.uio.java_tools.config.MapConfig;
 import com.uio.java_tools.dto.ParseParameterDTO;
 import com.uio.java_tools.service.GeneratorService;
@@ -69,13 +70,9 @@ public class GeneratorBySQLServiceImpl implements GeneratorService {
     public Map<String, String> mapDataInit(){
         Map<String, String> javaBeanTypeMap = mapConfig.getJavaBeanTypeMap();
         if (javaBeanTypeMap == null || javaBeanTypeMap.size() <= 0) {
-            System.out.println("javaBeanTypeMap读取失败");
-        } else {
-            System.out.println("javaBeanTypeMap读取成功，数据如下：");
-            for (String key : javaBeanTypeMap.keySet()) {
-                System.out.println("key: " + key + ", value: " + javaBeanTypeMap.get(key));
-            }
+            logger.warn("javaBeanTypeMap读取失败");
         }
+        logger.info("javaBeanTypeMap读取成功，数据如下：{}", JSON.toJSONString(javaBeanTypeMap));
         return javaBeanTypeMap;
     }
 
@@ -87,10 +84,10 @@ public class GeneratorBySQLServiceImpl implements GeneratorService {
     public String parsingClassName(String tableName){
         //解析类名
         String[] s = StringUtils.split(tableName, "_");
-        String className = "";
+        StringBuilder className = new StringBuilder();
         for (int i = 1; i < s.length; i++){
-            className = className + s[i].substring(0,1).toUpperCase()+s[i].substring(1);
+            className.append(s[i].substring(0, 1).toUpperCase()).append(s[i].substring(1));
         }
-        return className;
+        return className.toString();
     }
 }
