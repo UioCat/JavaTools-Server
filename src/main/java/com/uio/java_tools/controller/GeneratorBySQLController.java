@@ -6,12 +6,14 @@ import com.uio.java_tools.resq.GeneratorParameterReq;
 import com.uio.java_tools.resq.StringDataReq;
 import com.uio.java_tools.service.GeneratorService;
 import com.uio.java_tools.utils.BackMessage;
+import com.uio.java_tools.utils.CreateFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -44,6 +46,21 @@ public class GeneratorBySQLController {
     @PostMapping("/generatorFileBySQL")
     public BackMessage<String> generatorFileBySQL(@RequestBody List<GeneratorParameterReq> generatorParameterReqList) {
         return null;
+    }
+
+    /**
+     * 测试文件生成
+     * @return
+     */
+    @PostMapping("/testFile")
+    public void testFile() throws IOException {
+        CreateFileUtil createFileUtil = new CreateFileUtil();
+        String folder = createFileUtil.createFolder("C://java");
+        createFileUtil.createFile(folder,"Student.java","public class Student {\n" +
+                "\n" +
+                "    private String name;\n" +
+                "}\n");
+        return;
     }
 
 }
