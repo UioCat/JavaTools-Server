@@ -2,6 +2,7 @@ package com.uio.java_tools.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.uio.java_tools.config.MapConfig;
+import com.uio.java_tools.constant.GlobalMap;
 import com.uio.java_tools.dto.ParseParameterDTO;
 import com.uio.java_tools.service.GeneratorService;
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +29,13 @@ public class GeneratorBySQLServiceImpl implements GeneratorService {
     @Autowired
     private MapConfig mapConfig;
 
+
+
     @Override
     public ParseParameterDTO parse(String inputString) {
         ParseParameterDTO parseParameterDTO = new ParseParameterDTO();
+        Map<String, String> javaTypeMap = GlobalMap.initJavaTypeMap();
         //获取sql类型对应的java类型
-        Map<String, String> javaTypeMap = mapDataInit();
         int start = inputString.indexOf("(");
         int end = inputString.lastIndexOf(")");
         //解析表名，类名
@@ -90,4 +94,5 @@ public class GeneratorBySQLServiceImpl implements GeneratorService {
         }
         return className.toString();
     }
+
 }

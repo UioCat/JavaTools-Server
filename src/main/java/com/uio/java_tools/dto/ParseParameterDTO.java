@@ -47,4 +47,13 @@ public class ParseParameterDTO {
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
+
+    @Override
+    public String toString() {
+        return "ParseParameterDTO{" +
+                "fieldList=" + fieldList +
+                ", className='" + className + '\'' +
+                ", tableName='" + tableName + '\'' +
+                '}';
+    }
 }

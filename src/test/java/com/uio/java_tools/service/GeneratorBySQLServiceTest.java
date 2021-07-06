@@ -30,4 +30,10 @@ public class GeneratorBySQLServiceTest {
         System.out.println(JSON.toJSONString(parseParameterDTO));
     }
 
+    @Test
+    public void test() {
+        ParseParameterDTO parse = generatorBySQLService.parse("CREATE TABLE tb_config( id int(32),username varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,password varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,level varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL);");
+        System.out.println(parse.toString());
+    }
+
 }

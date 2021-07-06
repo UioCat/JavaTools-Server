@@ -1,13 +1,13 @@
 package com.uio.java_tools.manager.impl;
 
-import com.uio.java_tools.enums.TypeEnum;
+import com.uio.java_tools.constant.GlobalMap;
 import com.uio.java_tools.manager.ParseStrManager;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -20,13 +20,15 @@ public class ParseStrManagerImpl implements ParseStrManager {
 
     @Override
     public boolean verifyWord(String word) {
-        TypeEnum[] typeEnums = TypeEnum.values();
-        for(TypeEnum type : typeEnums) {
-            if(word.equals(type.getType())) {
-                return true;
-            }
-        }
-        return false;
+        Map<String, String> sqlTypeMap = GlobalMap.initSqlTypeMap();
+//        TypeEnum[] typeEnums = TypeEnum.values();
+//        for(TypeEnum type : typeEnums) {
+//            if(word.equals(type.getType())) {
+//                return true;
+//            }
+//        }
+//        return false;
+        return sqlTypeMap.get(word) != null;
     }
 
     @Override
@@ -52,12 +54,14 @@ public class ParseStrManagerImpl implements ParseStrManager {
 
     @Override
     public String typeConvertForMysql(String type) {
-        TypeEnum[] typeEnums = TypeEnum.values();
-        for (TypeEnum typeEnum : typeEnums) {
-            if(type.equals(typeEnum.getType())) {
-                return typeEnum.getConvertSql();
-            }
-        }
-        return type;
+//        TypeEnum[] typeEnums = TypeEnum.values();
+//        for (TypeEnum typeEnum : typeEnums) {
+//            if(type.equals(typeEnum.getType())) {
+//                return typeEnum.getConvertSql();
+//            }
+//        }
+        Map<String, String> sqlTypeMap = GlobalMap.initSqlTypeMap();
+        String sqlType = sqlTypeMap.get(type);
+        return StringUtils.isNotBlank(sqlType) ? sqlType : type;
     }
 }
