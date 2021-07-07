@@ -1,39 +1,144 @@
 # Uio-Tools工具 接口文档
 
-- 测试用例Java：
+[toc]
+## 测试用例Java
 
-  ```
-  package com.example.java_tools;
-  
-  public class User {
-  
-      private String foo = "123123";
-      private String name;
-      private Integer sex;
-      private Boolean urban;
-      private Double balance;
-      private Float money;
-  
-      public User(String foo, String name, Integer sex, Boolean urban, Double balance, Float money) {
-          this.foo = foo;
-          this.name = name;
-          this.sex = sex;
-          this.urban = urban;
-          this.balance = balance;
-          this.money = money;
-      }
-  
-      public String getName() {
-          return name;
-      }
-  
-      public void setName(String name) {
-          this.name = name;
-      }
-  }
-  ```
-  
-- 测试用例SQL：
+```
+package com.example.java_tools;
+
+import java.util.Date;
+
+/**
+ * @author han xun
+ * Date 2021/6/14 13:19
+ * Description:
+ */
+public class Entity {
+
+    /**
+     * 用户id
+     */
+    private Long id;
+
+    /**
+     * 用户名
+     */
+    private String username;
+
+    /**
+     * 密码
+     */
+    private String password;
+
+    /**
+     * 数量
+     */
+    private Integer counts;
+
+    /**
+     * 求和
+     */
+    private Double sum;
+
+    /**
+     * 数字
+     */
+    private Float number;
+
+    /**
+     * 性别
+     */
+    private Byte sex;
+
+    /**
+     * 类型
+     */
+    private Character type;
+
+    /**
+     * 开始时间
+     */
+    private Date startTime;
+
+    public Entity() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getCounts() {
+        return counts;
+    }
+
+    public void setCounts(Integer counts) {
+        this.counts = counts;
+    }
+
+    public Double getSum() {
+        return sum;
+    }
+
+    public void setSum(Double sum) {
+        this.sum = sum;
+    }
+
+    public Float getNumber() {
+        return number;
+    }
+
+    public void setNumber(Float number) {
+        this.number = number;
+    }
+
+    public Byte getSex() {
+        return sex;
+    }
+
+    public void setSex(Byte sex) {
+        this.sex = sex;
+    }
+
+    public Character getType() {
+        return type;
+    }
+
+    public void setType(Character type) {
+        this.type = type;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+}
+
+```
+
+## 测试用例SQL：
 
 ```
 CREATE TABLE `tb_news` (
@@ -82,7 +187,7 @@ parseSQL
 }
 ```
 
-> data数据见测试用例
+> data数据见测试用例：测试用例SQL
 
 - 返回
 
@@ -97,8 +202,8 @@ parseSQL
       "String keyword",
       "String articleUid"
     ],
-    "classname":"News",
-    "tbName":"tb_news"
+    "className":"News",
+    "tableName":"tb_news"
   }
 }
 ```
@@ -118,41 +223,45 @@ generatorFileBySQL
 - 发送
 
 ```json
-{
-  "fieldList":[
-      "Integer id",
-      "String title",
-      "String keyword",
-      "String articleUid"
-    ],
-  "tbName":"tb_news",
-  "projectName":"com.uio.java_tools",
-  "classname":"News",
-  "generatorMybatisParameterList":[
-    {
-  		"type":"INSERT",
-      "parameterList":[
-        "Integer title","String keyword","String articleUid"
+[
+  {
+    "fieldList":[
+        "Integer id",
+        "String title",
+        "String keyword",
+        "String articleUid"
       ],
-      "keyParamterList":null
-  	}
-	]
-}
+    "tableName":"tb_news",
+    "packageName":"com.uio.java_tools",
+    "className":"News",
+    "generatorMybatisParameterList":[
+      {
+        "type":"INSERT",
+        "parameterList":[
+          "Integer title","String keyword","String articleUid"
+        ],
+        "keyParamterList":null
+      }
+    ]
+  }
+]
 ```
 
->  1. fieldList为解析时后端返回的全部数据，与用户的选择数据无关
+>  1. ！！！！请注意该数据为 JSON数组，即用户可以解析多个SQL文件后，选择需要生成的代码并进行提交，一次性生成文件
 >
->  2. tbName为解析时后端返回的数据
+>  2. fieldList为解析时后端返回的全部数据，与用户的选择数据无关
 >
->  3. className为解析时后端返回的数据，用户可以进行更改
+>  3. tableName为解析时后端返回的数据
 >
->  4. projectName为用户输入
+>  4. className为解析时后端返回的数据，用户可以进行更改
 >
->  5. generatorMybatisParameterList内的parameterList数组为用户选择的数据，该数据插入，查询时的选择数据
+>  5. projectName为用户输入
 >
->  6. generatorMybatisParameterList内keyParameterList数据为用户选择的诗句，该数据表示查询、修改的条件
+>  6. generatorMybatisParameterList内的parameterList数组为用户选择的数据，该数据插入，查询时的选择数据
 >
->  7. generatorMybatisParameterList内type数据在后端为枚举，只包含：
+>  7. generatorMybatisParameterList内keyParameterList数据为用户选择的诗句，该数据表示查询、修改的条件
+>
+>  8. generatorMybatisParameterList内type为枚举，只包含：
 >
 >     ```
 >     INSERT
@@ -208,8 +317,8 @@ parseJava
       "String keyword",
       "String articleUid"
     ],
-    "classname":"News",
-    "tbName":"tb_news",
+    "className":"News",
+    "tableName":"tb_news",
     "packageName":"com.uio.java_tools"
   }
 }
@@ -219,7 +328,7 @@ parseJava
 
 ## 根据Java生成文件
 
-(该接口的上传参数和返回参数与根据SQL生成文件一致)
+(该接口的上传参数和返回参数与根据SQL生成文件一致，后续该接口可能会发生变化)
 
 generatorFileByJava
 
@@ -232,27 +341,33 @@ generatorFileByJava
 - 发送
 
 ```json
-{
-  "fieldList":[
-      "Integer id",
-      "String title",
-      "String keyword",
-      "String articleUid"
-    ],
-  "tbName":"tb_news",
-  "projectName":"com.uio.java_tools",
-  "classname":"News",
-  "generatorMybatisParameterList":[
-    {
-  		"type":"INSERT",
-      "parameterList":[
-        "Integer title","String keyword","String articleUid"
+[
+  {
+    "fieldList":[
+        "Integer id",
+        "String title",
+        "String keyword",
+        "String articleUid"
       ],
-      "keyParamterList":null
-  	}
-	]
-}
+    "tableName":"tb_news",
+    "packageName":"com.uio.java_tools",
+    "className":"News",
+    "generatorMybatisParameterList":[
+      {
+        "type":"INSERT",
+        "parameterList":[
+          "Integer title","String keyword","String articleUid"
+        ],
+        "keyParamterList":null
+      }
+    ]
+  }
+]
 ```
+
+>1. tableName为解析生成，用户可进行修改
+>2. packageName为解析生成，用户可进行修改
+>3. 类名为解析生成，不需要修改
 
 - 返回
 
@@ -266,7 +381,15 @@ generatorFileByJava
 
 > info内为生成文件的下载链接
 
+## Mybatis生成
 
+暂未定义
+
+
+
+## MySQL生成暂时保留原来，后续进行拓展
+
+暂未定义
 
 
 

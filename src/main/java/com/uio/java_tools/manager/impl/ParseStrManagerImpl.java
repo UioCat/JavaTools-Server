@@ -20,7 +20,7 @@ public class ParseStrManagerImpl implements ParseStrManager {
 
     @Override
     public boolean verifyWord(String word) {
-        Map<String, String> sqlTypeMap = GlobalMap.initSqlTypeMap();
+        Map<String, String> sqlTypeMap = GlobalMap.initSqlTypeMap;
 //        TypeEnum[] typeEnums = TypeEnum.values();
 //        for(TypeEnum type : typeEnums) {
 //            if(word.equals(type.getType())) {
@@ -60,7 +60,7 @@ public class ParseStrManagerImpl implements ParseStrManager {
 //                return typeEnum.getConvertSql();
 //            }
 //        }
-        Map<String, String> sqlTypeMap = GlobalMap.initSqlTypeMap();
+        Map<String, String> sqlTypeMap = GlobalMap.initSqlTypeMap;
         String sqlType = sqlTypeMap.get(type);
         return StringUtils.isNotBlank(sqlType) ? sqlType : type;
     }

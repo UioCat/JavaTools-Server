@@ -34,7 +34,7 @@ public class GeneratorBySQLServiceImpl implements GeneratorService {
     @Override
     public ParseParameterDTO parse(String inputString) {
         ParseParameterDTO parseParameterDTO = new ParseParameterDTO();
-        Map<String, String> javaTypeMap = GlobalMap.initJavaTypeMap();
+        Map<String, String> javaTypeMap = GlobalMap.initJavaTypeMap;
         //获取sql类型对应的java类型
         int start = inputString.indexOf("(");
         int end = inputString.lastIndexOf(")");

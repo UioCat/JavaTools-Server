@@ -22,4 +22,4 @@ curl'https://github.com/Palmcivet/JavaTools-FE'
 
 ## 接口文档
 
-请查看Uio-Tools.md文件
+请查看Uio-Tools.md文件GlobalMap
