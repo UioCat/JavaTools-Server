@@ -230,6 +230,60 @@
   }
   ```
 
+#### entityCreate
+
+- 路径：
+
+    ```
+    /tools/entity2SQL
+    ```
+
+
+
+- 发送：
+
+    ```json
+    {
+       	"parameter": ["Integer id", "String taskName", "Long createTime", "String project", "Integer status"],
+    	"uniqueKey":["taskName"],
+    	"primaryKey":["id"],
+        "tbName": "tb_config",
+        "entity":"public class Task implements Serializable {
+        /**
+         * 任务id
+         */
+        private Integer id;
+        /**
+         * 任务名
+         */
+        private String taskName;
+        /**
+         * 任务创建时间
+         */
+        private Long createTime;
+        /**
+         * 任务所属项目
+         */
+        private String project;
+        /**
+         * 任务状态
+         */
+        private Integer status;"
+    }
+    ```
+
+
+
+- 返回：
+
+    ```json
+    {
+        "code": 12,
+        "message": "请求成功",
+        "info": "CREATE TABLE tb_config (id INT (32) UNIQUE COMMENT `任务id`,taskName VARCHAR (255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL UNIQUE COMMENT `任务名`,createTime BIGINT COMMENT `任务创建时间`,project VARCHAR (255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT `任务所属项目`,status INT(32) COMMENT `任务状态` PRIMARY KEY ( id ));"
+    }
+    ```
+
 ### MyBatis
 
 #### create
