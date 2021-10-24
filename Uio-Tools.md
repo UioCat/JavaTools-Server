@@ -90,22 +90,38 @@ version：**v1.2**
 - 返回：
   
   ```
-  {
-      "code": 12,
-      "message": "请求成功",
-      "info": {
-          "parameter":[
-              {"field":Integer id","comment":"用户id"},
-              {"field":"String username", "comment":"用户名"},
-              {"field":"String password", "comment":"用户密码"}, 
-              {"field":"String level","comment":"用户权限"}, 
-              {"field":"String uniqueName","comment":"用户唯一名"}, 
-          ],
-          "tbName": "tb_user",
-          "primaryKey":"id"
-      }
-
-  }
+{
+    "code": 12,
+    "message": "请求成功",
+    "info":
+    {
+        "parameter":
+        [
+            {
+                "field": "Integer id",
+                "comment": "用户id"
+            },
+            {
+                "field": "String username",
+                "comment": "用户名"
+            },
+            {
+                "field": "String password",
+                "comment": "用户密码"
+            },
+            {
+                "field": "String level",
+                "comment": "用户权限"
+            },
+            {
+                "field": "String uniqueName",
+                "comment": "用户唯一名"
+            }
+        ],
+        "tbName": "tb_user",
+        "primaryKey": "id"
+    }
+}
   ```
 
 ### MySQL
@@ -121,19 +137,40 @@ version：**v1.2**
 - 发送：
 
   ```
-  {
-     	 "parameter":[
-              {"field":Integer id","comment":"用户id"},
-              {"field":"String username", "comment":"用户名"},
-              {"field":"String password", "comment":"用户密码"}, 
-              {"field":"String level","comment":"用户权限"}, 
-              {"field":"String uniqueName","comment":"用户唯一名"}, 
-          ],
-      "String project", "Integer status"], 
-  	  "uniqueKey":["taskName"], 
-  	  "primaryKey":["id"], 
-      "tbName": "tb_config"
-  }
+{
+    "parameter":
+    [
+        {
+            "field": "Integer id",
+            "comment": "用户id"
+        },
+        {
+            "field": "String username",
+            "comment": "用户名"
+        },
+        {
+            "field": "String password",
+            "comment": "用户密码"
+        },
+        {
+            "field": "String level",
+            "comment": "用户权限"
+        },
+        {
+            "field": "String uniqueName",
+            "comment": "用户唯一名"
+        }
+    ],
+    "uniqueKey":
+    [
+        "taskName"
+    ],
+    "primaryKey":
+    [
+        "id"
+    ],
+    "tbName": "tb_config"
+}
   ```
 
 - 返回：
