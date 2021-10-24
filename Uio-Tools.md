@@ -1,6 +1,7 @@
 # Uio-Tools工具
 
-version：**v1.2**
+
+version：**v1.1**
 
 ## 接口文档
 
@@ -43,8 +44,7 @@ version：**v1.2**
 
 ### 文本解析接口parse
 
-**v1.2更新**
-
+**v1.1更新**
 该接口为 MySQL 和 MyBatis 共用
 
 - 路径：
@@ -127,7 +127,7 @@ version：**v1.2**
 ### MySQL
 
 #### 生成创表命令接口create
-**v1.2更新**
+**v1.1更新**
 - 路径：
 
   ```
@@ -284,6 +284,41 @@ version：**v1.2**
       "info": "SELECT username,password,level FROM tb_config WHERE id=id;"
   }
   ```
+
+#### entityCreate
+
+**v1.1新增**
+
+- 路径：
+
+    ```
+    /tools/entity2SQL
+    ```
+
+
+- 发送：
+
+    ```json
+    {
+       	"parameter": ["Integer id", "String taskName", "Long createTime", "String project", "Integer status"],
+    	  "uniqueKey":["taskName"],
+    	  "primaryKey":["id"],
+        "tbName": "tb_config",
+        "comment":["任务id","任务名","任务创建时间","任务所属项目","任务状态"]
+    }
+    ```
+
+
+
+- 返回：
+
+    ```json
+    {
+        "code": 12,
+        "message": "请求成功",
+        "info": "CREATE TABLE tb_config (id INT (32) UNIQUE COMMENT `任务id`,taskName VARCHAR (255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL UNIQUE COMMENT `任务名`,createTime BIGINT COMMENT `任务创建时间`,project VARCHAR (255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT `任务所属项目`,status INT(32) COMMENT `任务状态` PRIMARY KEY ( id ));"
+    }
+    ```
 
 ### MyBatis
 
