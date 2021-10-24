@@ -1,403 +1,49 @@
-# Uio-Tools工具 接口文档
+# Uio-Tools工具
 
-[toc]
-## 测试用例Java
+version：**v1.2**
 
-```
-package com.example.java_tools;
+## 接口文档
 
-import java.util.Date;
+- 测试用例：
 
-/**
- * @author han xun
- * Date 2021/6/14 13:19
- * Description:
- */
-public class Entity {
+  ```
+  package com.example.java_tools;
 
-    /**
-     * 用户id
-     */
-    private Long id;
+  public class User {
 
-    /**
-     * 用户名
-     */
-    private String username;
+      private String foo = "123123";
+      private String name;
+      private Integer sex;
+      private Boolean urban;
+      private Double balance;
+      private Float money;
 
-    /**
-     * 密码
-     */
-    private String password;
+      public User(String foo, String name, Integer sex, Boolean urban, Double balance, Float money) {
+          this.foo = foo;
+          this.name = name;
+          this.sex = sex;
+          this.urban = urban;
+          this.balance = balance;
+          this.money = money;
+      }
 
-    /**
-     * 数量
-     */
-    private Integer counts;
+      public String getName() {
+          return name;
+      }
 
-    /**
-     * 求和
-     */
-    private Double sum;
-
-    /**
-     * 数字
-     */
-    private Float number;
-
-    /**
-     * 性别
-     */
-    private Byte sex;
-
-    /**
-     * 类型
-     */
-    private Character type;
-
-    /**
-     * 开始时间
-     */
-    private Date startTime;
-
-    public Entity() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Integer getCounts() {
-        return counts;
-    }
-
-    public void setCounts(Integer counts) {
-        this.counts = counts;
-    }
-
-    public Double getSum() {
-        return sum;
-    }
-
-    public void setSum(Double sum) {
-        this.sum = sum;
-    }
-
-    public Float getNumber() {
-        return number;
-    }
-
-    public void setNumber(Float number) {
-        this.number = number;
-    }
-
-    public Byte getSex() {
-        return sex;
-    }
-
-    public void setSex(Byte sex) {
-        this.sex = sex;
-    }
-
-    public Character getType() {
-        return type;
-    }
-
-    public void setType(Character type) {
-        this.type = type;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-}
-
-```
-
-## 测试用例SQL：
-
-```
-CREATE TABLE `tb_news` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `keyword` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `article_uid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `index_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `image_source` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `create_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `class_array` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `main_editor` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `content_text` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `memo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `article_uid` (`article_uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=11845 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-```
-
-
-
-
+      public void setName(String name) {
+          this.name = name;
+      }
+  }
+  ```
 
 ### 基础 URL：`https://www.uiofield.top`
 
 ### 根路径：`/tools`
 
-
-
-## 解析SQL创表文件
-
-parseSQL
-
-- 路径，POST
-
-```
-/parseSQL
-```
-
-- 发送
-
-```json
-{
-  "data":""
-}
-```
-
-> data数据见测试用例：测试用例SQL
-
-- 返回
-
-```json
-{
-  "code":"200",
-  "message":"请求成功",
-  "info":{
-    "fieldList":[
-      "Integer id",
-      "String title",
-      "String keyword",
-      "String articleUid"
-    ],
-    "className":"News",
-    "tableName":"tb_news"
-  }
-}
-```
-
-
-
-## 根据SQL生成文件
-
-generatorFileBySQL
-
-- 路径，Post
-
-```
-/generatorFileBySQL
-```
-
-- 发送
-
-```json
-[
-  {
-    "fieldList":[
-        "Integer id",
-        "String title",
-        "String keyword",
-        "String articleUid"
-      ],
-    "tableName":"tb_news",
-    "packageName":"com.uio.java_tools",
-    "className":"News",
-    "generatorMybatisParameterList":[
-      {
-        "type":"INSERT",
-        "parameterList":[
-          "Integer title","String keyword","String articleUid"
-        ],
-        "keyParamterList":null
-      }
-    ]
-  }
-]
-```
-
->  1. ！！！！请注意该数据为 JSON数组，即用户可以解析多个SQL文件后，选择需要生成的代码并进行提交，一次性生成文件
->
->  2. fieldList为解析时后端返回的全部数据，与用户的选择数据无关
->
->  3. tableName为解析时后端返回的数据
->
->  4. className为解析时后端返回的数据，用户可以进行更改
->
->  5. projectName为用户输入
->
->  6. generatorMybatisParameterList内的parameterList数组为用户选择的数据，该数据插入，查询时的选择数据
->
->  7. generatorMybatisParameterList内keyParameterList数据为用户选择的诗句，该数据表示查询、修改的条件
->
->  8. generatorMybatisParameterList内type为枚举，只包含：
->
->     ```
->     INSERT
->     DELETE
->     UPDATE
->     SELECT
->     ```
-
-- 返回
-
-```json
-{
-  "code":"200",
-  "message":"请求成功",
-  "info":"https://www.uiofield.top/files/xxxx/xxxx.zip"
-}
-```
-
-> info内为生成文件的下载链接
-
-
-
-## 解析Java文件
-
-parseJava
-
-- 路径，Post
-
-```
-/parseJava
-```
-
-- 发送
-
-```json
-{
-  "data":""
-}
-```
-
-> data数据见测试用例
-
-- 返回
-
-```json
-{
-  "code":"200",
-  "message":"请求成功",
-  "info":{
-    "fieldList":[
-      "Integer id",
-      "String title",
-      "String keyword",
-      "String articleUid"
-    ],
-    "className":"News",
-    "tableName":"tb_news",
-    "packageName":"com.uio.java_tools"
-  }
-}
-```
-
-
-
-## 根据Java生成文件
-
-(该接口的上传参数和返回参数与根据SQL生成文件一致，后续该接口可能会发生变化)
-
-generatorFileByJava
-
-- 请求路径，Post
-
-```
-/generatorFileByJava
-```
-
-- 发送
-
-```json
-[
-  {
-    "fieldList":[
-        "Integer id",
-        "String title",
-        "String keyword",
-        "String articleUid"
-      ],
-    "tableName":"tb_news",
-    "packageName":"com.uio.java_tools",
-    "className":"News",
-    "generatorMybatisParameterList":[
-      {
-        "type":"INSERT",
-        "parameterList":[
-          "Integer title","String keyword","String articleUid"
-        ],
-        "keyParamterList":null
-      }
-    ]
-  }
-]
-```
-
->1. tableName为解析生成，用户可进行修改
->2. packageName为解析生成，用户可进行修改
->3. 类名为解析生成，不需要修改
-
-- 返回
-
-```json
-{
-  "code":"200",
-  "message":"请求成功",
-  "info":"https://www.uiofield.top/files/xxxx/xxxx.zip"
-}
-```
-
-> info内为生成文件的下载链接
-
-## Mybatis生成
-
-暂未定义
-
-
-
-## MySQL生成暂时保留原来，后续进行拓展
-
-暂未定义
-
-
-
--------------
-
-## 以下全部弃用
-
 ### 文本解析接口parse
+
+**v1.2更新**
 
 该接口为 MySQL 和 MyBatis 共用
 
@@ -441,26 +87,31 @@ generatorFileByJava
   }"
   }
   ```
-
 - 返回：
-
+  
   ```
   {
       "code": 12,
       "message": "请求成功",
-      "info": [
-          "Integer id",
-          "String username",
-          "String password",
-          "String level"
-      ]
+      "info": {
+          "parameter":[
+              {"field":Integer id","comment":"用户id"},
+              {"field":"String username", "comment":"用户名"},
+              {"field":"String password", "comment":"用户密码"}, 
+              {"field":"String level","comment":"用户权限"}, 
+              {"field":"String uniqueName","comment":"用户唯一名"}, 
+          ],
+          "tbName": "tb_user",
+          "primaryKey":"id"
+      }
+
   }
   ```
 
 ### MySQL
 
 #### 生成创表命令接口create
-
+**v1.2更新**
 - 路径：
 
   ```
@@ -471,7 +122,16 @@ generatorFileByJava
 
   ```
   {
-      "parameter": ["Integer id", "String username", "String password", "String level"],
+     	 "parameter":[
+              {"field":Integer id","comment":"用户id"},
+              {"field":"String username", "comment":"用户名"},
+              {"field":"String password", "comment":"用户密码"}, 
+              {"field":"String level","comment":"用户权限"}, 
+              {"field":"String uniqueName","comment":"用户唯一名"}, 
+          ],
+      "String project", "Integer status"], 
+  	  "uniqueKey":["taskName"], 
+  	  "primaryKey":["id"], 
       "tbName": "tb_config"
   }
   ```
@@ -482,7 +142,7 @@ generatorFileByJava
   {
       "code": 12,
       "message": "请求成功",
-      "info": "CREATE TABLE tb_config( id int(32),username varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,password varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,level varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL);"
+      "info": "CREATE TABLE tb_config (id INT (32) UNIQUE COMMENT `任务id`,taskName VARCHAR (255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL UNIQUE COMMENT `任务名`,createTime BIGINT COMMENT `任务创建时间`,project VARCHAR (255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT `任务所属项目`,status INT(32) COMMENT `任务状态` PRIMARY KEY ( id ));"
   }
   ```
 
