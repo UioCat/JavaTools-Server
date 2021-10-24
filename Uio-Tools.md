@@ -1,5 +1,6 @@
 # Uio-Tools工具
 
+
 version：**v1.1**
 
 ## 接口文档
@@ -8,16 +9,16 @@ version：**v1.1**
 
   ```
   package com.example.java_tools;
-  
+
   public class User {
-  
+
       private String foo = "123123";
       private String name;
       private Integer sex;
       private Boolean urban;
       private Double balance;
       private Float money;
-  
+
       public User(String foo, String name, Integer sex, Boolean urban, Double balance, Float money) {
           this.foo = foo;
           this.name = name;
@@ -26,11 +27,11 @@ version：**v1.1**
           this.balance = balance;
           this.money = money;
       }
-  
+
       public String getName() {
           return name;
       }
-  
+
       public void setName(String name) {
           this.name = name;
       }
@@ -44,7 +45,6 @@ version：**v1.1**
 ### 文本解析接口parse
 
 **v1.1更新**
-
 该接口为 MySQL 和 MyBatis 共用
 
 - 路径：
@@ -90,24 +90,44 @@ version：**v1.1**
 - 返回：
   
   ```
-  {
-      "code": 12,
-      "message": "请求成功",
-      "info": {
-          "parameter":["Integer id", "String username", "String password", "String level","String uniqueName"],
-          "tbName": "tb_user",
-          "uniqueKey":["uniqueName"],
-	        "primaryKey":["id"],
-          "comment":["用户id","用户名","用户密码","用户权限","用户唯一名"]
-      }
-      
-  }
+{
+    "code": 12,
+    "message": "请求成功",
+    "info":
+    {
+        "parameter":
+        [
+            {
+                "field": "Integer id",
+                "comment": "用户id"
+            },
+            {
+                "field": "String username",
+                "comment": "用户名"
+            },
+            {
+                "field": "String password",
+                "comment": "用户密码"
+            },
+            {
+                "field": "String level",
+                "comment": "用户权限"
+            },
+            {
+                "field": "String uniqueName",
+                "comment": "用户唯一名"
+            }
+        ],
+        "tbName": "tb_user",
+        "primaryKey": "id"
+    }
+}
   ```
 
 ### MySQL
 
 #### 生成创表命令接口create
-
+**v1.1更新**
 - 路径：
 
   ```
@@ -117,10 +137,40 @@ version：**v1.1**
 - 发送：
 
   ```
-  {
-      "parameter": ["Integer id", "String username", "String password", "String level"],
-      "tbName": "tb_config"
-  }
+{
+    "parameter":
+    [
+        {
+            "field": "Integer id",
+            "comment": "用户id"
+        },
+        {
+            "field": "String username",
+            "comment": "用户名"
+        },
+        {
+            "field": "String password",
+            "comment": "用户密码"
+        },
+        {
+            "field": "String level",
+            "comment": "用户权限"
+        },
+        {
+            "field": "String uniqueName",
+            "comment": "用户唯一名"
+        }
+    ],
+    "uniqueKey":
+    [
+        "taskName"
+    ],
+    "primaryKey":
+    [
+        "id"
+    ],
+    "tbName": "tb_config"
+}
   ```
 
 - 返回：
@@ -129,7 +179,7 @@ version：**v1.1**
   {
       "code": 12,
       "message": "请求成功",
-      "info": "CREATE TABLE tb_config( id int(32),username varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,password varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,level varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL);"
+      "info": "CREATE TABLE tb_config (id INT (32) UNIQUE COMMENT `任务id`,taskName VARCHAR (255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL UNIQUE COMMENT `任务名`,createTime BIGINT COMMENT `任务创建时间`,project VARCHAR (255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT `任务所属项目`,status INT(32) COMMENT `任务状态` PRIMARY KEY ( id ));"
   }
   ```
 
