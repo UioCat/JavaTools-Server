@@ -114,4 +114,19 @@ public class TokenizerServiceImpl implements TokenizerService {
         return code.split("[ \\n\\r]");
     }
 
+    // todo 采用正则进行解析
+
+    /**
+     * 解析Java代码，将Java代码解析出字段类型、字段名、字段备注、唯一键和表名
+     * @param code Java代码（可以不全）
+     * 字段类型、字段名、字段备注、唯一键和表名
+     */
+    public void extractFieldFromJavaCodeUpdate(String code){
+        // 1. 解析字段类型、名称、备注，采用正则进行循环
+
+        // 2. 解析唯一键
+
+        // 3. 解析表名
+        return;
+    }
 }

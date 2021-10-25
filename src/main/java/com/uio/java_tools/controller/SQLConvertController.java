@@ -17,6 +17,7 @@ public class SQLConvertController {
     @Autowired
     private SQLConvertService sqlService;
 
+    // todo 待更新接口实现，添加唯一键、主键和comment
     /**
      * 创表命令
      * @param parameterDTO parameter，tbName

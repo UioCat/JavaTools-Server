@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -29,6 +30,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      */
     @Override
     public BackMessage<String> createSqlService(ParameterDTO parameterDTO) {
+        // 去除分割
         List<String> parameterType = new ArrayList<>();
         List<String> parameterName = new ArrayList<>();
 

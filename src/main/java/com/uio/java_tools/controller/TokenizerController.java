@@ -22,6 +22,7 @@ public class TokenizerController {
     @Autowired
     private TokenizerServiceImpl tokenizerService;
 
+    // todo 更新接口解析实现
     /**
      * 文本识别接口
      * @param dateMessage String data
@@ -29,6 +30,8 @@ public class TokenizerController {
      */
     @PostMapping(value = "/wordIdentify")
     public BackMessage<List<String>> tokenizer(@RequestBody StringDataReq dateMessage) {
+        // 1. 修改为解析成封装好的特定对象，键接口返回值
+        // 2. 新建返回值对象，封装字段名、类型和备注对象为成员，参照接口文档
         List<String> fieldList =  tokenizerService.extractFieldFromJavaCode(dateMessage.getData());
         return new BackMessage<List<String>>(BackEnum.REQUEST_SUCCESS, fieldList);
     }
