@@ -11,29 +11,40 @@ version：**v1.2**
     
     public class User {
     
-      private String foo = "123123";
-      private String name;
-      private Integer sex;
-      private Boolean urban;
-      private Double balance;
-      private Float money;
+            /**
+             * 编码
+             */
+            private String foo = "123123";
+            /*
+               姓名
+             */
+            private String name;
+            /**
+             * 性别
+             */
+            private Integer sex;
+            //城市
+            private Boolean urban;
+            // 余额
+            private Double balance;
+            private Float money;
     
-      public User(String foo, String name, Integer sex, Boolean urban, Double balance, Float money) {
-          this.foo = foo;
-          this.name = name;
-          this.sex = sex;
-          this.urban = urban;
-          this.balance = balance;
-          this.money = money;
-      }
+        public User(String foo, String name, Integer sex, Boolean urban, Double balance, Float money) {
+            this.foo = foo;
+            this.name = name;
+            this.sex = sex;
+            this.urban = urban;
+            this.balance = balance;
+            this.money = money;
+        }
     
-      public String getName() {
-          return name;
-      }
+        public String getName() {
+        	return name;
+        }
     
-      public void setName(String name) {
-          this.name = name;
-      }
+        public void setName(String name) {
+    	    this.name = name;
+        }
     }
     ```
 

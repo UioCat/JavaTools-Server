@@ -6,14 +6,12 @@ package com.uio.java_tools.dto;
  * Description:
  */
 public class Parameter {
-    String type;
-    String field;
-    String comment;
+    private String type;
+    private String field;
+    private String comment;
+    private String defaultValue;
 
-    public Parameter(String type, String field, String comment) {
-        this.type = type;
-        this.field = field;
-        this.comment = comment;
+    public Parameter() {
     }
 
     public String getType() {
@@ -40,12 +38,21 @@ public class Parameter {
         this.comment = comment;
     }
 
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(String defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+
     @Override
     public String toString() {
         return "Parameter{" +
                 "type='" + type + '\'' +
                 ", field='" + field + '\'' +
                 ", comment='" + comment + '\'' +
+                ", defaultValue='" + defaultValue + '\'' +
                 '}';
     }
 }

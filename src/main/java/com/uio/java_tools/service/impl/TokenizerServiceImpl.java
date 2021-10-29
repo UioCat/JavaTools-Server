@@ -1,12 +1,21 @@
 package com.uio.java_tools.service.impl;
 
+import com.uio.java_tools.dto.EntityParameterDTO;
+import com.uio.java_tools.dto.Parameter;
+import com.uio.java_tools.enums.BackEnum;
+import com.uio.java_tools.enums.RegexEnum;
+import com.uio.java_tools.exception.CustomException;
 import com.uio.java_tools.manager.ParseStrManager;
 import com.uio.java_tools.service.TokenizerService;
+import com.uio.java_tools.utils.BackMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author uio
@@ -30,27 +39,27 @@ public class TokenizerServiceImpl implements TokenizerService {
         int hierarchy = 0; // 层级，用来判断是否为类变量，当层级大于等于2时，不加入到result内
         int flag = 0; // flag为0表示寻找类型关键词,flag为1表示寻找字段名，flag为2表示判断是否符合类型 + 变量名的格式
         StringBuilder field = null;
-        for(int i = 0; i < words.length; i++) {
+        for (int i = 0; i < words.length; i++) {
 
             // 层级判断和处理
-            if(words[i].equals("{")) {
+            if (words[i].equals("{")) {
                 hierarchy++;
-            } else if(words[i].equals("}")) {
+            } else if (words[i].equals("}")) {
                 hierarchy--;
-            } else if(hierarchy >= 2) {
+            } else if (hierarchy >= 2) {
                 // 层级大于等于2，不处理内容
                 continue;
             }
 
-            if(flag == 0 && parseStrManager.verifyWord(words[i])) {
+            if (flag == 0 && parseStrManager.verifyWord(words[i])) {
                 // 找到变量类型关键词
                 field = new StringBuilder();
                 field.append(words[i]);
                 field.append(" ");
                 flag++;
-            } else if(flag == 1) {
+            } else if (flag == 1) {
                 field.append(words[i]); // 加入变量名
-                if(words[i].contains(";")) {
+                if (words[i].contains(";")) {
                     // todo 重新考虑 = 的情况
                     // 如果没有;则表明不合法或为注释，则忽略
                     result.add(field.toString().replace(";", ""));  //如果包含";"则去除
@@ -72,7 +81,7 @@ public class TokenizerServiceImpl implements TokenizerService {
     public String getPackageName(String code) {
         // todo 暂时使用改方案，等整体稳定后，何如extractFieldFromJavaCode方法内
         String[] words = splitCode(code);
-        if(words.length >= 2) {
+        if (words.length >= 2) {
             if (words[0].equals("package")) {
                 StringBuilder stringBuilder = new StringBuilder();
                 String allPackageName = words[1];
@@ -99,8 +108,8 @@ public class TokenizerServiceImpl implements TokenizerService {
         // todo 方法待改进
         String[] words = splitCode(code);
         for (int i = 0; i < words.length; i++) {
-            if("public".equals(words[i])) {
-                if(i + 2 < words.length) {
+            if ("public".equals(words[i])) {
+                if (i + 2 < words.length) {
                     return words[i + 2];
                 }
             }
@@ -109,24 +118,84 @@ public class TokenizerServiceImpl implements TokenizerService {
     }
 
 
-
     private String[] splitCode(String code) {
         return code.split("[ \\n\\r]");
     }
 
-    // todo 采用正则进行解析
-
-    /**
-     * 解析Java代码，将Java代码解析出字段类型、字段名、字段备注、唯一键和表名
-     * @param code Java代码（可以不全）
-     * 字段类型、字段名、字段备注、唯一键和表名
-     */
-    public void extractFieldFromJavaCodeUpdate(String code){
+    @Override
+    public BackMessage<EntityParameterDTO> parseJavaEntityCode(String code) {
+        EntityParameterDTO result = new EntityParameterDTO();
         // 1. 解析字段类型、名称、备注，采用正则进行循环
-
-        // 2. 解析唯一键
-
+        List<Parameter> parameters = getParameters(code);
+        result.setParameters(parameters);
+        // 2. 解析id主键
+        String primaryKey = getPrimaryKey(parameters);
+        result.setPrimaryKey(primaryKey);
         // 3. 解析表名
-        return;
+        String className = getClassName(code);
+        result.setTableName("tb_" + className);
+
+        return new BackMessage<>(BackEnum.REQUEST_SUCCESS, result);
+    }
+
+    private String getPrimaryKey(List<Parameter> parameters) {
+        String result = null;
+        String regex = "\\w*id\\w*";
+        for (Parameter parameter: parameters) {
+            if (Pattern.matches(regex, parameter.getField())) {
+                result = parameter.getField();
+            }
+        }
+        return result;
+    }
+
+    private List<Parameter> getParameters(String code) {
+        List<Parameter> result = new ArrayList<>();
+
+        Pattern paramRegex = Pattern.compile(RegexEnum.PARAMETER_REGEX.getRegexString(), Pattern.CASE_INSENSITIVE);
+        Matcher paramMatcher = paramRegex.matcher(code);
+
+        List<String> parameters = new ArrayList<>();
+        while (paramMatcher.find()) {
+            String parameter = code.substring(paramMatcher.start(), paramMatcher.end());
+            parameters.add(parameter);
+        }
+
+        for (String parameter: parameters) {
+            Parameter param = new Parameter();
+
+            // 解析注释
+            Pattern commentRegex = Pattern.compile(RegexEnum.COMMENT_REGEX.getRegexString());
+            Matcher commentMatcher = commentRegex.matcher(parameter);
+            if (commentMatcher.find()) {
+                String s = parameter.substring(commentMatcher.start(), commentMatcher.end());
+                param.setComment(s.replaceAll("[\\r\\n\\*/ ]", ""));
+            } else {
+                param.setComment(null);
+            }
+            // 解析参数类型和参数名
+            Pattern typeAndFiledRegex = Pattern.compile(RegexEnum.TYPE_FIELD_REGEX.getRegexString(), Pattern.CASE_INSENSITIVE);
+            Matcher typeAndFieldMatcher = typeAndFiledRegex.matcher(parameter);
+            if (typeAndFieldMatcher.find()) {
+                String s = parameter.substring(typeAndFieldMatcher.start(), typeAndFieldMatcher.end());
+                String[] strings = s.split("[ =;]+");
+                if (strings.length == 2) {
+                    param.setType(strings[0]);
+                    param.setField(strings[1]);
+                } else if (strings.length == 3) {
+                    param.setType(strings[0]);
+                    param.setField(strings[1]);
+                    param.setDefaultValue(strings[2]);
+                } else {
+                    throw new CustomException(BackEnum.PARAM_ERROR);
+                }
+
+            } else {
+                throw new CustomException(BackEnum.PARAM_ERROR);
+            }
+            result.add(param);
+        }
+
+        return result;
     }
 }

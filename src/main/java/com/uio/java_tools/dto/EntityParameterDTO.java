@@ -3,6 +3,9 @@ package com.uio.java_tools.dto;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author VM
+ */
 public class EntityParameterDTO {
 
     private List<Parameter> parameters;
@@ -16,7 +19,7 @@ public class EntityParameterDTO {
     @Override
     public String toString() {
         return "ParameterDTO1{" +
-                "parameters=" + parameters +
+                "parameters=" + parameters.toString() +
                 ", tableName='" + tableName + '\'' +
                 ", primaryKey='" + primaryKey + '\'' +
                 ", namespace='" + namespace + '\'' +
