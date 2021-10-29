@@ -1,6 +1,8 @@
 package com.uio.java_tools.service.impl;
 
 
+import com.uio.java_tools.dto.EntityParameterDTO;
+import com.uio.java_tools.dto.Parameter;
 import com.uio.java_tools.enums.BackEnum;
 import com.uio.java_tools.manager.impl.ParseStrManagerImpl;
 import com.uio.java_tools.manager.impl.VelocityTemplateForSQL;
@@ -11,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -29,18 +30,14 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      * @return 创建数据库命令
      */
     @Override
-    public BackMessage<String> createSqlService(ParameterDTO parameterDTO) {
-        // 去除分割
-        List<String> parameterType = new ArrayList<>();
-        List<String> parameterName = new ArrayList<>();
+    public BackMessage<String> createSqlService(EntityParameterDTO parameterDTO) {
 
-        for (String parameter: parameterDTO.getParameter()) {
-            parameterType.add(parse.typeConvertForMysql(parameter.split(" ")[0]));
-            parameterName.add(parse.upperToLower(parameter.split(" ")[1]));
+        for (Parameter parameter: parameterDTO.getParameters()) {
+            parameter.setDatatype(parse.typeConvertForMysql(parameter.getType()));
+            parameter.setField(parse.upperToLower(parameter.getField()));
         }
 
-        String SQLCommand = velocityTemplateForSQL.createSQLTemplate(parameterType, parameterName, parameterDTO.getTableName());
-
+        String SQLCommand = velocityTemplateForSQL.createSQLTemplate(parameterDTO.getParameters(), parameterDTO.getTableName(), parameterDTO.getPrimaryKey());
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS, SQLCommand);
     }
 
@@ -80,7 +77,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      * @return 插入数据库命令
      */
     @Override
-    public BackMessage<String> insertMsgService(ParameterDTO parameterDTO){
+    public BackMessage<String> insertMsgService(ParameterDTO parameterDTO) {
 
         List<String> parameterName = new ArrayList<>();
 
@@ -99,7 +96,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      * @return 删除信息命令
      */
     @Override
-    public BackMessage<String> deleteMsg(ParameterDTO parameterDTO){
+    public BackMessage<String> deleteMsg(ParameterDTO parameterDTO) {
 
         List<String> keyParameterType = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
@@ -121,7 +118,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      * @return 查询数据库信息命令
      */
     @Override
-    public BackMessage<String> selectMsg(ParameterDTO parameterDTO){
+    public BackMessage<String> selectMsg(ParameterDTO parameterDTO) {
 
         List<String> keyParameterType = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
@@ -138,7 +135,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
             parameterName.add(parameter.split(" ")[1]);
         }
 
-        String selectSQL = velocityTemplateForSQL.selectSQLTemplate(parameterName,keyParameterType,keyParameterName, parameterDTO.getTableName());
+        String selectSQL = velocityTemplateForSQL.selectSQLTemplate(parameterName, keyParameterType, keyParameterName, parameterDTO.getTableName());
 
         return new BackMessage<>(BackEnum.REQUEST_SUCCESS, selectSQL);
 

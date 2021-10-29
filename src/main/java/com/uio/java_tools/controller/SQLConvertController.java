@@ -1,5 +1,6 @@
 package com.uio.java_tools.controller;
 
+import com.uio.java_tools.dto.EntityParameterDTO;
 import com.uio.java_tools.service.SQLConvertService;
 import com.uio.java_tools.utils.BackMessage;
 import com.uio.java_tools.dto.ParameterDTO;
@@ -24,7 +25,7 @@ public class SQLConvertController {
      * @return 创表命令 String
      */
     @PostMapping("/createSQL")
-    public BackMessage<String> createSqlCommandController(@RequestBody ParameterDTO parameterDTO){
+    public BackMessage<String> createSqlCommandController(@RequestBody EntityParameterDTO parameterDTO){
         
         logger.info("parameterMessage = " + parameterDTO.toString());
         return sqlService.createSqlService(parameterDTO);

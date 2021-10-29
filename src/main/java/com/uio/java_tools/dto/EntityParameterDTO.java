@@ -18,7 +18,7 @@ public class EntityParameterDTO {
 
     @Override
     public String toString() {
-        return "ParameterDTO1{" +
+        return "EntityParameterDTO{" +
                 "parameters=" + parameters.toString() +
                 ", tableName='" + tableName + '\'' +
                 ", primaryKey='" + primaryKey + '\'' +

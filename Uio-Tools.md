@@ -58,13 +58,13 @@ version：**v1.2**
 该接口为 MySQL 和 MyBatis 共用
 
 - 路径：
-  
+
     ```
     /tools/wordIdentify
     ```
 
 - 发送：
-  
+
     ```
     {
       "data": "package com.example.java_tools;
@@ -158,12 +158,14 @@ version：**v1.2**
             {
                 "type": "Integer",
                 "field": "id",
-                "comment": "用户id"
+                "comment": "用户id",
+                "defaultValue": "123123"
             },
             {
                 "type": "String",
                 "field": "username",
-                "comment": "用户名"
+                "comment": "用户名",
+                "unique": true
             },
             {
                 "type": "String",
@@ -181,15 +183,11 @@ version：**v1.2**
                 "comment": "用户唯一名"
             }
         ],
-        "uniqueKey":
-        [
-            "taskName"
-        ],
         "primaryKey": "id",
         "tbName": "tb_config"
       }
     ```
-    
+
 - 返回：
 
     ```
@@ -238,7 +236,7 @@ version：**v1.2**
     ```
 
 - 发送：
-  
+
     ```
     {
         "parameter": ["String username", "String password", "String level"],
@@ -310,7 +308,7 @@ version：**v1.2**
 - 路径：`/tools/mybatisBasics`
 
 - 发送：
-  
+
     ```
     {
         "namespace":"com.example.manage_platform.dao.AnnounceDao"

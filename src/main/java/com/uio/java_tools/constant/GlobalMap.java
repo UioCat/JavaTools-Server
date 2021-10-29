@@ -46,20 +46,20 @@ public class GlobalMap {
     public static final HashMap<String, String> initSqlTypeMap = new HashMap<String, String>() {{
         put("Integer", "int(32)");
         put("int", "int(32)");
-        put("String", "varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL");
-        put("Boolean", "bit(1) DEFAULT NULL");
-        put("boolean", "bit(1) NOT DEFAULT NULL");
-        put("Double", "double DEFAULT NULL");
+        put("String", "varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci");
+        put("Boolean", "bit(1)");
+        put("boolean", "bit(1)");
+        put("Double", "double");
         put("double", "double");
-        put("Character", "char(1) DEFAULT NULL");
-        put("char", "char(1) NOT DEFAULT NULL");
-        put("Float", "float DEFAULT NULL");
-        put("float", "float NOT DEFAULT NULL");
-        put("Long", "bigint DEFAULT NULL");
-        put("long", "bigint NOT DEFAULT NULL");
-        put("Date", "date DEFAULT NULL");
-        put("Byte", "char(1) NOT DEFAULT NULL");
-        put("byte", "char(1) NOT DEFAULT NULL");
+        put("Character", "char(1)");
+        put("char", "char(1)");
+        put("Float", "float");
+        put("float", "float");
+        put("Long", "bigint");
+        put("long", "bigint");
+        put("Date", "date");
+        put("Byte", "char(1)");
+        put("byte", "char(1)");
         put("BigDecimal", "decimal(10,2)");
     }};
 }

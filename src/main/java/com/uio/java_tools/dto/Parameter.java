@@ -7,9 +7,11 @@ package com.uio.java_tools.dto;
  */
 public class Parameter {
     private String type;
+    private String datatype;
     private String field;
     private String comment;
     private String defaultValue;
+    private boolean unique;
 
     public Parameter() {
     }
@@ -20,6 +22,14 @@ public class Parameter {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getDatatype() {
+        return datatype;
+    }
+
+    public void setDatatype(String datatype) {
+        this.datatype = datatype;
     }
 
     public String getField() {
@@ -46,13 +56,23 @@ public class Parameter {
         this.defaultValue = defaultValue;
     }
 
+    public boolean isUnique() {
+        return unique;
+    }
+
+    public void setUnique(boolean unique) {
+        this.unique = unique;
+    }
+
     @Override
     public String toString() {
         return "Parameter{" +
                 "type='" + type + '\'' +
+                ", datatype='" + datatype + '\'' +
                 ", field='" + field + '\'' +
                 ", comment='" + comment + '\'' +
                 ", defaultValue='" + defaultValue + '\'' +
+                ", unique=" + unique +
                 '}';
     }
 }

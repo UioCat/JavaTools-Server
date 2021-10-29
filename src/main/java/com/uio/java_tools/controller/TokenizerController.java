@@ -23,8 +23,6 @@ public class TokenizerController {
     @Autowired
     private TokenizerServiceImpl tokenizerService;
 
-    // todo 更新接口解析实现
-
     /**
      * 文本识别接口
      * @param dateMessage String data

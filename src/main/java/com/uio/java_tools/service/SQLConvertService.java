@@ -1,5 +1,6 @@
 package com.uio.java_tools.service;
 
+import com.uio.java_tools.dto.EntityParameterDTO;
 import com.uio.java_tools.utils.BackMessage;
 import com.uio.java_tools.dto.ParameterDTO;
 
@@ -15,7 +16,7 @@ public interface SQLConvertService {
      * @param parameterDTO parameter，tbName
      * @return 创表命令
      */
-    BackMessage<String> createSqlService(ParameterDTO parameterDTO);
+    BackMessage<String> createSqlService(EntityParameterDTO parameterDTO);
 
     /**
      * 更新数据库表命令
