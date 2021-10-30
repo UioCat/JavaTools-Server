@@ -102,39 +102,63 @@ version：**v1.2**
 
     ```json
     {
-      "code": 12,
-      "message": "请求成功",
-      "info":{
-          "parameter":[
-              {
-                  "type": "Integer",
-                  "field": "id",
-                  "comment": "用户id"
-              },
-              {
-                  "type": "String",
-                  "field": "username",
-                  "comment": "用户名"
-              },
-              {
-                  "type": "String",
-                  "field": "password",
-                  "comment": "用户密码"
-              },
-              {
-                  "type": "String",
-                  "field": "level",
-                  "comment": "用户权限"
-              },
-              {
-                  "type": "String",
-                  "field": "uniqueName",
-                  "comment": "用户唯一名"
-              }
-          ],
-          "tbName": "tb_user",
-          "primaryKey": "id"
-      }
+        "code": 200,
+        "message": "请求成功",
+        "info": {
+            "parameters": [
+                {
+                    "type": "String",
+                    "datatype": null,
+                    "field": "foo",
+                    "comment": "编码",
+                    "defaultValue": "\"123123\"",
+                    "unique": false
+                },
+                {
+                    "type": "String",
+                    "datatype": null,
+                    "field": "name",
+                    "comment": "姓名",
+                    "defaultValue": null,
+                    "unique": false
+                },
+                {
+                    "type": "Integer",
+                    "datatype": null,
+                    "field": "sex",
+                    "comment": "性别",
+                    "defaultValue": null,
+                    "unique": false
+                },
+                {
+                    "type": "Boolean",
+                    "datatype": null,
+                    "field": "urban",
+                    "comment": "城市",
+                    "defaultValue": null,
+                    "unique": false
+                },
+                {
+                    "type": "Double",
+                    "datatype": null,
+                    "field": "balance",
+                    "comment": "余额",
+                    "defaultValue": null,
+                    "unique": false
+                },
+                {
+                    "type": "Float",
+                    "datatype": null,
+                    "field": "money",
+                    "comment": null,
+                    "defaultValue": null,
+                    "unique": false
+                }
+            ],
+            "tableName": "tb_User",
+            "primaryKey": null,
+            "namespace": null
+        }
     }
     ```
 
@@ -152,9 +176,9 @@ version：**v1.2**
 
 - 发送：
 
-    ```
+    ```json
     {
-        "parameter":[
+        "parameters":[
             {
                 "type": "Integer",
                 "field": "id",
@@ -190,11 +214,11 @@ version：**v1.2**
 
 - 返回：
 
-    ```
+    ```json
     {
-      "code": 12,
-      "message": "请求成功",
-      "info": "CREATE TABLE tb_config (id INT (32) UNIQUE COMMENT `任务id`,taskName VARCHAR (255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL UNIQUE COMMENT `任务名`,createTime BIGINT COMMENT `任务创建时间`,project VARCHAR (255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT `任务所属项目`,status INT(32) COMMENT `任务状态` PRIMARY KEY ( id ));"
+        "code": 200,
+        "message": "请求成功",
+        "info": "CREATE TABLE ${tbName}(\r\n    `id` int(32) DEFAULT 123123 comment `用户id`,\r\n    `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT null comment `用户名` UNIQUE,\r\n    `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT null comment `用户密码`,\r\n    `level` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT null comment `用户权限`,\r\n    `unique_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT null comment `用户唯一名`    , PRIMARY KEY(`id`)\r\n);"
     }
     ```
 
