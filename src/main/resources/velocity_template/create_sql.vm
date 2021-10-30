@@ -3,6 +3,6 @@ CREATE TABLE ${tbName}(
     `${parameter.field}` ${parameter.datatype} DEFAULT#if(${parameter.defaultValue}) ${parameter.defaultValue}#else null#end
 #if(${parameter.comment}) comment `${parameter.comment}`#end#if(${parameter.unique}) UNIQUE#end#if(${parameters.size()} != $velocityCount),
 #end#end
-#if(${primaryKey})    , PRIMARY KEY(`${primaryKey}`)
-#end
+#if(${primaryKey})    , PRIMARY KEY(`${primaryKey}`)#end
+
 );
