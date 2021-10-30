@@ -1,6 +1,7 @@
 package com.uio.java_tools.manager.impl;
 
 import com.uio.java_tools.constant.IData;
+import com.uio.java_tools.dto.Parameter;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -28,18 +29,20 @@ public class VelocityTemplateForSQL {
      * @param parameterType 参数类型
      * @param parameterName 参数名
      * @param tbName 表名
+     * @param parameters
+     * @param tableName
+     * @param primaryKey
      * @return
      */
-    public String createSQLTemplate(List<String> parameterType, List<String> parameterName,
-                                    String tbName) {
+    public String createSQLTemplate(List<Parameter> parameters, String tableName, String primaryKey) {
         // 获取模板文件
         Template template = getTemplate(IData.templateForCreateSQLFile);
 
         // 设置变量
         VelocityContext ctx = new VelocityContext();
-        ctx.put("tbName", tbName);
-        ctx.put("paramNameList", parameterName);
-        ctx.put("paramTypeList", parameterType);
+        ctx.put("tbName", tableName);
+        ctx.put("parameters", parameters);
+        ctx.put("primaryKey", primaryKey);
 
         StringWriter sw = new StringWriter();
 
@@ -123,7 +126,7 @@ public class VelocityTemplateForSQL {
         ctx.put("keyParamNameList", keyParameterName);
 
         StringWriter sw = new StringWriter();
-        template.merge(ctx,sw);
+        template.merge(ctx, sw);
         return sw.toString();
     }
 

@@ -49,8 +49,6 @@ class SQLConvertServiceTest {
         // mock测试打桩
         Mockito.when(parse.typeConvertForMysql(Mockito.anyString())).thenReturn("123");
         Mockito.when(parse.upperToLower(Mockito.anyString())).thenReturn("123");
-        Mockito.when(velocityTemplateForSQL.createSQLTemplate(Mockito.anyList(), Mockito.anyList(), Mockito.anyString())).
-                thenReturn("创建表sql");
 
         // 反射注入mock对象
         try {
@@ -58,8 +56,8 @@ class SQLConvertServiceTest {
             Field velocityField = SQLConvertServiceImpl.class.getDeclaredField("velocityTemplateForSQL");
             parseField.setAccessible(true);
             velocityField.setAccessible(true);
-            parseField.set(sqlConvertService,parse);
-            velocityField.set(sqlConvertService,velocityTemplateForSQL);
+            parseField.set(sqlConvertService, parse);
+            velocityField.set(sqlConvertService, velocityTemplateForSQL);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -67,9 +65,6 @@ class SQLConvertServiceTest {
         }
 
         // mock测试
-        BackMessage<String> backMessage = sqlConvertService.createSqlService(parameterDTO);
-        Assertions.assertEquals(200,backMessage.getCode());
-        System.out.println(backMessage.getInfo());
     }
 
     /**
@@ -154,10 +149,10 @@ class SQLConvertServiceTest {
      * 插入sql生成测试
      */
     @Test
-    public void insertTest(){
+    public void insertTest() {
         // mock测试打桩
         Mockito.when(parse.upperToLower(Mockito.anyString())).thenReturn("123");
-        Mockito.when(velocityTemplateForSQL.insertSQLTemplate(Mockito.anyList(),Mockito.anyString())).thenReturn("插入sql");
+        Mockito.when(velocityTemplateForSQL.insertSQLTemplate(Mockito.anyList(), Mockito.anyString())).thenReturn("插入sql");
 
         // 反射注入mock对象
         try {
@@ -165,8 +160,8 @@ class SQLConvertServiceTest {
             Field parseField = SQLConvertServiceImpl.class.getDeclaredField("parse");
             velocityField.setAccessible(true);
             parseField.setAccessible(true);
-            velocityField.set(sqlConvertService,velocityTemplateForSQL);
-            parseField.set(sqlConvertService,parse);
+            velocityField.set(sqlConvertService, velocityTemplateForSQL);
+            parseField.set(sqlConvertService, parse);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -175,7 +170,7 @@ class SQLConvertServiceTest {
 
         // mock测试
         BackMessage<String> backMessage = sqlConvertService.insertMsgService(parameterDTO);
-        Assertions.assertEquals(200,backMessage.getCode());
+        Assertions.assertEquals(200, backMessage.getCode());
         System.out.println(backMessage.getInfo());
     }
 }

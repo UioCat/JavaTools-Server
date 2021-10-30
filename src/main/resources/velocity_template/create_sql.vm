@@ -1,7 +1,8 @@
-CREATE TABLE ${tbName}
-(
-#foreach(${paramNameItem} in ${paramNameList})
-    #set($index=$!{velocityCount} - 1) ${paramNameItem} ${paramTypeList.get($index)}#if(${paramNameList.size()} != $velocityCount),
-#end
-#end
+CREATE TABLE ${tbName}(
+#foreach(${parameter} in ${parameters})
+    `${parameter.field}` ${parameter.datatype} DEFAULT#if(${parameter.defaultValue}) ${parameter.defaultValue}#else null#end
+#if(${parameter.comment}) comment `${parameter.comment}`#end#if(${parameter.unique}) UNIQUE#end#if(${parameters.size()} != $velocityCount),
+#end#end
+#if(${primaryKey})    , PRIMARY KEY(`${primaryKey}`)#end
+
 );
