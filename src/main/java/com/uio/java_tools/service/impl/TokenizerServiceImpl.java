@@ -2,12 +2,11 @@ package com.uio.java_tools.service.impl;
 
 import com.uio.java_tools.dto.EntityParameterDTO;
 import com.uio.java_tools.dto.Parameter;
-import com.uio.java_tools.enums.BackEnum;
+import com.uio.java_tools.common.BackEnum;
 import com.uio.java_tools.enums.RegexEnum;
-import com.uio.java_tools.exception.CustomException;
+import com.uio.java_tools.common.CustomException;
 import com.uio.java_tools.manager.ParseStrManager;
 import com.uio.java_tools.service.TokenizerService;
-import com.uio.java_tools.utils.BackMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -123,7 +122,7 @@ public class TokenizerServiceImpl implements TokenizerService {
     }
 
     @Override
-    public BackMessage<EntityParameterDTO> parseJavaEntityCode(String code) {
+    public EntityParameterDTO parseJavaEntityCode(String code) {
         EntityParameterDTO result = new EntityParameterDTO();
         // 1. 解析字段类型、名称、备注，采用正则进行循环
         List<Parameter> parameters = getParameters(code);
@@ -135,7 +134,7 @@ public class TokenizerServiceImpl implements TokenizerService {
         String className = getClassName(code);
         result.setTableName("tb_" + className);
 
-        return new BackMessage<>(BackEnum.REQUEST_SUCCESS, result);
+        return result;
     }
 
     private String getPrimaryKey(List<Parameter> parameters) {

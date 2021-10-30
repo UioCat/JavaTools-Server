@@ -1,9 +1,7 @@
 package com.uio.java_tools.service.impl;
 
-import com.uio.java_tools.enums.BackEnum;
 import com.uio.java_tools.service.MybatisConvertService;
 import com.uio.java_tools.manager.impl.MybatisProduceManagerImpl;
-import com.uio.java_tools.utils.BackMessage;
 import com.uio.java_tools.dto.ParameterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +20,13 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
     // todo 将实现类的for循环改成stream，更优雅
 
     @Override
-    public BackMessage<String> MybatisBasicsService(ParameterDTO parameterDTO) {
+    public String MybatisBasicsService(ParameterDTO parameterDTO) {
         String basicsCommand = mybatisProduceService.mybatisBasics(parameterDTO.getNamespace());
-        return new BackMessage<>(BackEnum.REQUEST_SUCCESS,basicsCommand);
+        return basicsCommand;
     }
 
     @Override
-    public BackMessage<String> MybatisInsertService(ParameterDTO parameterDTO) {
+    public String MybatisInsertService(ParameterDTO parameterDTO) {
 
         List<String> parameterName = new ArrayList<>();
 
@@ -40,11 +38,11 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
 //        }
 
         String insertCommand = mybatisProduceService.mybatisInsert(parameterName, parameterDTO.getTableName());
-        return new BackMessage<>(BackEnum.REQUEST_SUCCESS,insertCommand);
+        return insertCommand;
     }
 
     @Override
-    public BackMessage<String> MybatisUpdateService(ParameterDTO parameterDTO) {
+    public String MybatisUpdateService(ParameterDTO parameterDTO) {
 
         List<String> parameterName = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
@@ -57,11 +55,11 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
         }
 
         String updateCommand = mybatisProduceService.mybatisUpdate(keyParameterName,parameterName, parameterDTO.getTableName());
-        return new BackMessage<>(BackEnum.REQUEST_SUCCESS,updateCommand);
+        return updateCommand;
     }
 
     @Override
-    public BackMessage<String> MybatisDeleteService(ParameterDTO parameterDTO) {
+    public String MybatisDeleteService(ParameterDTO parameterDTO) {
 
         List<String> keyParameterName = new ArrayList<>();
 
@@ -70,11 +68,11 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
         }
 
         String deleteCommand = mybatisProduceService.mybatisDelete(keyParameterName, parameterDTO.getTableName());
-        return new BackMessage<>(BackEnum.REQUEST_SUCCESS,deleteCommand);
+        return deleteCommand;
     }
 
     @Override
-    public BackMessage<String> MybatisSelectService(ParameterDTO parameterDTO) {
+    public String MybatisSelectService(ParameterDTO parameterDTO) {
 
         List<String> parameterName = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
@@ -87,6 +85,6 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
         }
         String selectCommand = mybatisProduceService.mybatisSelect(keyParameterName,parameterName, parameterDTO.getTableName());
 
-        return new BackMessage<>(BackEnum.REQUEST_SUCCESS,selectCommand);
+        return selectCommand;
     }
 }

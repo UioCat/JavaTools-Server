@@ -1,6 +1,6 @@
 package com.uio.java_tools.service;
 
-import com.uio.java_tools.utils.BackMessage;
+import com.uio.java_tools.common.BackMessage;
 import com.uio.java_tools.dto.ParameterDTO;
 
 /**
@@ -15,14 +15,14 @@ public interface MybatisConvertService {
      * @param parameterDTO namespace
      * @return backMsg
      */
-    BackMessage<String> MybatisBasicsService(ParameterDTO parameterDTO);
+    String MybatisBasicsService(ParameterDTO parameterDTO);
 
     /**
      * 根据参数写出插入数据库的mybatis配置语句
      * @param parameterDTO parameter,tbName
      * @return backMsg
      */
-    BackMessage<String> MybatisInsertService(ParameterDTO parameterDTO);
+    String MybatisInsertService(ParameterDTO parameterDTO);
 
 
     /**
@@ -30,7 +30,7 @@ public interface MybatisConvertService {
      * @param parameterDTO parameter,keyParameter,tbName
      * @return backMsg
      */
-    BackMessage<String> MybatisUpdateService(ParameterDTO parameterDTO);
+    String MybatisUpdateService(ParameterDTO parameterDTO);
 
 
     /**
@@ -38,14 +38,14 @@ public interface MybatisConvertService {
      * @param parameterDTO keyParameter,tbName
      * @return backMsg
      */
-    BackMessage<String> MybatisDeleteService(ParameterDTO parameterDTO);
+    String MybatisDeleteService(ParameterDTO parameterDTO);
 
     /**
      * 根据参数写出对应的查询配置
      * @param parameterDTO keyParameter，parameter, tbName
      * @return backMsg
      */
-    BackMessage<String> MybatisSelectService(ParameterDTO parameterDTO);
+    String MybatisSelectService(ParameterDTO parameterDTO);
 
 
 }

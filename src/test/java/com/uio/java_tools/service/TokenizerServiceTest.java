@@ -1,7 +1,9 @@
 package com.uio.java_tools.service;
 
+import com.uio.java_tools.dto.EntityParameterDTO;
 import com.uio.java_tools.enums.RegexEnum;
-import com.uio.java_tools.util.TestUtils;
+import com.uio.java_tools.utils.FileUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Description: 分词解析器
  */
 @SpringBootTest
+@Slf4j
 public class TokenizerServiceTest {
 
     @Autowired
@@ -32,14 +35,22 @@ public class TokenizerServiceTest {
     /**
      * 待测试文本存储路径
      */
-    private static String filePath = "target/classes/static/testJava.txt";
+    private static String JAVA_FILE_PATH = "target/classes/static/testJava.txt";
+
+
+    @Test
+    public void parseJavaEntityCodeTest() {
+        String str = FileUtils.readTestString(JAVA_FILE_PATH);
+        EntityParameterDTO entityParameterDTO = tokenizerService.parseJavaEntityCode(str);
+        log.info("tokenizerService.parseJavaEntityCode result:{}", entityParameterDTO);
+    }
 
     @Test
     public void extractFieldFromJavaCodeTest() {
 
-        String testString = TestUtils.readTestString(filePath);
+        String testString = FileUtils.readTestString(JAVA_FILE_PATH);
         List<String> list = tokenizerService.extractFieldFromJavaCode(testString);
-        System.out.println(list.size());
+        log.info("{}", list.size());
         assertEquals(list.size(), listSize);
     }
 
@@ -49,13 +60,13 @@ public class TokenizerServiceTest {
                 "         * 编码\n" +
                 "         */\n" +
                 "        private String foo = \"123123\";";
-        System.out.println(parameter);
+        log.info(parameter);
         Pattern commentRegex = Pattern.compile(RegexEnum.TYPE_FIELD_REGEX.getRegexString(),Pattern.CASE_INSENSITIVE);
         Matcher commentMatcher = commentRegex.matcher(parameter);
         commentMatcher.find();
         String s = parameter.substring(commentMatcher.start(), commentMatcher.end());
-        System.out.println(s);
+        log.info(s);
         String[] split = s.split("[= ;]+");
-        System.out.println(Arrays.toString(split));
+        log.info(Arrays.toString(split));
     }
 }

@@ -1,8 +1,6 @@
 package com.uio.java_tools.utils;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -10,7 +8,7 @@ import java.util.List;
  * @Description: 自动创建文件
  * @time 2021/7/1 17:45
  */
-public class CreateFileUtil {
+public class FileUtils {
 
     //创建文件夹
     public String createFolder(String filePath) {
@@ -44,5 +42,24 @@ public class CreateFileUtil {
             if (null != writer)
                 writer.close();
         }
+    }
+
+    /**
+     * 读取文件
+     * @param filePath
+     * @return
+     */
+    public static String readTestString(String filePath) {
+        try {
+            File file = new File(filePath);
+            InputStream is = new FileInputStream(file);
+            byte[] byteArray = new byte[(int) file.length()];
+            is.read(byteArray);
+            is.close();
+            return new String(byteArray);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -1,11 +1,13 @@
 package com.uio.java_tools.service;
 
+import com.alibaba.fastjson.JSON;
+import com.uio.java_tools.dto.EntityParameterDTO;
 import com.uio.java_tools.manager.impl.ParseStrManagerImpl;
 import com.uio.java_tools.manager.impl.VelocityTemplateForSQL;
 import com.uio.java_tools.service.impl.SQLConvertServiceImpl;
-import com.uio.java_tools.utils.BackMessage;
 import com.uio.java_tools.dto.ParameterDTO;
-import org.junit.jupiter.api.Assertions;
+import com.uio.java_tools.utils.FileUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -21,12 +23,14 @@ import java.lang.reflect.Field;
  * Description:
  */
 @SpringBootTest
+@Slf4j
 class SQLConvertServiceTest {
-    // 被测试Service
-    @Autowired
-    SQLConvertServiceImpl sqlConvertService;
 
-    // mock对象
+    @Autowired
+    private SQLConvertServiceImpl sqlConvertService;
+    @Autowired
+    private TokenizerService tokenizerService;
+
     @Mock
     private ParseStrManagerImpl parse;
     @Mock
@@ -39,6 +43,20 @@ class SQLConvertServiceTest {
         parameterDTO.setParameter(new String[]{"String uid", "String username", "String password", "Long createTime", "Integer role"});
         parameterDTO.setKeyParameter(new String[]{"String uid", "String username"});
         parameterDTO.setTableName("tb_user");
+    }
+
+    private final static String FILE_PATH_JAVA = "target/classes/static/testJava.txt";
+
+    /**
+     * 解析Java并生成创表命令单测
+     */
+    @Test
+    public void createSqlService() {
+        String testString = FileUtils.readTestString(FILE_PATH_JAVA);
+        EntityParameterDTO entityParameterDTO = tokenizerService.parseJavaEntityCode(testString);
+        log.info("tokenizerService.parseJavaEntityCode result:{}", entityParameterDTO);
+
+        sqlConvertService.createSqlService(entityParameterDTO);
     }
 
     /**
@@ -81,16 +99,13 @@ class SQLConvertServiceTest {
             Field f = SQLConvertServiceImpl.class.getDeclaredField("velocityTemplateForSQL");
             f.setAccessible(true);
             f.set(sqlConvertService, velocityTemplateForSQL);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            log.warn("updateTest exception, ", e);
         }
 
         // mock测试
-        BackMessage backMessage = sqlConvertService.updateTableService(parameterDTO);
-        Assertions.assertEquals(200, backMessage.getCode());
-        System.out.println(backMessage.getInfo());
+        String s = sqlConvertService.updateTableService(parameterDTO);
+        log.info(JSON.toJSONString(s));
     }
 
     /**
@@ -113,10 +128,7 @@ class SQLConvertServiceTest {
             e.printStackTrace();
         }
 
-        // mock测试
-        BackMessage backMessage = sqlConvertService.selectMsg(parameterDTO);
-        Assertions.assertEquals(200, backMessage.getCode());
-        System.out.println(backMessage.getInfo());
+        log.info(JSON.toJSONString(sqlConvertService.selectMsg(parameterDTO)));
     }
 
     /**
@@ -133,16 +145,11 @@ class SQLConvertServiceTest {
             Field f = SQLConvertServiceImpl.class.getDeclaredField("velocityTemplateForSQL");
             f.setAccessible(true);
             f.set(sqlConvertService, velocityTemplateForSQL);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            log.warn("deleteTest exception, ", e);
         }
 
-        // mock测试
-        BackMessage backMessage = sqlConvertService.deleteMsg(parameterDTO);
-        Assertions.assertEquals(200, backMessage.getCode());
-        System.out.println(backMessage.getInfo());
+        log.info(JSON.toJSONString(sqlConvertService.deleteMsg(parameterDTO)));
     }
 
     /**
@@ -162,15 +169,10 @@ class SQLConvertServiceTest {
             parseField.setAccessible(true);
             velocityField.set(sqlConvertService, velocityTemplateForSQL);
             parseField.set(sqlConvertService, parse);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            log.warn("insertTest exception, ", e);
         }
 
-        // mock测试
-        BackMessage<String> backMessage = sqlConvertService.insertMsgService(parameterDTO);
-        Assertions.assertEquals(200, backMessage.getCode());
-        System.out.println(backMessage.getInfo());
+        log.info(sqlConvertService.insertMsgService(parameterDTO));
     }
 }

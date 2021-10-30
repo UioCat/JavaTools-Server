@@ -1,78 +1,37 @@
 package com.uio.java_tools.dto;
 
+import lombok.Data;
+
 /**
  * @author VM
  * Date 2021/10/25 23:25
  * Description:
  */
+@Data
 public class Parameter {
+
+    /**
+     * Java数据类型
+     */
     private String type;
+    /**
+     * MySQL数据类型
+     */
     private String datatype;
+    /**
+     * 字段名
+     */
     private String field;
+    /**
+     * 注释
+     */
     private String comment;
+    /**
+     * 默认值
+     */
     private String defaultValue;
+    /**
+     * 是否为唯一键
+     */
     private boolean unique;
-
-    public Parameter() {
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getDatatype() {
-        return datatype;
-    }
-
-    public void setDatatype(String datatype) {
-        this.datatype = datatype;
-    }
-
-    public String getField() {
-        return field;
-    }
-
-    public void setField(String field) {
-        this.field = field;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public String getDefaultValue() {
-        return defaultValue;
-    }
-
-    public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
-    public boolean isUnique() {
-        return unique;
-    }
-
-    public void setUnique(boolean unique) {
-        this.unique = unique;
-    }
-
-    @Override
-    public String toString() {
-        return "Parameter{" +
-                "type='" + type + '\'' +
-                ", datatype='" + datatype + '\'' +
-                ", field='" + field + '\'' +
-                ", comment='" + comment + '\'' +
-                ", defaultValue='" + defaultValue + '\'' +
-                ", unique=" + unique +
-                '}';
-    }
 }

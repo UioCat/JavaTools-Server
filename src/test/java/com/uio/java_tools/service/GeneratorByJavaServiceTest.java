@@ -1,8 +1,7 @@
 package com.uio.java_tools.service;
 
 import com.uio.java_tools.dto.JavaParseParameterDTO;
-import com.uio.java_tools.dto.ParseParameterDTO;
-import com.uio.java_tools.util.TestUtils;
+import com.uio.java_tools.utils.FileUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,7 +33,7 @@ public class GeneratorByJavaServiceTest {
 
     @Test
     public void parseJavaTest() {
-        String testString = TestUtils.readTestString(filePath);
+        String testString = FileUtils.readTestString(filePath);
         JavaParseParameterDTO javaParseParameterDTO = generatorService.parse(testString);
         assertEquals(javaParseParameterDTO.getFieldList().size(), listSize);
         assertEquals(javaParseParameterDTO.getPackageName(), "com.example.java_tools");

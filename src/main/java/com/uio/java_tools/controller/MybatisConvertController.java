@@ -1,7 +1,7 @@
 package com.uio.java_tools.controller;
 
 import com.uio.java_tools.service.MybatisConvertService;
-import com.uio.java_tools.utils.BackMessage;
+import com.uio.java_tools.common.BackMessage;
 import com.uio.java_tools.dto.ParameterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +22,7 @@ public class MybatisConvertController {
      */
     @RequestMapping("/mybatisBasics")
     public BackMessage<String> mybatisBatisController(@RequestBody ParameterDTO parameterDTO){
-        return mybatisConvertService.MybatisBasicsService(parameterDTO);
+        return BackMessage.success(mybatisConvertService.MybatisBasicsService(parameterDTO));
     }
 
     /**
@@ -32,7 +32,7 @@ public class MybatisConvertController {
      */
     @RequestMapping("/mybatisInsert")
     public BackMessage<String> mybatisInsertController(@RequestBody ParameterDTO parameterDTO){
-        return mybatisConvertService.MybatisInsertService(parameterDTO);
+        return BackMessage.success(mybatisConvertService.MybatisInsertService(parameterDTO));
     }
 
     /**
@@ -42,7 +42,7 @@ public class MybatisConvertController {
      */
     @RequestMapping("/mybatisDelete")
     public BackMessage<String> mybatisDeleteController(@RequestBody ParameterDTO parameterDTO){
-        return mybatisConvertService.MybatisDeleteService(parameterDTO);
+        return BackMessage.success(mybatisConvertService.MybatisDeleteService(parameterDTO));
     }
 
     /**
@@ -52,12 +52,12 @@ public class MybatisConvertController {
      */
     @RequestMapping("/mybatisUpdate")
     public BackMessage<String> mybatisUpdate(@RequestBody ParameterDTO parameterDTO){
-        return mybatisConvertService.MybatisUpdateService(parameterDTO);
+        return BackMessage.success(mybatisConvertService.MybatisUpdateService(parameterDTO));
     }
 
     @RequestMapping("/mybatisSelect")
     public BackMessage<String> mybatisSelect(@RequestBody ParameterDTO parameterDTO){
-        return mybatisConvertService.MybatisSelectService(parameterDTO);
+        return BackMessage.success(mybatisConvertService.MybatisSelectService(parameterDTO));
     }
 
 }

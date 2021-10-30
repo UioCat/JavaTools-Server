@@ -1,61 +1,29 @@
 package com.uio.java_tools.dto;
 
+import lombok.Data;
+
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author VM
  */
+@Data
 public class EntityParameterDTO {
-
+    /**
+     * 参数列表
+     */
     private List<Parameter> parameters;
+    /**
+     * 表名
+     */
     private String tableName;
+    /**
+     * 主键
+     */
     private String primaryKey;
+    /**
+     * namespace
+     */
     private String namespace;
-
-    public EntityParameterDTO() {
-    }
-
-    @Override
-    public String toString() {
-        return "EntityParameterDTO{" +
-                "parameters=" + parameters.toString() +
-                ", tableName='" + tableName + '\'' +
-                ", primaryKey='" + primaryKey + '\'' +
-                ", namespace='" + namespace + '\'' +
-                '}';
-    }
-
-    public String getNamespace() {
-        return namespace;
-    }
-
-    public void setNamespace(String namespace) {
-        this.namespace = namespace;
-    }
-
-    public String getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
-    public List<Parameter> getParameters() {
-        return parameters;
-    }
-
-    public void setParameters(List<Parameter> parameters) {
-        this.parameters = parameters;
-    }
-
-    public String getPrimaryKey() {
-        return primaryKey;
-    }
-
-    public void setPrimaryKey(String primaryKey) {
-        this.primaryKey = primaryKey;
-    }
-
 }

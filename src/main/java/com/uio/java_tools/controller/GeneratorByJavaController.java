@@ -1,11 +1,11 @@
 package com.uio.java_tools.controller;
 
 import com.uio.java_tools.dto.JavaParseParameterDTO;
-import com.uio.java_tools.enums.BackEnum;
+import com.uio.java_tools.common.BackEnum;
 import com.uio.java_tools.resq.GeneratorParameterReq;
 import com.uio.java_tools.resq.StringDataReq;
 import com.uio.java_tools.service.GeneratorService;
-import com.uio.java_tools.utils.BackMessage;
+import com.uio.java_tools.common.BackMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;

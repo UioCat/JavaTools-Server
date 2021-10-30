@@ -1,11 +1,9 @@
 package com.uio.java_tools.service;
 
 import com.uio.java_tools.manager.impl.MybatisProduceManagerImpl;
-import com.uio.java_tools.service.MybatisConvertService;
 import com.uio.java_tools.service.impl.MybatisConvertServiceImpl;
-import com.uio.java_tools.utils.BackMessage;
 import com.uio.java_tools.dto.ParameterDTO;
-import org.junit.jupiter.api.Assertions;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -21,15 +19,15 @@ import java.lang.reflect.Field;
  * Description:
  */
 @SpringBootTest
+@Slf4j
 public class MybatisConvertServiceTest {
     /**
      * 需要测试MybatisProduceManager时，直接将mock打桩和注入注释掉即可测试
      */
 
-    // 待测试对象
     @Autowired
     private MybatisConvertService mybatisConvertService;
-    // mock对象
+
     @Mock
     private MybatisProduceManagerImpl mybatisProduceManager;
 
@@ -60,9 +58,7 @@ public class MybatisConvertServiceTest {
         }
 
         // namespace为空值时，返回值为空值
-        BackMessage<String> backMessage = mybatisConvertService.MybatisBasicsService(parameterDTO);
-        Assertions.assertNotNull(backMessage.getInfo());
-        System.out.println(backMessage.getInfo());
+        log.info(mybatisConvertService.MybatisBasicsService(parameterDTO));
     }
 
     /**
@@ -81,9 +77,7 @@ public class MybatisConvertServiceTest {
             e.printStackTrace();
         }
 
-        BackMessage<String> backMessage = mybatisConvertService.MybatisInsertService(parameterDTO);
-        Assertions.assertNotNull(backMessage.getInfo());
-        System.out.println(backMessage.getInfo());
+        log.info(mybatisConvertService.MybatisInsertService(parameterDTO));
 
     }
 
@@ -102,9 +96,7 @@ public class MybatisConvertServiceTest {
             e.printStackTrace();
         }
 
-        BackMessage<String> backMessage = mybatisConvertService.MybatisUpdateService(parameterDTO);
-        Assertions.assertNotNull(backMessage.getInfo());
-        System.out.println(backMessage.getInfo());
+        log.info(mybatisConvertService.MybatisUpdateService(parameterDTO));
     }
 
     /**
@@ -122,9 +114,7 @@ public class MybatisConvertServiceTest {
             e.printStackTrace();
         }
 
-        BackMessage<String> backMessage = mybatisConvertService.MybatisDeleteService(parameterDTO);
-        Assertions.assertNotNull(backMessage.getInfo());
-        System.out.println(backMessage.getInfo());
+        log.info(mybatisConvertService.MybatisDeleteService(parameterDTO));
     }
 
     /**
@@ -142,8 +132,6 @@ public class MybatisConvertServiceTest {
             e.printStackTrace();
         }
 
-        BackMessage<String> backMessage = mybatisConvertService.MybatisSelectService(parameterDTO);
-        Assertions.assertNotNull(backMessage.getInfo());
-        System.out.println(backMessage.getInfo());
+        log.info(mybatisConvertService.MybatisSelectService(parameterDTO));
     }
 }

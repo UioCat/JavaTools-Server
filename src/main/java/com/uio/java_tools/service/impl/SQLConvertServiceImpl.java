@@ -3,11 +3,10 @@ package com.uio.java_tools.service.impl;
 
 import com.uio.java_tools.dto.EntityParameterDTO;
 import com.uio.java_tools.dto.Parameter;
-import com.uio.java_tools.enums.BackEnum;
+import com.uio.java_tools.common.BackEnum;
 import com.uio.java_tools.manager.impl.ParseStrManagerImpl;
 import com.uio.java_tools.manager.impl.VelocityTemplateForSQL;
 import com.uio.java_tools.service.SQLConvertService;
-import com.uio.java_tools.utils.BackMessage;
 import com.uio.java_tools.dto.ParameterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      * @return 创建数据库命令
      */
     @Override
-    public BackMessage<String> createSqlService(EntityParameterDTO parameterDTO) {
+    public String createSqlService(EntityParameterDTO parameterDTO) {
 
         for (Parameter parameter: parameterDTO.getParameters()) {
             parameter.setDatatype(parse.typeConvertForMysql(parameter.getType()));
@@ -38,7 +37,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
         }
 
         String SQLCommand = velocityTemplateForSQL.createSQLTemplate(parameterDTO.getParameters(), parameterDTO.getTableName(), parameterDTO.getPrimaryKey());
-        return new BackMessage<>(BackEnum.REQUEST_SUCCESS, SQLCommand);
+        return SQLCommand;
     }
 
     /**
@@ -48,7 +47,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      */
 
     @Override
-    public BackMessage<String> updateTableService(ParameterDTO parameterDTO) {
+    public String updateTableService(ParameterDTO parameterDTO) {
         // 需求改的参数
         List<String> parameterType = new ArrayList<>();
         List<String> parameterName = new ArrayList<>();
@@ -68,7 +67,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
 
         String updateSQL = velocityTemplateForSQL.updateSQLTemplate(parameterType, parameterName,
                 keyParameterType, keyParameterName, parameterDTO.getTableName());
-        return new BackMessage<>(BackEnum.REQUEST_SUCCESS, updateSQL);
+        return updateSQL;
     }
 
     /**
@@ -77,7 +76,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      * @return 插入数据库命令
      */
     @Override
-    public BackMessage<String> insertMsgService(ParameterDTO parameterDTO) {
+    public String insertMsgService(ParameterDTO parameterDTO) {
 
         List<String> parameterName = new ArrayList<>();
 
@@ -87,7 +86,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
         }
 
         String insertSQL = velocityTemplateForSQL.insertSQLTemplate(parameterName, parameterDTO.getTableName());
-        return new BackMessage<>(BackEnum.REQUEST_SUCCESS, insertSQL);
+        return insertSQL;
     }
 
     /**
@@ -96,7 +95,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      * @return 删除信息命令
      */
     @Override
-    public BackMessage<String> deleteMsg(ParameterDTO parameterDTO) {
+    public String deleteMsg(ParameterDTO parameterDTO) {
 
         List<String> keyParameterType = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
@@ -108,7 +107,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
 
         String deleteSQL = velocityTemplateForSQL.deleteSQLTemplate(keyParameterType, keyParameterName, parameterDTO.getTableName());
 
-        return new BackMessage<>(BackEnum.REQUEST_SUCCESS, deleteSQL);
+        return deleteSQL;
     }
 
 
@@ -118,7 +117,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      * @return 查询数据库信息命令
      */
     @Override
-    public BackMessage<String> selectMsg(ParameterDTO parameterDTO) {
+    public String selectMsg(ParameterDTO parameterDTO) {
 
         List<String> keyParameterType = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
@@ -137,8 +136,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
 
         String selectSQL = velocityTemplateForSQL.selectSQLTemplate(parameterName, keyParameterType, keyParameterName, parameterDTO.getTableName());
 
-        return new BackMessage<>(BackEnum.REQUEST_SUCCESS, selectSQL);
-
+        return selectSQL;
     }
 
 }

@@ -1,7 +1,6 @@
 package com.uio.java_tools.service;
 
 import com.uio.java_tools.dto.EntityParameterDTO;
-import com.uio.java_tools.utils.BackMessage;
 
 import java.util.List;
 
@@ -38,5 +37,5 @@ public interface TokenizerService {
      * @param code Java代码（可以不全）
      * @return 字段类型、字段名、字段备注、字段默认值、唯一键和表名
      */
-    BackMessage<EntityParameterDTO> parseJavaEntityCode(String code);
+    EntityParameterDTO parseJavaEntityCode(String code);
 }

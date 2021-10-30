@@ -1,14 +1,13 @@
 package com.uio.java_tools.controller;
 
+import com.uio.java_tools.common.BackMessage;
 import com.uio.java_tools.dto.EntityParameterDTO;
 import com.uio.java_tools.service.SQLConvertService;
-import com.uio.java_tools.utils.BackMessage;
 import com.uio.java_tools.dto.ParameterDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 
 @RestController
 public class SQLConvertController {
@@ -18,17 +17,15 @@ public class SQLConvertController {
     @Autowired
     private SQLConvertService sqlService;
 
-    // todo 待更新接口实现，添加唯一键、主键和comment
     /**
      * 创表命令
      * @param parameterDTO parameter，tbName
      * @return 创表命令 String
      */
     @PostMapping("/createSQL")
-    public BackMessage<String> createSqlCommandController(@RequestBody EntityParameterDTO parameterDTO){
+    public BackMessage<String> createSQL(@RequestBody EntityParameterDTO parameterDTO){
         
-        logger.info("parameterMessage = " + parameterDTO.toString());
-        return sqlService.createSqlService(parameterDTO);
+        return BackMessage.success(sqlService.createSqlService(parameterDTO));
     }
 
     /**
@@ -37,10 +34,9 @@ public class SQLConvertController {
      * @return 更新数据库表命令 String
      */
     @PostMapping("/updateTable")
-    public BackMessage<String> updateTableController(@RequestBody ParameterDTO parameterDTO){
+    public BackMessage<String> updateTable(@RequestBody ParameterDTO parameterDTO){
 
-        logger.info("parameterMessage = " + parameterDTO.toString());
-        return sqlService.updateTableService(parameterDTO);
+        return BackMessage.success(sqlService.updateTableService(parameterDTO));
     }
 
     /**
@@ -49,10 +45,9 @@ public class SQLConvertController {
      * @return 插入数据命令
      */
     @PostMapping("/insertMsg")
-    public BackMessage<String> insertMsgController(@RequestBody ParameterDTO parameterDTO) {
+    public BackMessage<String> insertMsg(@RequestBody ParameterDTO parameterDTO) {
 
-        logger.info("parameterMessage = " + parameterDTO.toString());
-        return sqlService.insertMsgService(parameterDTO);
+        return BackMessage.success(sqlService.insertMsgService(parameterDTO));
     }
 
     /**
@@ -61,11 +56,10 @@ public class SQLConvertController {
      * @return 删除信息命令
      */
     @PostMapping("/deleteMsg")
-    public BackMessage<String> deleteMsgController(@RequestBody ParameterDTO parameterDTO){
+    public BackMessage<String> deleteMsg(@RequestBody ParameterDTO parameterDTO){
 
         logger.info("parameterMessage = " + parameterDTO.toString());
-        BackMessage<String> backMessage = sqlService.deleteMsg(parameterDTO);
-        return backMessage;
+        return BackMessage.success(sqlService.deleteMsg(parameterDTO));
     }
 
     /**
@@ -74,10 +68,9 @@ public class SQLConvertController {
      * @return
      */
     @PostMapping("/selectTable")
-    public BackMessage<String> selectTableController(@RequestBody ParameterDTO parameterDTO){
+    public BackMessage<String> selectTable(@RequestBody ParameterDTO parameterDTO){
 
-        logger.info("parameterMessage = " + parameterDTO.toString());
-        return sqlService.selectMsg(parameterDTO);
+        return BackMessage.success(sqlService.selectMsg(parameterDTO));
     }
 
 }
