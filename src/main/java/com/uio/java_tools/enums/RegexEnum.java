@@ -9,19 +9,15 @@ public enum RegexEnum {
     /**
      * field解析正则表达式
      */
-    TYPE_FIELD_REGEX("(integer|string|boolean|double|float|int|byte|short|long|char|character) (\\w|=| |\")*;"),
+    TYPE_FIELD_REGEX("(integer|string|boolean|double|float|int|byte|short|long|char|character|date) (\\w|=| |\")*;"),
     /**
-     * 类型解析正则表达式
+     * 解析方法正则表达式
      */
-    TYPE_REGEX("integer|string|boolean|double|float|int|byte|short|long|char|character"),
-    /**
-     * 注释解析正则表达式
-     */
-    COMMENT_REGEX("[\\t ]*(/\\*[\\w\\W]*?\\*/|//.*)"),
+    METHOD_REGEX("(public |private |protected )*\\w* \\w*\\([\\w, ]*\\)"),
     /**
      * parameter解析正则表达式
      */
-    PARAMETER_REGEX("([\\t ]*(/\\*[\\w\\W]*?\\*/|//.*))*[\\r\\n].*(private )*(integer|string|boolean|double|float|int|byte|short|long|char|character) (\\w|=| |\")*;");
+    PARAMETER_REGEX("(public |private |protected )*(integer|string|boolean|double|float|int|byte|short|long|char|character|date) (\\w|=| |\")*;");
 
 
     private String regexString;
