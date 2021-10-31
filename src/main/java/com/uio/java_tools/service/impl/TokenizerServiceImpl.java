@@ -7,6 +7,7 @@ import com.uio.java_tools.enums.RegexEnum;
 import com.uio.java_tools.common.CustomException;
 import com.uio.java_tools.manager.ParseStrManager;
 import com.uio.java_tools.service.TokenizerService;
+import com.uio.java_tools.utils.RegexPrecompile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -132,7 +133,7 @@ public class TokenizerServiceImpl implements TokenizerService {
         result.setPrimaryKey(primaryKey);
         // 3. 解析表名
         String className = getClassName(code);
-        result.setTableName("tb_" + className);
+        result.setTableName(className);
 
         return result;
     }
@@ -150,39 +151,54 @@ public class TokenizerServiceImpl implements TokenizerService {
 
     private List<Parameter> getParameters(String code) {
         List<Parameter> result = new ArrayList<>();
-
-        Pattern paramRegex = Pattern.compile(RegexEnum.PARAMETER_REGEX.getRegexString(), Pattern.CASE_INSENSITIVE);
-        Matcher paramMatcher = paramRegex.matcher(code);
+        //去除所有的换行
+        String codeInOneLine = code.replaceAll("\\r\\n", " ");
+        // 预处理，提取出字段所在位置
+        Matcher methodMatcher = RegexPrecompile.METHOD_PATTERN.matcher(codeInOneLine);
+        int start = 0;
+        int end = codeInOneLine.length();
+        if (codeInOneLine.contains("class ")) {
+            start = codeInOneLine.indexOf("class ");
+        }
+        if (methodMatcher.find()) {
+            end = methodMatcher.start();
+        }
+        String entity = codeInOneLine.substring(start, end);
+        Matcher paramMatcher = RegexPrecompile.PARAM_REGEX.matcher(entity);
 
         List<String> parameters = new ArrayList<>();
         while (paramMatcher.find()) {
-            String parameter = code.substring(paramMatcher.start(), paramMatcher.end());
+            String parameter = entity.substring(paramMatcher.start(), paramMatcher.end());
+            if (parameter.contains("static") || parameter.contains("final")) {
+                continue;
+            }
             parameters.add(parameter);
         }
 
         for (String parameter: parameters) {
             Parameter param = new Parameter();
 
-            // 解析注释
-            Pattern commentRegex = Pattern.compile(RegexEnum.COMMENT_REGEX.getRegexString());
-            Matcher commentMatcher = commentRegex.matcher(parameter);
-            if (commentMatcher.find()) {
-                String s = parameter.substring(commentMatcher.start(), commentMatcher.end());
-                param.setComment(s.replaceAll("[\\r\\n\\*/ ]", ""));
-            } else {
-                param.setComment(null);
-            }
-            // 解析参数类型和参数名
-            Pattern typeAndFiledRegex = Pattern.compile(RegexEnum.TYPE_FIELD_REGEX.getRegexString(), Pattern.CASE_INSENSITIVE);
-            Matcher typeAndFieldMatcher = typeAndFiledRegex.matcher(parameter);
+            // 解析参数类型和参数名，并以此分割comment
+            Matcher typeAndFieldMatcher = RegexPrecompile.TYPE_AND_FILED_REGEX.matcher(parameter);
             if (typeAndFieldMatcher.find()) {
-                String s = parameter.substring(typeAndFieldMatcher.start(), typeAndFieldMatcher.end());
-                String[] strings = s.split("[ =;]+");
+                start = typeAndFieldMatcher.start();
+                end = typeAndFieldMatcher.end();
+                // 获取comment并存储
+                String comment = parameter.substring(0, start);
+                String s = comment.replaceAll("[\\*/ ]", "");
+                if (!s.isEmpty()) {
+                    param.setComment(s);
+                }
+                String attribute = parameter.substring(start, end);
+                String typeAndField = attribute.replaceAll("private|protected|public", "").trim();
+                String[] strings = typeAndField.split("[ =;]+");
                 if (strings.length == 2) {
                     param.setType(strings[0]);
+                    param.setDatatype(parseStrManager.typeConvertForMysql(strings[0]));
                     param.setField(strings[1]);
                 } else if (strings.length == 3) {
                     param.setType(strings[0]);
+                    param.setDatatype(parseStrManager.typeConvertForMysql(strings[0]));
                     param.setField(strings[1]);
                     param.setDefaultValue(strings[2]);
                 } else {
