@@ -26,4 +26,8 @@ public class EntityParameterDTO {
      * namespace
      */
     private String namespace;
+    /**
+     * 是否为下划线命名
+     */
+    private boolean underline;
 }

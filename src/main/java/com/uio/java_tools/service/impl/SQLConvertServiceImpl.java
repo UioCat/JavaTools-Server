@@ -30,10 +30,10 @@ public class SQLConvertServiceImpl implements SQLConvertService {
      */
     @Override
     public String createSqlService(EntityParameterDTO parameterDTO) {
-
-        for (Parameter parameter: parameterDTO.getParameters()) {
-            parameter.setDatatype(parse.typeConvertForMysql(parameter.getType()));
-            parameter.setField(parse.upperToLower(parameter.getField()));
+        if (parameterDTO.isUnderline()) {
+            for (Parameter parameter: parameterDTO.getParameters()) {
+                parameter.setField(parse.upperToLower(parameter.getField()));
+            }
         }
 
         String SQLCommand = velocityTemplateForSQL.createSQLTemplate(parameterDTO.getParameters(), parameterDTO.getTableName(), parameterDTO.getPrimaryKey());

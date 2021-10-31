@@ -1,6 +1,6 @@
 # Uio-Tools 工具
 
-version：**v1.2**
+version：**v1.3**
 
 ## 接口文档
 
@@ -54,7 +54,7 @@ version：**v1.2**
 
 ### 文本解析接口 parse
 
-**v1.2 更新**
+**v1.3 更新**
 该接口为 MySQL 和 MyBatis 共用
 
 - 路径：
@@ -67,34 +67,7 @@ version：**v1.2**
 
     ```
     {
-      "data": "package com.example.java_tools;
-    
-      public class User {
-    
-          private String foo = 123123;
-          private String name;
-          private Integer sex;
-          private Boolean urban;
-          private Double balance;
-          private Float money;
-    
-          public User(String foo, String name, Integer sex, Boolean urban, Double balance, Float money) {
-              this.foo = foo;
-              this.name = name;
-              this.sex = sex;
-              this.urban = urban;
-              this.balance = balance;
-              this.money = money;
-          }
-    
-          public String getName() {
-              return name;
-          }
-    
-          public void setName(String name) {
-              this.name = name;
-          }
-      }"
+      "data": "package com.example.java_tools;\r\n\r\n  public class User {\r\n\r\n      private String foo = 123123;\r\n      private String name;\r\n      private Integer sex;\r\n      private Boolean urban;\r\n      private Double balance;\r\n      private Float money;\r\n\r\n      public User(String foo, String name, Integer sex, Boolean urban, Double balance, Float money) {\r\n          this.foo = foo;\r\n          this.name = name;\r\n          this.sex = sex;\r\n          this.urban = urban;\r\n          this.balance = balance;\r\n          this.money = money;\r\n      }\r\n\r\n      public String getName() {\r\n          return name;\r\n      }\r\n\r\n      public void setName(String name) {\r\n          this.name = name;\r\n      }\r\n  }"
     }
     ```
 
@@ -102,39 +75,64 @@ version：**v1.2**
 
     ```json
     {
-      "code": 12,
-      "message": "请求成功",
-      "info":{
-          "parameter":[
-              {
-                  "type": "Integer",
-                  "field": "id",
-                  "comment": "用户id"
-              },
-              {
-                  "type": "String",
-                  "field": "username",
-                  "comment": "用户名"
-              },
-              {
-                  "type": "String",
-                  "field": "password",
-                  "comment": "用户密码"
-              },
-              {
-                  "type": "String",
-                  "field": "level",
-                  "comment": "用户权限"
-              },
-              {
-                  "type": "String",
-                  "field": "uniqueName",
-                  "comment": "用户唯一名"
-              }
-          ],
-          "tbName": "tb_user",
-          "primaryKey": "id"
-      }
+        "code": 200,
+        "message": "请求成功",
+        "info": {
+            "parameters": [
+                {
+                    "type": "String",
+                    "datatype": "varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci",
+                    "field": "foo",
+                    "comment": "private",
+                    "defaultValue": "123123",
+                    "unique": false
+                },
+                {
+                    "type": "String",
+                    "datatype": "varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci",
+                    "field": "name",
+                    "comment": "private",
+                    "defaultValue": null,
+                    "unique": false
+                },
+                {
+                    "type": "Integer",
+                    "datatype": "int(32)",
+                    "field": "sex",
+                    "comment": "private",
+                    "defaultValue": null,
+                    "unique": false
+                },
+                {
+                    "type": "Boolean",
+                    "datatype": "bit(1)",
+                    "field": "urban",
+                    "comment": "private",
+                    "defaultValue": null,
+                    "unique": false
+                },
+                {
+                    "type": "Double",
+                    "datatype": "double",
+                    "field": "balance",
+                    "comment": "private",
+                    "defaultValue": null,
+                    "unique": false
+                },
+                {
+                    "type": "Float",
+                    "datatype": "float",
+                    "field": "money",
+                    "comment": "private",
+                    "defaultValue": null,
+                    "unique": false
+                }
+            ],
+            "tableName": "User",
+            "primaryKey": null,
+            "namespace": null,
+            "underline": false
+        }
     }
     ```
 
@@ -142,7 +140,7 @@ version：**v1.2**
 
 #### 生成创表命令接口 create
 
-**v1.2 更新**
+**v1.3 更新**
 
 - 路径：
 
@@ -152,49 +150,72 @@ version：**v1.2**
 
 - 发送：
 
-    ```
+    ```json
     {
-        "parameter":[
+        "parameters": [
+            {
+                "type": "String",
+                "datatype": "varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci",
+                "field": "foo",
+                "comment": "private",
+                "defaultValue": "123123",
+                "unique": false
+            },
+            {
+                "type": "String",
+                "datatype": "varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci",
+                "field": "name",
+                "comment": "private",
+                "defaultValue": null,
+                "unique": false
+            },
             {
                 "type": "Integer",
-                "field": "id",
-                "comment": "用户id",
-                "defaultValue": "123123"
+                "datatype": "int(32)",
+                "field": "sex",
+                "comment": "private",
+                "defaultValue": null,
+                "unique": false
             },
             {
-                "type": "String",
-                "field": "username",
-                "comment": "用户名",
-                "unique": true
+                "type": "Boolean",
+                "datatype": "bit(1)",
+                "field": "urban",
+                "comment": "private",
+                "defaultValue": null,
+                "unique": false
             },
             {
-                "type": "String",
-                "field": "password",
-                "comment": "用户密码"
+                "type": "Double",
+                "datatype": "double",
+                "field": "balance",
+                "comment": "private",
+                "defaultValue": null,
+                "unique": false
             },
             {
-                "type": "String",
-                "field": "level",
-                "comment": "用户权限"
-            },
-            {
-                "type": "String",
-                "field": "uniqueName",
-                "comment": "用户唯一名"
+                "type": "Float",
+                "datatype": "float",
+                "field": "money",
+                "comment": "private",
+                "defaultValue": null,
+                "unique": false
             }
         ],
-        "primaryKey": "id",
-        "tbName": "tb_config"
-      }
+        "tableName": "User",
+        "primaryKey": null,
+        "namespace": null,
+        "underline": false
+    }
     ```
 
 - 返回：
 
-    ```
+    ```json
     {
-      "code": 12,
-      "message": "请求成功",
-      "info": "CREATE TABLE tb_config (id INT (32) UNIQUE COMMENT `任务id`,taskName VARCHAR (255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL UNIQUE COMMENT `任务名`,createTime BIGINT COMMENT `任务创建时间`,project VARCHAR (255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT `任务所属项目`,status INT(32) COMMENT `任务状态` PRIMARY KEY ( id ));"
+        "code": 200,
+        "message": "请求成功",
+        "info": "CREATE TABLE User(\r\n    `foo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 123123 comment `private`,\r\n    `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT null comment `private`,\r\n    `sex` int(32) DEFAULT null comment `private`,\r\n    `urban` bit(1) DEFAULT null comment `private`,\r\n    `balance` double DEFAULT null comment `private`,\r\n    `money` float DEFAULT null comment `private`\r\n);"
     }
     ```
 
