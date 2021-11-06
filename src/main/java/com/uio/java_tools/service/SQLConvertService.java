@@ -1,6 +1,6 @@
 package com.uio.java_tools.service;
 
-import com.uio.java_tools.dto.EntityParameterDTO;
+import com.uio.java_tools.controller.req.CreateSqlReq;
 import com.uio.java_tools.dto.ParameterDTO;
 
 /**
@@ -12,10 +12,10 @@ public interface SQLConvertService {
 
     /**
      * 根据参数写出创表命令
-     * @param parameterDTO parameter，tbName
+     * @param createSqlReq
      * @return 创表命令
      */
-    String createSqlService(EntityParameterDTO parameterDTO);
+    String createSqlService(CreateSqlReq createSqlReq);
 
     /**
      * 更新数据库表命令

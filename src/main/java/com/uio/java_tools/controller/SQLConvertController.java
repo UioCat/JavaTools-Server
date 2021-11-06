@@ -1,7 +1,8 @@
 package com.uio.java_tools.controller;
 
 import com.uio.java_tools.common.BackMessage;
-import com.uio.java_tools.dto.EntityParameterDTO;
+import com.uio.java_tools.controller.req.CreateSqlReq;
+import com.uio.java_tools.dto.AnalysisDTO;
 import com.uio.java_tools.service.SQLConvertService;
 import com.uio.java_tools.dto.ParameterDTO;
 import org.slf4j.Logger;
@@ -19,13 +20,13 @@ public class SQLConvertController {
 
     /**
      * 创表命令
-     * @param parameterDTO parameter，tbName
+     * @param createSqlReq
      * @return 创表命令 String
      */
     @PostMapping("/createSQL")
-    public BackMessage<String> createSQL(@RequestBody EntityParameterDTO parameterDTO){
+    public BackMessage<String> createSQL(@RequestBody CreateSqlReq createSqlReq){
         
-        return BackMessage.success(sqlService.createSqlService(parameterDTO));
+        return BackMessage.success(sqlService.createSqlService(createSqlReq));
     }
 
     /**

@@ -2,8 +2,6 @@ package com.uio.java_tools.dto;
 
 import lombok.Data;
 
-import java.util.Arrays;
-
 @Data
 public class ParameterDTO {
 

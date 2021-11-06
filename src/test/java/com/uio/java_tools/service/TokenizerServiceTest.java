@@ -1,6 +1,6 @@
 package com.uio.java_tools.service;
 
-import com.uio.java_tools.dto.EntityParameterDTO;
+import com.uio.java_tools.dto.AnalysisDTO;
 import com.uio.java_tools.enums.RegexEnum;
 import com.uio.java_tools.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -24,9 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Slf4j
 public class TokenizerServiceTest {
 
-    @Autowired
-    private TokenizerService tokenizerService;
-
     /**
      * 解析出的数据应有的数量
      */
@@ -38,21 +35,12 @@ public class TokenizerServiceTest {
     private static String JAVA_FILE_PATH = "target/classes/static/testJava.txt";
 
 
-    @Test
-    public void parseJavaEntityCodeTest() {
-        String str = FileUtils.readTestString(JAVA_FILE_PATH);
-        EntityParameterDTO entityParameterDTO = tokenizerService.parseJavaEntityCode(str);
-        log.info("tokenizerService.parseJavaEntityCode result:{}", entityParameterDTO);
-    }
-
-    @Test
-    public void extractFieldFromJavaCodeTest() {
-
-        String testString = FileUtils.readTestString(JAVA_FILE_PATH);
-        List<String> list = tokenizerService.extractFieldFromJavaCode(testString);
-        log.info("{}", list.size());
-        assertEquals(list.size(), listSize);
-    }
+//    @Test
+//    public void parseJavaEntityCodeTest() {
+//        String str = FileUtils.readTestString(JAVA_FILE_PATH);
+//        AnalysisDTO analysisDTO = tokenizerService.parseJavaEntityCode(str);
+//        log.info("tokenizerService.parseJavaEntityCode result:{}", analysisDTO);
+//    }
 
     @Test
     public void getCommentTest() {

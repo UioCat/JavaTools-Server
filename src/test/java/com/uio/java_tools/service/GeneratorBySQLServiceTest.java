@@ -1,3 +1,4 @@
+/*
 package com.uio.java_tools.service;
 
 import com.alibaba.fastjson.JSON;
@@ -10,11 +11,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Objects;
 
+*/
 /**
  * @author han xun
  * Date 2021/7/3 12:07
  * Description:
- */
+ *//*
+
 @SpringBootTest
 public class GeneratorBySQLServiceTest {
 
@@ -37,3 +40,4 @@ public class GeneratorBySQLServiceTest {
     }
 
 }
+*/

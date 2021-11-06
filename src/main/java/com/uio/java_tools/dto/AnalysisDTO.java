@@ -9,7 +9,7 @@ import java.util.List;
  * @author VM
  */
 @Data
-public class EntityParameterDTO {
+public class AnalysisDTO {
     /**
      * 参数列表
      */
@@ -22,12 +22,4 @@ public class EntityParameterDTO {
      * 主键
      */
     private String primaryKey;
-    /**
-     * namespace
-     */
-    private String namespace;
-    /**
-     * 是否为下划线命名
-     */
-    private boolean underline;
 }

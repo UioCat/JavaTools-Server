@@ -1,11 +1,15 @@
 package com.uio.java_tools.service;
 
 import com.alibaba.fastjson.JSON;
-import com.uio.java_tools.dto.EntityParameterDTO;
+import com.uio.java_tools.controller.req.CreateSqlReq;
+import com.uio.java_tools.controller.req.SqlParameter;
+import com.uio.java_tools.dto.AnalysisDTO;
+import com.uio.java_tools.dto.Parameter;
 import com.uio.java_tools.manager.impl.ParseStrManagerImpl;
 import com.uio.java_tools.manager.impl.VelocityTemplateForSQL;
 import com.uio.java_tools.service.impl.SQLConvertServiceImpl;
 import com.uio.java_tools.dto.ParameterDTO;
+import com.uio.java_tools.service.impl.TokenizerJavaServiceImpl;
 import com.uio.java_tools.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author VM
@@ -29,7 +35,7 @@ class SQLConvertServiceTest {
     @Autowired
     private SQLConvertServiceImpl sqlConvertService;
     @Autowired
-    private TokenizerService tokenizerService;
+    private TokenizerJavaServiceImpl tokenizerJavaService;
 
     @Mock
     private ParseStrManagerImpl parse;
@@ -53,10 +59,25 @@ class SQLConvertServiceTest {
     @Test
     public void createSqlService() {
         String testString = FileUtils.readTestString(FILE_PATH_JAVA);
-        EntityParameterDTO entityParameterDTO = tokenizerService.parseJavaEntityCode(testString);
-        log.info("tokenizerService.parseJavaEntityCode result:{}", entityParameterDTO);
+        AnalysisDTO analysisDTO = tokenizerJavaService.analysisText(testString);
+        log.info("tokenizerService.parseJavaEntityCode result:{}", analysisDTO);
 
-        sqlConvertService.createSqlService(entityParameterDTO);
+        List<SqlParameter> sqlParameterList = new ArrayList<>(analysisDTO.getParameters().size());
+        for (Parameter parameter : analysisDTO.getParameters()) {
+            SqlParameter sqlParameter = new SqlParameter();
+            sqlParameter.setType(parameter.getType());
+            sqlParameter.setDatatype(parameter.getDatatype());
+            sqlParameter.setField(parameter.getField());
+            sqlParameter.setComment(parameter.getComment());
+            sqlParameter.setDefaultValue(parameter.getDefaultValue());
+            sqlParameter.setUniqueKey(true);
+        }
+
+        CreateSqlReq createSqlReq = new CreateSqlReq();
+        createSqlReq.setParameterList(sqlParameterList);
+        createSqlReq.setTableName(analysisDTO.getTableName());
+        createSqlReq.setPrimaryKey(analysisDTO.getPrimaryKey());
+        sqlConvertService.createSqlService(createSqlReq);
     }
 
     /**

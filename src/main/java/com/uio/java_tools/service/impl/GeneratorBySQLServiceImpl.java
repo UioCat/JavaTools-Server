@@ -1,3 +1,4 @@
+/*
 package com.uio.java_tools.service.impl;
 
 import com.alibaba.fastjson.JSON;
@@ -5,9 +6,8 @@ import com.uio.java_tools.config.MapConfig;
 import com.uio.java_tools.constant.GlobalMap;
 import com.uio.java_tools.dto.ParseParameterDTO;
 import com.uio.java_tools.service.GeneratorService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+*/
 /**
  * @author han xun
  * Date 2021/6/26 16:30
  * Description: 根据SQL生成文件
- */
-@Service
-public class GeneratorBySQLServiceImpl implements GeneratorService {
+ *//*
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+@Service
+@Slf4j
+public class GeneratorBySQLServiceImpl implements GeneratorService {
 
     @Autowired
     private MapConfig mapConfig;
@@ -65,24 +66,28 @@ public class GeneratorBySQLServiceImpl implements GeneratorService {
         return parseParameterDTO;
     }
 
-    /**
+    */
+/**
      * 获取sql字段对应的java字段map
      * @return
-     */
+     *//*
+
     public Map<String, String> mapDataInit(){
         Map<String, String> javaBeanTypeMap = mapConfig.getJavaBeanTypeMap();
         if (javaBeanTypeMap == null || javaBeanTypeMap.size() <= 0) {
-            logger.warn("javaBeanTypeMap读取失败");
+            log.warn("javaBeanTypeMap读取失败");
         }
-        logger.info("javaBeanTypeMap读取成功，数据如下：{}", JSON.toJSONString(javaBeanTypeMap));
+        log.info("javaBeanTypeMap读取成功，数据如下：{}", JSON.toJSONString(javaBeanTypeMap));
         return javaBeanTypeMap;
     }
 
-    /**
+    */
+/**
      * 将表名转化为类名
      * @param tableName
      * @return
-     */
+     *//*
+
     public String parsingClassName(String tableName){
         //解析类名
         String[] s = StringUtils.split(tableName, "_");
@@ -94,3 +99,4 @@ public class GeneratorBySQLServiceImpl implements GeneratorService {
     }
 
 }
+*/

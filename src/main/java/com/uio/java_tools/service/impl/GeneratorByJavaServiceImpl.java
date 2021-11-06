@@ -1,25 +1,26 @@
+/*
 package com.uio.java_tools.service.impl;
 
 import com.uio.java_tools.dto.JavaParseParameterDTO;
 import com.uio.java_tools.manager.ParseStrManager;
 import com.uio.java_tools.service.GeneratorService;
 import com.uio.java_tools.service.TokenizerService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+*/
 /**
  * @author han xun
  * Date 2021/6/26 16:30
  * Description: 根据Java生成文件
- */
-@Service
-public class GeneratorByJavaServiceImpl implements GeneratorService {
+ *//*
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+@Service
+@Slf4j
+public class GeneratorByJavaServiceImpl implements GeneratorService {
 
     @Autowired
     private ParseStrManager parseStrManager;
@@ -42,3 +43,4 @@ public class GeneratorByJavaServiceImpl implements GeneratorService {
     }
 
 }
+*/

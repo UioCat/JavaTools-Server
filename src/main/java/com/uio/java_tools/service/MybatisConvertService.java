@@ -1,6 +1,5 @@
 package com.uio.java_tools.service;
 
-import com.uio.java_tools.common.BackMessage;
 import com.uio.java_tools.dto.ParameterDTO;
 
 /**

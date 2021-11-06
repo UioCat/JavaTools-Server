@@ -30,8 +30,4 @@ public class Parameter {
      * 默认值
      */
     private String defaultValue;
-    /**
-     * 是否为唯一键
-     */
-    private boolean unique;
 }

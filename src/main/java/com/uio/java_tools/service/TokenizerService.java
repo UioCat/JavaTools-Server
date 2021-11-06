@@ -1,8 +1,7 @@
 package com.uio.java_tools.service;
 
-import com.uio.java_tools.dto.EntityParameterDTO;
+import com.uio.java_tools.dto.AnalysisDTO;
 
-import java.util.List;
 
 /**
  * @author uio
@@ -12,18 +11,11 @@ import java.util.List;
 public interface TokenizerService {
 
     /**
-     * 解析Java代码，将Java代码解析出字段的类型以及字段名
-     * @param code Java代码（可以不全）
-     * @return 字段类型 + 字段名
-     */
-    List<String> extractFieldFromJavaCode(String code);
-
-    /**
-     * 解析Java代码获得包名
-     * @param code
+     * 解析文本为标准数据
+     * @param text Java实体类（可不全）、SQL创表文件
      * @return
      */
-    String getPackageName(String code);
+    AnalysisDTO analysisText(String text);
 
     /**
      * 解析Java代码获得类名
@@ -31,11 +23,4 @@ public interface TokenizerService {
      * @return
      */
     String getClassName(String code);
-
-    /**
-     * 解析Java代码，将Java代码解析出字段类型、字段名、字段备注、唯一键和表名
-     * @param code Java代码（可以不全）
-     * @return 字段类型、字段名、字段备注、字段默认值、唯一键和表名
-     */
-    EntityParameterDTO parseJavaEntityCode(String code);
 }
