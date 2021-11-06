@@ -54,6 +54,8 @@ public class Entity {
      */
     private Date startTime;
 
+    private boolean test;
+
     public Entity() {
     }
 
