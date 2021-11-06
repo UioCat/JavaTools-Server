@@ -2,6 +2,7 @@ package com.uio.java_tools.service;
 
 import com.uio.java_tools.dto.AnalysisDTO;
 import com.uio.java_tools.enums.RegexEnum;
+import com.uio.java_tools.service.impl.TokenizerJavaServiceImpl;
 import com.uio.java_tools.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -34,13 +35,15 @@ public class TokenizerServiceTest {
      */
     private static String JAVA_FILE_PATH = "target/classes/static/testJava.txt";
 
+    @Autowired
+    private TokenizerJavaServiceImpl tokenizerJavaService;
 
-//    @Test
-//    public void parseJavaEntityCodeTest() {
-//        String str = FileUtils.readTestString(JAVA_FILE_PATH);
-//        AnalysisDTO analysisDTO = tokenizerService.parseJavaEntityCode(str);
-//        log.info("tokenizerService.parseJavaEntityCode result:{}", analysisDTO);
-//    }
+    @Test
+    public void parseJavaEntityCodeTest() {
+        String testString = FileUtils.readTestString(JAVA_FILE_PATH);
+        AnalysisDTO analysisDTO = tokenizerJavaService.analysisText(testString);
+        log.info("tokenizerService.parseJavaEntityCode result:{}", analysisDTO);
+    }
 
     @Test
     public void getCommentTest() {
