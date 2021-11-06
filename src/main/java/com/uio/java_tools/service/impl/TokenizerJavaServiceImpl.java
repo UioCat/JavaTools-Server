@@ -26,11 +26,16 @@ public class TokenizerJavaServiceImpl implements TokenizerService {
     @Autowired
     private ParseStrManager parseStrManager;
 
+    /**
+     * 解析Java文本
+     * @param text Java实体类文本（可不全）
+     * @return
+     */
     @Override
     public AnalysisDTO analysisText(String text) {
         AnalysisDTO result = new AnalysisDTO();
         // 1. 解析字段类型、名称、备注，采用正则进行循环
-        List<Parameter> parameters = getParameters(text);
+        List<Parameter> parameters = this.getParameters(text);
         result.setParameters(parameters);
         // 2. 解析id主键
         String primaryKey = getPrimaryKey(parameters);
