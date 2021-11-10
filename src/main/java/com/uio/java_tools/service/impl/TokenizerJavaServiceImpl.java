@@ -49,7 +49,7 @@ public class TokenizerJavaServiceImpl implements TokenizerService {
     private List<Parameter> getParameters(String code) {
         List<Parameter> result = new ArrayList<>();
         //去除所有的换行
-        String codeInOneLine = code.replaceAll("\\r\\n", " ");
+        String codeInOneLine = code.replaceAll("\\r|\\n", " ");
         // 预处理，提取出字段所在位置
         Matcher methodMatcher = RegexPrecompile.METHOD_PATTERN.matcher(codeInOneLine);
         int start = 0;
