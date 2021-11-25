@@ -25,6 +25,7 @@ public class TokenizerController {
     private Map<String, TokenizerService> tokenizerServiceMap;
 
     private static final String TOKENIZER_PREFIX = "tokenizer_";
+
     /**
      * 文本识别接口
      * @param dateMessage String data

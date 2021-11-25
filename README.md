@@ -11,7 +11,7 @@ curl'https://github.com/Palmcivet/JavaTools-FE'
 #### 功能：
 1. 解析SQL创表文件，并附有对应的生成代码接口
 2. 解析Java类文件，并附有对应的生成代码接口 
-   1. 解析Java数据类型、SQL数据类型、字段名 
+   1. 解析Java数据类型、SQL数据类型、小驼峰字段名、下划线命名法字段名 
    2. 解析生成表名、主键 
    3. 解析注解
    4. 解析默认值
@@ -21,6 +21,10 @@ curl'https://github.com/Palmcivet/JavaTools-FE'
    3. 支持comment注释
    4. 支持默认值或NULL加入
 4. 可生成Mybatis XML代码
+预期
+5. 根据输入值来生产SQL CRUD
+6. Mybatis整合jar包导入使用
+7. 集合javaDemo实现项目级生成
 ## 接口文档
 
 查看Uio-Tools.md文件

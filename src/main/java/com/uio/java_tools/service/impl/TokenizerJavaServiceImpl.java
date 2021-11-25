@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author han xun
@@ -27,6 +26,11 @@ public class TokenizerJavaServiceImpl implements TokenizerService {
     private ParseStrManager parseStrManager;
 
     /**
+     * 解析主键名
+     */
+    private final static String PRIMARY_KEY_NAME = "id";
+
+    /**
      * 解析Java文本
      * @param text Java实体类文本（可不全）
      * @return
@@ -36,16 +40,27 @@ public class TokenizerJavaServiceImpl implements TokenizerService {
         AnalysisDTO result = new AnalysisDTO();
         // 1. 解析字段类型、名称、备注，采用正则进行循环
         List<Parameter> parameters = this.getParameters(text);
-        result.setParameters(parameters);
+
         // 2. 解析id主键
         String primaryKey = getPrimaryKey(parameters);
-        result.setPrimaryKey(primaryKey);
         // 3. 解析表名
         String className = getClassName(text);
-        result.setTableName(className);
+        String tableName = parseStrManager.classNameToTableName(className);
+        // 4. 解析包名
+        String packageName = this.getPackageName(text);
+
+        result.setParameters(parameters);
+        result.setPrimaryKey(primaryKey);
+        result.setTableName(tableName);
+        result.setPackageName(packageName);
         return result;
     }
 
+    /**
+     * 解析字段
+     * @param code
+     * @return
+     */
     private List<Parameter> getParameters(String code) {
         List<Parameter> result = new ArrayList<>();
         //去除所有的换行
@@ -105,26 +120,30 @@ public class TokenizerJavaServiceImpl implements TokenizerService {
             } else {
                 throw new CustomException(BackEnum.PARAM_ERROR);
             }
+            param.setFieldInSql(parseStrManager.upperToLower(param.getField()));
             result.add(param);
         }
 
         return result;
     }
 
+    /**
+     * 查找是否存在主键
+     * @param parameters
+     * @return
+     */
     private String getPrimaryKey(List<Parameter> parameters) {
-        String result = null;
-        String regex = "\\w*id\\w*";
         for (Parameter parameter: parameters) {
-            if (Pattern.matches(regex, parameter.getField())) {
-                result = parameter.getField();
+            if (parameter.getField().equals(PRIMARY_KEY_NAME)) {
+                return parameter.getField();
             }
         }
-        return result;
+        return null;
     }
 
     public String getPackageName(String code) {
         // todo 暂时使用改方案，等整体稳定后，何如extractFieldFromJavaCode方法内
-        String[] words = splitCode(code);
+        String[] words = removeLineBreak(code);
         if (words.length >= 2) {
             if (words[0].equals("package")) {
                 StringBuilder stringBuilder = new StringBuilder();
@@ -134,27 +153,28 @@ public class TokenizerJavaServiceImpl implements TokenizerService {
                 stringBuilder.append(hierarchy[0]);
 
                 for (int i = 1; i < hierarchy.length; i++) {
-                    if (i == hierarchy.length - 1) {
-                        break;
-                    } else {
-                        stringBuilder.append(".");
-                        stringBuilder.append(hierarchy[i]);
-                    }
+                    stringBuilder.append(".");
+                    stringBuilder.append(hierarchy[i]);
                 }
-                return stringBuilder.toString();
+                return stringBuilder.toString().replace(";", "");
             }
         }
         return "";
     }
 
-    private String[] splitCode(String code) {
+    /**
+     * 去除换行符
+     * @param code
+     * @return
+     */
+    private String[] removeLineBreak(String code) {
         return code.split("[ \\n\\r]");
     }
 
     @Override
     public String getClassName(String code) {
         // todo 方法待改进
-        String[] words = splitCode(code);
+        String[] words = removeLineBreak(code);
         for (int i = 0; i < words.length; i++) {
             if ("public".equals(words[i])) {
                 if (i + 2 < words.length) {

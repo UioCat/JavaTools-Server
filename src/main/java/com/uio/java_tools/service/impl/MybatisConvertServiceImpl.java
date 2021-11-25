@@ -19,32 +19,25 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
     @Autowired
     private MybatisProduceManagerImpl mybatisProduceService;
 
-    // todo 将实现类的for循环改成stream，更优雅
-
     @Override
-    public String MybatisBasicsService(ParameterDTO parameterDTO) {
+    public String mybatisBasicsService(ParameterDTO parameterDTO) {
         String basicsCommand = mybatisProduceService.mybatisBasics(parameterDTO.getNamespace());
         return basicsCommand;
     }
 
     @Override
-    public String MybatisInsertService(ParameterDTO parameterDTO) {
+    public String mybatisInsertService(ParameterDTO parameterDTO) {
 
         List<String> parameterName = new ArrayList<>();
 
         parameterName = Arrays.stream(parameterDTO.getParameter()).
                 map(parameter -> parameter.split(" ")[1]).collect(Collectors.toList());
 
-//        for(String parameter : parameterMessage.getParameter()){
-//            parameterName.add(parameter.split(" ")[1]);
-//        }
-
-        String insertCommand = mybatisProduceService.mybatisInsert(parameterName, parameterDTO.getTableName());
-        return insertCommand;
+        return mybatisProduceService.mybatisInsert(parameterName, parameterDTO.getTableName());
     }
 
     @Override
-    public String MybatisUpdateService(ParameterDTO parameterDTO) {
+    public String mybatisUpdateService(ParameterDTO parameterDTO) {
 
         List<String> parameterName = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
@@ -61,7 +54,7 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
     }
 
     @Override
-    public String MybatisDeleteService(ParameterDTO parameterDTO) {
+    public String mybatisDeleteService(ParameterDTO parameterDTO) {
 
         List<String> keyParameterName = new ArrayList<>();
 
@@ -69,12 +62,11 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
             keyParameterName.add(keyParameter.split(" ")[1]);
         }
 
-        String deleteCommand = mybatisProduceService.mybatisDelete(keyParameterName, parameterDTO.getTableName());
-        return deleteCommand;
+        return mybatisProduceService.mybatisDelete(keyParameterName, parameterDTO.getTableName());
     }
 
     @Override
-    public String MybatisSelectService(ParameterDTO parameterDTO) {
+    public String mybatisSelectService(ParameterDTO parameterDTO) {
 
         List<String> parameterName = new ArrayList<>();
         List<String> keyParameterName = new ArrayList<>();
@@ -85,8 +77,7 @@ public class MybatisConvertServiceImpl implements MybatisConvertService {
         for(String parameter : parameterDTO.getParameter()){
             parameterName.add(parameter.split(" ")[1]);
         }
-        String selectCommand = mybatisProduceService.mybatisSelect(keyParameterName,parameterName, parameterDTO.getTableName());
 
-        return selectCommand;
+        return mybatisProduceService.mybatisSelect(keyParameterName,parameterName, parameterDTO.getTableName());
     }
 }

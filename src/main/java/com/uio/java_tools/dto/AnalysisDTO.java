@@ -22,4 +22,8 @@ public class AnalysisDTO {
      * 主键
      */
     private String primaryKey;
+    /**
+     * 包名
+     */
+    private String packageName;
 }

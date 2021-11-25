@@ -14,14 +14,14 @@ public interface MybatisConvertService {
      * @param parameterDTO namespace
      * @return backMsg
      */
-    String MybatisBasicsService(ParameterDTO parameterDTO);
+    String mybatisBasicsService(ParameterDTO parameterDTO);
 
     /**
      * 根据参数写出插入数据库的mybatis配置语句
      * @param parameterDTO parameter,tbName
      * @return backMsg
      */
-    String MybatisInsertService(ParameterDTO parameterDTO);
+    String mybatisInsertService(ParameterDTO parameterDTO);
 
 
     /**
@@ -29,7 +29,7 @@ public interface MybatisConvertService {
      * @param parameterDTO parameter,keyParameter,tbName
      * @return backMsg
      */
-    String MybatisUpdateService(ParameterDTO parameterDTO);
+    String mybatisUpdateService(ParameterDTO parameterDTO);
 
 
     /**
@@ -37,14 +37,14 @@ public interface MybatisConvertService {
      * @param parameterDTO keyParameter,tbName
      * @return backMsg
      */
-    String MybatisDeleteService(ParameterDTO parameterDTO);
+    String mybatisDeleteService(ParameterDTO parameterDTO);
 
     /**
      * 根据参数写出对应的查询配置
      * @param parameterDTO keyParameter，parameter, tbName
      * @return backMsg
      */
-    String MybatisSelectService(ParameterDTO parameterDTO);
+    String mybatisSelectService(ParameterDTO parameterDTO);
 
 
 }

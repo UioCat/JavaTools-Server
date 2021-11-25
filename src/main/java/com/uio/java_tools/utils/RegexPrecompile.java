@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 /**
  * @author VM
  * Date 2021/10/31 17:18
- * Description:
+ * Description: 匹配规则
  */
 public class RegexPrecompile {
     public static final Pattern METHOD_PATTERN = Pattern.compile(RegexEnum.METHOD_REGEX.getRegexString(), Pattern.CASE_INSENSITIVE);

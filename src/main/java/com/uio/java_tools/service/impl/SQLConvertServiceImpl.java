@@ -41,7 +41,6 @@ public class SQLConvertServiceImpl implements SQLConvertService {
 
 
     /**
-     *
      * 更新数据库表命令
      * @param parameterDTO parameter,keyParameter,tbName
      * @return 更新数据库命令
@@ -86,8 +85,7 @@ public class SQLConvertServiceImpl implements SQLConvertService {
 
         }
 
-        String insertSQL = velocityTemplateForSQL.insertSQLTemplate(parameterName, parameterDTO.getTableName());
-        return insertSQL;
+        return velocityTemplateForSQL.insertSQLTemplate(parameterName, parameterDTO.getTableName());
     }
 
     /**

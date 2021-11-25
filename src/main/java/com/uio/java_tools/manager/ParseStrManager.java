@@ -30,5 +30,5 @@ public interface ParseStrManager {
      */
     boolean verifyWord(String word);
 
-
+    String classNameToTableName(String className);
 }

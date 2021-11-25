@@ -15,7 +15,7 @@ public class StringParse {
         String[] typeArray = new String[lineArray.length];
         String[] nameArray = new String[lineArray.length];
         for(int i=0; i<lineArray.length; i++) {
-            line = deleteHeadSpace(lineArray[i]); //去掉最前的空格
+            line = lineArray[i].trim(); //去掉最前的空格
             array = line.split(" ");//根据空格分开word
             typeArray[i] = array[array.length - 2];//将倒数第二个word放入类型数组
             nameArray[i] = array[array.length - 1];//将最后一个word放入变量名数组
@@ -26,22 +26,4 @@ public class StringParse {
 
         return wordArrayList;
     }
-
-    //删除头部的空格
-    private String deleteHeadSpace(String str){
-
-        StringBuilder stringBuilder = new StringBuilder();
-        Boolean flag = false;
-        for (char ch:str.toCharArray()) {
-            if(ch != 32){
-                flag = true;
-            }
-            if(flag){
-                stringBuilder.append(ch);
-            }
-        }
-        return stringBuilder.toString();
-    }
-
-
 }

@@ -23,6 +23,10 @@ public class Parameter {
      */
     private String field;
     /**
+     * 数据库字段名
+     */
+    private String fieldInSql;
+    /**
      * 注释
      */
     private String comment;

@@ -58,7 +58,7 @@ public class MybatisConvertServiceTest {
         }
 
         // namespace为空值时，返回值为空值
-        log.info(mybatisConvertService.MybatisBasicsService(parameterDTO));
+        log.info(mybatisConvertService.mybatisBasicsService(parameterDTO));
     }
 
     /**
@@ -77,7 +77,7 @@ public class MybatisConvertServiceTest {
             e.printStackTrace();
         }
 
-        log.info(mybatisConvertService.MybatisInsertService(parameterDTO));
+        log.info(mybatisConvertService.mybatisInsertService(parameterDTO));
 
     }
 
@@ -96,7 +96,7 @@ public class MybatisConvertServiceTest {
             e.printStackTrace();
         }
 
-        log.info(mybatisConvertService.MybatisUpdateService(parameterDTO));
+        log.info(mybatisConvertService.mybatisUpdateService(parameterDTO));
     }
 
     /**
@@ -114,7 +114,7 @@ public class MybatisConvertServiceTest {
             e.printStackTrace();
         }
 
-        log.info(mybatisConvertService.MybatisDeleteService(parameterDTO));
+        log.info(mybatisConvertService.mybatisDeleteService(parameterDTO));
     }
 
     /**
@@ -132,6 +132,6 @@ public class MybatisConvertServiceTest {
             e.printStackTrace();
         }
 
-        log.info(mybatisConvertService.MybatisSelectService(parameterDTO));
+        log.info(mybatisConvertService.mybatisSelectService(parameterDTO));
     }
 }

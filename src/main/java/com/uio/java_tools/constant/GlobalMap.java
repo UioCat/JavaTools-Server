@@ -1,10 +1,7 @@
 package com.uio.java_tools.constant;
 
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Alfred

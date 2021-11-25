@@ -25,7 +25,6 @@ public class SQLConvertController {
      */
     @PostMapping("/createSQL")
     public BackMessage<String> createSQL(@RequestBody CreateSqlReq createSqlReq){
-        
         return BackMessage.success(sqlService.createSqlService(createSqlReq));
     }
 

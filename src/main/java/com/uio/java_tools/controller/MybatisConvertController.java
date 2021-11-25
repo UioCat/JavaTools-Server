@@ -22,7 +22,7 @@ public class MybatisConvertController {
      */
     @RequestMapping("/mybatisBasics")
     public BackMessage<String> mybatisBatisController(@RequestBody ParameterDTO parameterDTO){
-        return BackMessage.success(mybatisConvertService.MybatisBasicsService(parameterDTO));
+        return BackMessage.success(mybatisConvertService.mybatisBasicsService(parameterDTO));
     }
 
     /**
@@ -32,7 +32,7 @@ public class MybatisConvertController {
      */
     @RequestMapping("/mybatisInsert")
     public BackMessage<String> mybatisInsertController(@RequestBody ParameterDTO parameterDTO){
-        return BackMessage.success(mybatisConvertService.MybatisInsertService(parameterDTO));
+        return BackMessage.success(mybatisConvertService.mybatisInsertService(parameterDTO));
     }
 
     /**
@@ -42,7 +42,7 @@ public class MybatisConvertController {
      */
     @RequestMapping("/mybatisDelete")
     public BackMessage<String> mybatisDeleteController(@RequestBody ParameterDTO parameterDTO){
-        return BackMessage.success(mybatisConvertService.MybatisDeleteService(parameterDTO));
+        return BackMessage.success(mybatisConvertService.mybatisDeleteService(parameterDTO));
     }
 
     /**
@@ -52,12 +52,12 @@ public class MybatisConvertController {
      */
     @RequestMapping("/mybatisUpdate")
     public BackMessage<String> mybatisUpdate(@RequestBody ParameterDTO parameterDTO){
-        return BackMessage.success(mybatisConvertService.MybatisUpdateService(parameterDTO));
+        return BackMessage.success(mybatisConvertService.mybatisUpdateService(parameterDTO));
     }
 
     @RequestMapping("/mybatisSelect")
     public BackMessage<String> mybatisSelect(@RequestBody ParameterDTO parameterDTO){
-        return BackMessage.success(mybatisConvertService.MybatisSelectService(parameterDTO));
+        return BackMessage.success(mybatisConvertService.mybatisSelectService(parameterDTO));
     }
 
 }
