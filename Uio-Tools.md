@@ -1,8 +1,5 @@
-# Uio-Tools 工具
+# Uio-Tools 工具 接口文档
 
-version：**v1.3**
-
-## 接口文档
 
 - 测试用例：
 
@@ -52,7 +49,255 @@ version：**v1.3**
 
 ### 根路径：`/tools`
 
-### 文本解析接口 parse
+重构 2021-11-28
+
+## version:  **v2.0** 
+
+#### 文本解析接口（升级）
+```
+/analysisText
+```
+req
+```json
+{
+    "data":"package com.example.java_tools.entity;\n\nimport java.util.Date;\n\n/**\n * @author han xun\n * Date 2021/6/14 13:19\n * Description:\n */\npublic class Entity {\n\n    /**\n     * 用户id\n     */\n    private Long id;\n\n    /**\n     * 用户名\n     */\n    private String username;\n\n    /**\n     * 密码\n     */\n    private String password;\n\n    /**\n     * 数量\n     */\n    private Integer counts;\n\n    /**\n     * 求和\n     */\n    private Double sum;\n\n    /**\n     * 数字\n     */\n    private Float number;\n\n    /**\n     * 性别\n     */\n    private Byte sex;\n\n    /**\n     * 类型\n     */\n    private Character type;\n\n    /**\n     * 开始时间\n     */\n    private Date startTime;\n\n    private boolean test;\n\n    public Entity() {\n    }\n\n    public Long getId() {\n        return id;\n    }\n\n    public void setId(Long id) {\n        this.id = id;\n    }\n\n    public String getUsername() {\n        return username;\n    }\n\n    public void setUsername(String userna\nme) {        this.username = username;\n    }\n\n    public String getPassword() {\n        return password;\n    }\n\n    public void setPassword(String passwo\nrd) {        this.password = password;\n    }\n\n    public Integer getCounts() {\n        return counts;\n    }\n\n    public void setCounts(Integer counts)\n {        this.counts = counts;\n    }\n\n    public Double getSum() {\n        return sum;\n    }\n\n    public void setSum(Double sum) {\n        this.sum = sum;\n    }\n\n    public Float getNumber() {\n        return number;\n    }\n\n    public void setNumber(Float number) {\n        this.number = number;\n    }\n\n    public Byte getSex() {\n        return sex;\n    }\n\n    public void setSex(Byte sex) {\n        this.sex = sex;\n    }\n\n    public Character getType() {\n        return type;\n    }\n\n    public void setType(Character type) {\n        this.type = type;\n    }\n\n    public Date getStartTime() {\n        return startTime;\n    }\n\n    public void setStartTime(Date startTi\nme) {        this.startTime = startTime;\n    }\n}\n",
+    "analysisType": "SYNTAX_JAVA" 
+}
+```
+analysisType为枚举 `SYNTAX_JAVA` `SYNTAX_MYSQL`，当前仅支持 SYNTAX_JAVA
+
+res
+```json
+{
+    "code": 200,
+    "message": "请求成功",
+    "info": {
+        "parameters": [
+            {
+                "type": "Long",
+                "datatype": "bigint",
+                "field": "id",
+                "fieldInSql": "id",
+                "comment": "用户id",
+                "defaultValue": null
+            },
+            {
+                "type": "String",
+                "datatype": "varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci",
+                "field": "username",
+                "fieldInSql": "username",
+                "comment": "用户名",
+                "defaultValue": null
+            },
+            {
+                "type": "String",
+                "datatype": "varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci",
+                "field": "password",
+                "fieldInSql": "password",
+                "comment": "密码",
+                "defaultValue": null
+            },
+            {
+                "type": "Integer",
+                "datatype": "int(32)",
+                "field": "counts",
+                "fieldInSql": "counts",
+                "comment": "数量",
+                "defaultValue": null
+            },
+            {
+                "type": "Double",
+                "datatype": "double",
+                "field": "sum",
+                "fieldInSql": "sum",
+                "comment": "求和",
+                "defaultValue": null
+            },
+            {
+                "type": "Float",
+                "datatype": "float",
+                "field": "number",
+                "fieldInSql": "number",
+                "comment": "数字",
+                "defaultValue": null
+            },
+            {
+                "type": "Byte",
+                "datatype": "char(1)",
+                "field": "sex",
+                "fieldInSql": "sex",
+                "comment": "性别",
+                "defaultValue": null
+            },
+            {
+                "type": "Character",
+                "datatype": "char(1)",
+                "field": "type",
+                "fieldInSql": "type",
+                "comment": "类型",
+                "defaultValue": null
+            },
+            {
+                "type": "Date",
+                "datatype": "date",
+                "field": "startTime",
+                "fieldInSql": "start_time",
+                "comment": "开始时间",
+                "defaultValue": null
+            },
+            {
+                "type": "boolean",
+                "datatype": "bit(1)",
+                "field": "test",
+                "fieldInSql": "test",
+                "comment": null,
+                "defaultValue": null
+            }
+        ],
+        "tableName": "tb_entity",
+        "className": "Entity",
+        "primaryKey": "id",
+        "packageName": "com.example.java_tools.entity"
+    }
+}
+```
+
+#### SQL创表语句生成（升级）
+
+```
+/createSQL
+```
+
+req
+
+```json
+{
+    "tableName":"tb_test",
+    "primaryKey":"id",
+    "parameterList":[
+            {
+                "type": "Long",
+                "datatype": "bigint",
+                "field": "id",
+                "fieldInSql": "id",
+                "comment": "用户id",
+                "defaultValue": null,
+                "uniqueKey":false
+            },
+            {
+                "type": "String",
+                "datatype": "varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci",
+                "field": "username",
+                "fieldInSql": "username",
+                "comment": "用户名",
+                "defaultValue": "ASd",
+                "uniqueKey":true
+            },
+            {
+                "type": "String",
+                "datatype": "varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci",
+                "field": "password",
+                "fieldInSql": "password",
+                "comment": "密码",
+                "defaultValue": null,
+                "uniqueKey":false
+            },
+            {
+                "type": "Date",
+                "datatype": "date",
+                "field": "startTime",
+                "fieldInSql": "start_time",
+                "comment": "开始时间",
+                "defaultValue": null,
+                "uniqueKey":false
+            }
+    ]
+}
+```
+
+res
+
+```json
+{
+    "code": 200,
+    "message": "请求成功",
+    "info": "CREATE TABLE tb_test(\n    `id` bigint NOT NULL AUTO_INCREMENT comment '用户id',    `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci  DEFAULT ASd comment '用户名',    `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci  comment '密码',    `start_time` date  comment '开始时间', PRIMARY KEY(`id`));"
+}
+```
+
+
+
+#### 接口
+
+```
+
+```
+
+req
+
+```json
+
+```
+
+res
+
+```json
+
+```
+
+
+
+#### 接口
+
+```
+
+```
+
+req
+
+```json
+
+```
+
+res
+
+```json
+
+```
+
+
+
+#### 接口
+
+```
+
+```
+
+req
+
+```json
+
+```
+
+res
+
+```json
+
+```
+
+
+
+
+
+
+
+
+
+
+---
+## version：**v1.3**
+
+#### 文本解析接口 parse
 
 **v1.3 更新**
 该接口为 MySQL 和 MyBatis 共用
@@ -136,7 +381,7 @@ version：**v1.3**
     }
     ```
 
-### MySQL
+MySQL
 
 #### 生成创表命令接口 create
 
