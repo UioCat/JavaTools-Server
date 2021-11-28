@@ -1,6 +1,8 @@
 package com.uio.java_tools.controller;
 
+import com.uio.java_tools.common.BackEnum;
 import com.uio.java_tools.common.BackMessage;
+import com.uio.java_tools.common.CustomException;
 import com.uio.java_tools.dto.AnalysisDTO;
 import com.uio.java_tools.controller.req.StringDataReq;
 import com.uio.java_tools.enums.AnalysisTypeEnum;
@@ -33,8 +35,12 @@ public class TokenizerController {
      */
     @PostMapping(value = "/analysisText")
     public BackMessage<AnalysisDTO> analysisText(@RequestBody StringDataReq dateMessage) {
-
-        AnalysisTypeEnum analysisTypeEnum = AnalysisTypeEnum.valueOf(dateMessage.getAnalysisType());
+        AnalysisTypeEnum analysisTypeEnum;
+        try {
+            analysisTypeEnum = AnalysisTypeEnum.valueOf(dateMessage.getAnalysisType());
+        } catch (IllegalArgumentException e) {
+            throw new CustomException(BackEnum.PARAM_ERROR);
+        }
         TokenizerService tokenizerService = tokenizerServiceMap.get(TOKENIZER_PREFIX + analysisTypeEnum.getDesc());
         if (null != tokenizerService) {
             // 修改为解析成封装好的特定对象

@@ -22,7 +22,8 @@ public enum AnalysisTypeEnum {
     AnalysisTypeEnum(String desc) {
         this.desc = desc;
     }
-    String desc;
+
+    private String desc;
 
     public String getDesc() {
         return desc;

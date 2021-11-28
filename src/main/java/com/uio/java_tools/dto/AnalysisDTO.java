@@ -19,6 +19,10 @@ public class AnalysisDTO {
      */
     private String tableName;
     /**
+     * 类名
+     */
+    private String className;
+    /**
      * 主键
      */
     private String primaryKey;

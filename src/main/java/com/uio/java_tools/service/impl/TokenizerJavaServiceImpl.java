@@ -43,7 +43,7 @@ public class TokenizerJavaServiceImpl implements TokenizerService {
 
         // 2. 解析id主键
         String primaryKey = getPrimaryKey(parameters);
-        // 3. 解析表名
+        // 3. 解析类名、表名
         String className = getClassName(text);
         String tableName = parseStrManager.classNameToTableName(className);
         // 4. 解析包名
@@ -52,6 +52,7 @@ public class TokenizerJavaServiceImpl implements TokenizerService {
         result.setParameters(parameters);
         result.setPrimaryKey(primaryKey);
         result.setTableName(tableName);
+        result.setClassName(className);
         result.setPackageName(packageName);
         return result;
     }

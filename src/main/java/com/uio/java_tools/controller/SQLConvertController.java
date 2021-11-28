@@ -35,7 +35,6 @@ public class SQLConvertController {
      */
     @PostMapping("/updateTable")
     public BackMessage<String> updateTable(@RequestBody ParameterDTO parameterDTO){
-
         return BackMessage.success(sqlService.updateTableService(parameterDTO));
     }
 

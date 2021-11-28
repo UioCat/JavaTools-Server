@@ -34,4 +34,5 @@ build/
 application-prod.yml
 
 ### 上传脚本 ###
-up_package.sh
+upPackage-dev.sh
+upPackage-prod.sh

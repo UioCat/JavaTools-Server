@@ -17,46 +17,50 @@ public class MybatisConvertController {
 
     /**
      * mybatis基础信息创建
+     *
      * @param parameterDTO namespace
      * @return
      */
     @RequestMapping("/mybatisBasics")
-    public BackMessage<String> mybatisBatisController(@RequestBody ParameterDTO parameterDTO){
+    public BackMessage<String> mybatisBatisController(@RequestBody ParameterDTO parameterDTO) {
         return BackMessage.success(mybatisConvertService.mybatisBasicsService(parameterDTO));
     }
 
     /**
      * mybatis插入数据 创建
+     *
      * @param parameterDTO parameter tbName
      * @return
      */
     @RequestMapping("/mybatisInsert")
-    public BackMessage<String> mybatisInsertController(@RequestBody ParameterDTO parameterDTO){
+    public BackMessage<String> mybatisInsertController(@RequestBody ParameterDTO parameterDTO) {
         return BackMessage.success(mybatisConvertService.mybatisInsertService(parameterDTO));
     }
 
     /**
      * mybatis 删除数据 创建
+     *
      * @param parameterDTO keyParameter tbName
      * @return
      */
     @RequestMapping("/mybatisDelete")
-    public BackMessage<String> mybatisDeleteController(@RequestBody ParameterDTO parameterDTO){
+    public BackMessage<String> mybatisDeleteController(@RequestBody ParameterDTO parameterDTO) {
         return BackMessage.success(mybatisConvertService.mybatisDeleteService(parameterDTO));
     }
 
     /**
      * mybatis 修改数据 创建
+     *
      * @param parameterDTO parameter,keyParameter,tbName
      * @return
      */
     @RequestMapping("/mybatisUpdate")
-    public BackMessage<String> mybatisUpdate(@RequestBody ParameterDTO parameterDTO){
+    public BackMessage<String> mybatisUpdate(@RequestBody ParameterDTO parameterDTO) {
         return BackMessage.success(mybatisConvertService.mybatisUpdateService(parameterDTO));
     }
 
     @RequestMapping("/mybatisSelect")
-    public BackMessage<String> mybatisSelect(@RequestBody ParameterDTO parameterDTO){
+    public BackMessage<String> mybatisSelect(@RequestBody ParameterDTO parameterDTO) {
         return BackMessage.success(mybatisConvertService.mybatisSelectService(parameterDTO));
     }
 
