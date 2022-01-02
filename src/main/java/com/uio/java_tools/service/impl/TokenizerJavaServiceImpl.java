@@ -7,8 +7,10 @@ import com.uio.java_tools.dto.Parameter;
 import com.uio.java_tools.manager.ParseStrManager;
 import com.uio.java_tools.service.TokenizerService;
 import com.uio.java_tools.utils.RegexPrecompile;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.regex.Matcher;
  * Description:
  */
 @Service("tokenizer_java")
+@Slf4j
 public class TokenizerJavaServiceImpl implements TokenizerService {
 
     @Autowired
@@ -98,18 +101,21 @@ public class TokenizerJavaServiceImpl implements TokenizerService {
                 end = typeAndFieldMatcher.end();
                 // 获取comment并存储
                 String comment = parameter.substring(0, start);
-                String s = comment.replaceAll("[\\*/ ]", "");
-                if (!s.isEmpty()) {
-                    param.setComment(s);
-                }
+                comment = comment.replaceAll("[\\*/ ]", "");
                 String attribute = parameter.substring(start, end);
                 String typeAndField = attribute.replaceAll("private|protected|public", "").trim();
                 String[] strings = typeAndField.split("[ =;]+");
+                if (!StringUtils.isEmpty(comment)) {
+                    // 添加注释
+                    param.setComment(comment);
+                }
                 if (strings.length == 2) {
+                    // 没有defaultValue
                     param.setType(strings[0]);
                     param.setDatatype(parseStrManager.typeConvertForMysql(strings[0]));
                     param.setField(strings[1]);
                 } else if (strings.length == 3) {
+                    // 有defaultValue
                     param.setType(strings[0]);
                     param.setDatatype(parseStrManager.typeConvertForMysql(strings[0]));
                     param.setField(strings[1]);
@@ -117,8 +123,8 @@ public class TokenizerJavaServiceImpl implements TokenizerService {
                 } else {
                     throw new CustomException(BackEnum.PARAM_ERROR);
                 }
-
             } else {
+                log.warn("can not parse param:{}", parameter);
                 throw new CustomException(BackEnum.PARAM_ERROR);
             }
             param.setFieldInSql(parseStrManager.upperToLower(param.getField()));

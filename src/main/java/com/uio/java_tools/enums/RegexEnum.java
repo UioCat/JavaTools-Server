@@ -9,7 +9,7 @@ public enum RegexEnum {
     /**
      * field解析正则表达式
      */
-    TYPE_FIELD_REGEX("(public |private |protected )*(integer|string|boolean|double|float|int|byte|short|long|char|character|date) (\\w|=| |\")*;"),
+    TYPE_FIELD_REGEX("(public |private |protected )*(int|integer|string|boolean|double|float|int|byte|short|long|char|character|date|BigDecimal) (\\w|=| |\")*;"),
     /**
      * 解析方法正则表达式
      */

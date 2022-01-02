@@ -54,6 +54,7 @@ class SQLConvertServiceTest {
      */
     private final static String FILE_PATH_JAVA = "target/classes/static/testJava.txt";
     private final static String FILE2_PATH_JAVA = "target/classes/static/testJava2.txt";
+    private final static String FILE3_PATH_JAVA = "target/classes/static/testJava3.txt";
 
     /**
      * 解析Java字符串单测
@@ -87,7 +88,7 @@ class SQLConvertServiceTest {
      */
     @Test
     public void createSqlService() {
-        String testString = FileUtils.readTestString(FILE_PATH_JAVA);
+        String testString = FileUtils.readTestString(FILE3_PATH_JAVA);
         AnalysisDTO analysisDTO = tokenizerJavaService.analysisText(testString);
         log.info("tokenizerService.parseJavaEntityCode result:{}", analysisDTO);
 
@@ -117,72 +118,5 @@ class SQLConvertServiceTest {
     @Test
     public void insertTest() {
         log.info(sqlConvertService.insertMsgService(parameterDTO));
-    }
-
-    /**
-     * 更新sql生成测试
-     */
-    @Test
-    public void updateTest() {
-        // mock测试打桩
-        Mockito.when(velocityTemplateForSQL.updateSQLTemplate(Mockito.anyList(), Mockito.anyList(),
-                Mockito.anyList(), Mockito.anyList(), Mockito.anyString())).
-                thenReturn("更新sql");
-        // 反射注入mock对象
-        try {
-            Field f = SQLConvertServiceImpl.class.getDeclaredField("velocityTemplateForSQL");
-            f.setAccessible(true);
-            f.set(sqlConvertService, velocityTemplateForSQL);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            log.warn("updateTest exception, ", e);
-        }
-
-        // mock测试
-        String s = sqlConvertService.updateTableService(parameterDTO);
-        log.info(JSON.toJSONString(s));
-    }
-
-    /**
-     * 查找sql生成测试
-     */
-    @Test
-    public void selectTest() {
-        // mock测试打桩
-        Mockito.when(velocityTemplateForSQL.selectSQLTemplate(Mockito.anyList(), Mockito.anyList(),
-                Mockito.anyList(), Mockito.anyString())).
-                thenReturn("查找sql");
-        // 反射注入mock对象
-        try {
-            Field f = SQLConvertServiceImpl.class.getDeclaredField("velocityTemplateForSQL");
-            f.setAccessible(true);
-            f.set(sqlConvertService, velocityTemplateForSQL);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-        log.info(JSON.toJSONString(sqlConvertService.selectMsg(parameterDTO)));
-    }
-
-    /**
-     * 删除sql生成测试
-     */
-    @Test
-    public void deleteTest() {
-        // mock测试打桩
-        Mockito.when(velocityTemplateForSQL.deleteSQLTemplate(Mockito.anyList(), Mockito.anyList(), Mockito.anyString())).
-                thenReturn("删除sql");
-
-        // 反射注入mock对象
-        try {
-            Field f = SQLConvertServiceImpl.class.getDeclaredField("velocityTemplateForSQL");
-            f.setAccessible(true);
-            f.set(sqlConvertService, velocityTemplateForSQL);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            log.warn("deleteTest exception, ", e);
-        }
-
-        log.info(JSON.toJSONString(sqlConvertService.deleteMsg(parameterDTO)));
     }
 }

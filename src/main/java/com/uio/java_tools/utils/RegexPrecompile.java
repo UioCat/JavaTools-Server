@@ -12,5 +12,9 @@ import java.util.regex.Pattern;
 public class RegexPrecompile {
     public static final Pattern METHOD_PATTERN = Pattern.compile(RegexEnum.METHOD_REGEX.getRegexString(), Pattern.CASE_INSENSITIVE);
     public static final Pattern PARAM_REGEX = Pattern.compile(RegexEnum.PARAMETER_REGEX.getRegexString(), Pattern.CASE_INSENSITIVE);
+
+    /**
+     * 类型检测
+     */
     public static final Pattern TYPE_AND_FILED_REGEX = Pattern.compile(RegexEnum.TYPE_FIELD_REGEX.getRegexString(), Pattern.CASE_INSENSITIVE);
 }
