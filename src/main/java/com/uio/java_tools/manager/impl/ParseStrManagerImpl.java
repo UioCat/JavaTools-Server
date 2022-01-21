@@ -26,6 +26,8 @@ public class ParseStrManagerImpl implements ParseStrManager {
 
     @Override
     public String classNameToTableName(String className) {
+        // 如果有DO则去除
+        className = className.replace("DO", "");
         return TABLE_PREFIX + this.upperToLower(className);
     }
 

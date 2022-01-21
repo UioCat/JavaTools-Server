@@ -1,6 +1,6 @@
 package com.example.java_tools;
 
-public class User {
+public class UserDO {
     /**
      * 编码
      */

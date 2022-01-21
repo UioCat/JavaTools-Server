@@ -30,5 +30,10 @@ public interface ParseStrManager {
      */
     boolean verifyWord(String word);
 
+    /**
+     * 类名转换为表名
+     * @param className
+     * @return
+     */
     String classNameToTableName(String className);
 }
