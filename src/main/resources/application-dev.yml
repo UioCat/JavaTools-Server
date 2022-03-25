@@ -1,7 +1,0 @@
-server:
-  servlet:
-    context-path: /tools
-  port: 8080
-spring:
-  mvc:
-    static-path-pattern: /static/** #遇到任何路径都去/static/下找

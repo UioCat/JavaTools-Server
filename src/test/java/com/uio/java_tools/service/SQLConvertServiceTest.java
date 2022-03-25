@@ -54,7 +54,7 @@ class SQLConvertServiceTest {
      */
     private final static String FILE_PATH_JAVA = "target/classes/static/testJava.txt";
     private final static String FILE2_PATH_JAVA = "target/classes/static/testJava2.txt";
-    private final static String FILE3_PATH_JAVA = "target/classes/static/testJava3.txt";
+    private final static String FILE3_PATH_JAVA = "target/classes/static/generator.txt";
 
     /**
      * 解析Java字符串单测

@@ -1,0 +1,50 @@
+package com.uio.monitor.entity;
+
+import java.util.Date;
+
+/**
+ * @author han xun
+ * @date 2022-03-25 16:07
+ */
+public class PushMessageDO {
+
+    private Long id;
+
+    private Date gmtCreate;
+
+    private Date gmtModify;
+
+    private String creator;
+
+    private String modifier;
+
+    private Boolean deleted;
+    /**
+     * 推送时间
+     */
+    private Date pushDateTime;
+    /**
+     * 推送状态 INIT/PROCESSING/FINISH{@link com.uio.monitor.common.PushStateEnum}
+     */
+    private String state;
+    /**
+     * 发送渠道 WECHAT/EMAIL {@link com.uio.monitor.common.PushWayEnum}
+     */
+    private String pushWay;
+    /**
+     * 接收人
+     */
+    private String receiver;
+    /**
+     * 消息体
+     */
+    private String message;
+    /**
+     * 推送周期
+     */
+    private Integer pushCycle;
+    /**
+     * 周期单位 DAY/WEEK/MONTH/YEAR {@link com.uio.monitor.common.CycleUnitEnum}
+     */
+    private String cycleUnit;
+}
