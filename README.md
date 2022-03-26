@@ -21,10 +21,9 @@ curl'https://github.com/Palmcivet/JavaTools-FE'
    3. 支持comment注释
    4. 支持默认值或NULL加入
 4. 可生成Mybatis XML代码
-预期
+下版本后期优化点
 5. 根据输入值来生产SQL CRUD
 6. Mybatis整合jar包导入使用
 7. 集合javaDemo实现项目级生成
 ## 接口文档
-
-查看Uio-Tools.md文件
+https://www.yuque.com/hanxun-ekb3e/qsrlfu/xw3rga
