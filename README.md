@@ -3,7 +3,7 @@
 
 本仓库仅包含服务端代码
 客户端代码链接
-curl'https://github.com/Palmcivet/JavaTools-FE'
+curl'https://github.com/UioCat/JavaTools-Web'
 
 
 ## 1.0.0
