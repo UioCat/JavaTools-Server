@@ -54,7 +54,7 @@ public class GlobalMap {
         put("float", "float");
         put("Long", "bigint");
         put("long", "bigint");
-        put("Date", "date");
+        put("Date", "datetime");
         put("Byte", "char(1)");
         put("byte", "char(1)");
         put("BigDecimal", "decimal(10,2)");
